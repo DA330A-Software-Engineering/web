@@ -4,7 +4,7 @@
 
 .header-link {
     font-family: 'Montserrat', sans-serif;
-    color: black;
+    color: black !important;
     text-decoration: none;
     padding: 0 60px;
     padding-top: 50px;
@@ -12,7 +12,7 @@
 }
   
 mat-toolbar {
-    background-color: #AECCE4;
+    background-color: #AECCE4 !important;
     height: 12%;
     padding-left: 10%;
     box-shadow: 5px 20px 30px #C5C5C5;
@@ -28,6 +28,9 @@ mat-toolbar {
 .header-link.active {
     font-weight: bold;
 }
+
+
+
   
    
 

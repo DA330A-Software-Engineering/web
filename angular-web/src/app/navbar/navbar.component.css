@@ -25,6 +25,15 @@ mat-toolbar {
     height: 100%;
 }
 
+@media screen and (max-width: 768px) {
+    .header-container {
+      flex-direction: column;
+    }
+    .header-link {
+      padding: 10px 0;
+    }
+}
+
 .header-link.active {
     font-weight: bold;
 }

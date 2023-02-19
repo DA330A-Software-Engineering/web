@@ -15,16 +15,17 @@ import { RoutinesComponent } from './routines/routines.component';
 import { AboutusComponent } from './aboutus/aboutus.component';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
-import { CreateaccountComponent } from './createaccount/createaccount.component';
+import { SigninComponent } from './signin/signin.component';
 
 const appRoute: Routes = [
-  {path:'Home', component: HomeComponent},
-  {path:'Devices', component: DevicesComponent},
-  {path:'Groups', component: GroupsComponent},
-  {path:'Routines', component: RoutinesComponent},
-  {path:'Aboutus', component: AboutusComponent},
-  {path:'Login', component: LoginComponent},
-  {path:'', redirectTo: 'Login', pathMatch: 'full'}
+  {path:'home', component: HomeComponent},
+  {path:'devices', component: DevicesComponent},
+  {path:'groups', component: GroupsComponent},
+  {path:'routines', component: RoutinesComponent},
+  {path:'aboutus', component: AboutusComponent},
+  {path:'login', component: LoginComponent},
+  {path: 'signin', component: SigninComponent},
+  {path:'', redirectTo: 'login', pathMatch: 'full'}
   //{path:'', component: HomeComponent}
 ]
 
@@ -38,7 +39,8 @@ const appRoute: Routes = [
     RoutinesComponent,
     AboutusComponent,
     LoginComponent,
-    CreateaccountComponent
+    SigninComponent,
+  
   ],
   imports: [
     BrowserModule,

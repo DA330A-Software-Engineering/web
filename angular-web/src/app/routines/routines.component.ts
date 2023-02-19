@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./routines.component.css']
 })
 export class RoutinesComponent {
-  showNavbar = true;
+  
 }

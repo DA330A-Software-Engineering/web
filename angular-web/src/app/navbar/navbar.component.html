@@ -1,10 +1,10 @@
-
+<mat-toolbar>
     <mat-toolbar-row>
       <div class="header-container">
-        <a mat-button routerLink="Home" routerLinkActive="active" class="header-link">Home</a>
-        <a mat-button routerLink="Devices" routerLinkActive="active" class="header-link">Devices</a>
+        <a mat-button routerLink="home" routerLinkActive="active" class="header-link">Home</a>
+        <a mat-button routerLink="devices" routerLinkActive="active" class="header-link">Devices</a>
         <div class="dropdown">
-          <a mat-button class="header-link">Groups
+          <a mat-button routerLink="groups" routerLinkActive="active" class="header-link">Groups
           </a>
           <div class="dropdown-content">
             <a routerLink="groupslights">Lights</a>
@@ -15,8 +15,8 @@
             <a routerLink="groupsdisplay">Display</a>
           </div>
         </div>
-        <a mat-button routerLink="Routines" routerLinkActive="active" class="header-link">Routines</a>
-        <a mat-button routerLink="Aboutus" routerLinkActive="active" class="header-link">About us</a>
+        <a mat-button routerLink="routines" routerLinkActive="active" class="header-link">Routines</a>
+        <a mat-button routerLink="aboutus" routerLinkActive="active" class="header-link">About us</a>
       </div>
     </mat-toolbar-row>
   </mat-toolbar>

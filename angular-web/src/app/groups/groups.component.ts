@@ -6,5 +6,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./groups.component.css']
 })
 export class GroupsComponent {
-  
+  showNavbar = true;
 }

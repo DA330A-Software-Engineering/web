@@ -1,13 +1,22 @@
-<mat-toolbar color="primary"  class="mat-elevation-z">
+  <mat-toolbar color="primary" class="mat-elevation-z">
     <mat-toolbar-row>
-        <div class="header-container">
-            <a mat-button routerLink="Home" routerLinkActive="active" class="header-link">Home</a>
-            <a mat-button routerLink="Devices" routerLinkActive="active" class="header-link">Devices</a>
-            <a mat-button routerLink="Groups" routerLinkActive="active" class="header-link">Groups</a>
-            <a mat-button routerLink="Routines" routerLinkActive="active" class="header-link">Routines</a>
-            <a mat-button routerLink="Aboutus" routerLinkActive="active" class="header-link">About us</a>
+      <div class="header-container">
+        <a mat-button routerLink="Home" routerLinkActive="active" class="header-link">Home</a>
+        <a mat-button routerLink="Devices" routerLinkActive="active" class="header-link">Devices</a>
+        <div class="dropdown">
+          <a mat-button class="header-link">Groups
+          </a>
+          <div class="dropdown-content">
+            <a routerLink="groupslights">Lights</a>
+            <a routerLink="groupsfan">Fan</a>
+            <a routerLink="groupswindows">Windows</a>
+            <a routerLink="groupsspeakers">Speakers</a>
+            <a routerLink="groupsdoor">Doors</a>
+            <a routerLink="groupsdisplay">Display</a>
+          </div>
         </div>
-
+        <a mat-button routerLink="Routines" routerLinkActive="active" class="header-link">Routines</a>
+        <a mat-button routerLink="Aboutus" routerLinkActive="active" class="header-link">About us</a>
+      </div>
     </mat-toolbar-row>
   </mat-toolbar>
-  

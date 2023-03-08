@@ -1,4 +1,6 @@
-import { Component } from '@angular/core';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Component, OnInit } from '@angular/core';
+import { AuthService } from '../service/auth.service';
 
 @Component({
   selector: 'app-devices',
@@ -6,5 +8,9 @@ import { Component } from '@angular/core';
   styleUrls: ['./devices.component.css']
 })
 export class DevicesComponent {
-  showNavbar = true;
+
+  constructor(){
+
+  }
+
 }

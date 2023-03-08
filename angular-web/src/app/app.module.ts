@@ -22,8 +22,6 @@ import { environment } from '../environments/environment';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 
 
-
-
 const appRoute: Routes = [
   {path:'home', component: HomeComponent},
   {path:'devices', component: DevicesComponent},

@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
+import { HttpClient, HttpClientModule} from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
@@ -17,6 +17,10 @@ import { AboutusComponent } from './aboutus/aboutus.component';
 import { RouterModule, Routes } from '@angular/router';
 import { LoginComponent } from './login/login.component';
 import { SigninComponent } from './signin/signin.component';
+import { initializeApp,provideFirebaseApp } from '@angular/fire/app';
+import { environment } from '../environments/environment';
+import { provideFirestore,getFirestore } from '@angular/fire/firestore';
+
 
 const appRoute: Routes = [
   {path:'home', component: HomeComponent},
@@ -51,7 +55,10 @@ const appRoute: Routes = [
     MatMenuModule,
     MatButtonModule,
     MatCardModule,
-    RouterModule.forRoot(appRoute)
+    RouterModule.forRoot(appRoute),
+    HttpClientModule,
+    provideFirebaseApp(() => initializeApp(environment.firebase)),
+    provideFirestore(() => getFirestore())
   ],
   providers: [],
   bootstrap: [AppComponent]

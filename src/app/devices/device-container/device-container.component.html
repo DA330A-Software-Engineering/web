@@ -1,0 +1,7 @@
+<div class="devices-container">
+    <div *ngFor="let device of devices | async" class="show-devices" [ngSwitch]="device.type">
+        <app-toggle *ngSwitchCase="toggleType" [device]="device"></app-toggle>
+        <app-door *ngSwitchCase="doorType" [device]="device"></app-door>
+  </div>
+  
+</div>

@@ -21,7 +21,7 @@ export class DeviceService {
     const action = {
       id, type, state
     }
-    const url = `http://localhost:3000/`;
+    const url = `http://localhost:3000/devices/`;
     return this.http.post(url, action)
   }
 

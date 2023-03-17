@@ -34,8 +34,8 @@ const appRoute: Routes = [
   {path:'routines', component: RoutinesComponent},
   {path:'aboutus', component: AboutusComponent},
   {path:'login', component: LoginComponent},
-  {path:'', redirectTo: 'login', pathMatch: 'full'}
-  //{path:'', component: HomeComponent}
+  //{path:'', redirectTo: 'login', pathMatch: 'full'}
+  {path:'', component: HomeComponent}
 ]
 
 @NgModule({

@@ -6,6 +6,7 @@ import { map, Observable } from 'rxjs';
 import { Firestore, collection, addDoc, collectionData, doc, updateDoc } from '@angular/fire/firestore';
 import { Device } from 'src/app/models/device';
 import { Type } from '@angular/compiler';
+import Constants from 'src/app/constants';
 
 @Injectable({
   providedIn: 'root'
@@ -21,7 +22,7 @@ export class DeviceService {
     const action = {
       id, type, state
     }
-    const url = `http://localhost:3000/devices/actions`;
+    const url = `http://${Constants.ip}:${Constants.port}/devices/actions`;
     return this.http.put(url, action)
   }
 

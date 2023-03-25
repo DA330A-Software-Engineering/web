@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div *ngIf="groups.length === 0">
+        You don't have any groups yet. Create a new group by 
+        clicking the blue icon in the bottom right corner.</div>
+      <button mat-icon-button class="add-button">
+        <mat-icon>add</mat-icon>
+        <span class="add-text">Create group</span>
+      </button>
+      <button mat-icon-button class="remove-button">
+        <mat-icon>remove</mat-icon>
+        <span class="remove-text">Delete group</span>
+      </button>
+      <div class="group-container" *ngFor="let group of groups">
+        <div class="group-image-container">
+          <img class="group-image" [src]="group.image" alt="Group Image">
+        </div>
+        <div class="group-info-container">
+          <h2 class="group-name">{{ group.name }}</h2>
+          <ul class="list-group">
+            <li *ngFor="let device of group.devices" class="list-group-item">{{ device.name }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

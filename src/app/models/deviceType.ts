@@ -1,3 +1,3 @@
 export enum DeviceTypes {
-    TOGGLE = "toggle", SPEAKER ="speaker", WINDOW ="window", DISPLAY="display", DOOR ="door", FAN="fan"
+    TOGGLE = "toggle", BUZZER ="buzzer", WINDOW ="window", SCREEN="screen", DOOR ="door", FAN="fan"
 }

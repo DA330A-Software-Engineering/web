@@ -17,6 +17,9 @@ export class DeviceContainerComponent {
   toggleType = DeviceTypes.TOGGLE
   doorType = DeviceTypes.DOOR
   fanType = DeviceTypes.FAN
+  windowType = DeviceTypes.WINDOW
+  screenType = DeviceTypes.SCREEN
+  buzzerType = DeviceTypes.BUZZER
 
   constructor(private deviceService: DeviceService) {
     this.devices = deviceService.devices$;

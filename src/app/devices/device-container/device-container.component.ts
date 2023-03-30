@@ -16,6 +16,7 @@ export class DeviceContainerComponent {
   devices!: Observable<any>
   toggleType = DeviceTypes.TOGGLE
   doorType = DeviceTypes.DOOR
+  fanType = DeviceTypes.FAN
 
   constructor(private deviceService: DeviceService) {
     this.devices = deviceService.devices$;

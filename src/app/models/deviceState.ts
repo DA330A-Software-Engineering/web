@@ -20,3 +20,13 @@ export class DoorState extends DeviceState{
     }
 }
 
+export class FanState extends DeviceState{
+    on : boolean;
+    reverse : boolean;
+    constructor(on: boolean, reverse: boolean){
+        super();
+        this.on = on;
+        this.reverse = reverse;
+    }
+}
+

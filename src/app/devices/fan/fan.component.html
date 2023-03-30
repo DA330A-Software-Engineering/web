@@ -1,0 +1,8 @@
+<div class="show-fans">
+    <p>{{ device.id }}</p>
+    <p>{{ device.type }}</p>
+    <p>On: {{device.state.on}}</p>
+    <p>Reverse: {{device.state.reverse}}</p>
+    <button mat-raised-button (click)="fanToggleOn()">Click me</button>
+    <button mat-raised-button (click)="fanToggleReverse()">Click me</button>
+</div>

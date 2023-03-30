@@ -5,13 +5,15 @@ import { DoorComponent } from './door/door.component';
 import { ToggleComponent } from './toggle/toggle.component';
 
 import { MatButtonModule } from '@angular/material/button';
+import { FanComponent } from './fan/fan.component';
 
 
 @NgModule({
   declarations: [
     DeviceContainerComponent,
     DoorComponent,
-    ToggleComponent
+    ToggleComponent,
+    FanComponent
   ],
   imports: [
     CommonModule,

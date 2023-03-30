@@ -1,8 +1,8 @@
 
 <div class="show-toggle">
-    <p>{{ device.id }}</p>
     <p>{{ device.type }}</p>
+    <p>{{ device.description }}</p>
     <p>On: {{device.state.on}}</p>
-    <button mat-raised-button (click)="toggle()">Click me</button>
+    <button mat-raised-button (click)="toggle()">On/Off</button>
 </div>
 

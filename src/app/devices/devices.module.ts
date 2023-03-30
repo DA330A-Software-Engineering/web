@@ -6,6 +6,9 @@ import { ToggleComponent } from './toggle/toggle.component';
 
 import { MatButtonModule } from '@angular/material/button';
 import { FanComponent } from './fan/fan.component';
+import { WindowComponent } from './window/window.component';
+import { ScreenComponent } from './screen/screen.component';
+import { BuzzerComponent } from './buzzer/buzzer.component';
 
 
 @NgModule({
@@ -13,7 +16,10 @@ import { FanComponent } from './fan/fan.component';
     DeviceContainerComponent,
     DoorComponent,
     ToggleComponent,
-    FanComponent
+    FanComponent,
+    WindowComponent,
+    ScreenComponent,
+    BuzzerComponent
   ],
   imports: [
     CommonModule,

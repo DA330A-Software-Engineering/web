@@ -11,16 +11,17 @@ import { Router } from '@angular/router';
 
 export class AuthService {
 
-  private baseUrl = `http://${Constants.ip}:${Constants.port}/`; 
+  //private baseUrl = `http://${Constants.ip}:${Constants.port}/`; 
+  private restUrl = `http://localhost:3000/users/`; 
 
   constructor(private http: HttpClient, private router: Router ) {}
 
   signup(userObj: any){
-    return this.http.post<any>(`${this.baseUrl}users/signin`, userObj)
+    return this.http.post<any>(`${this.restUrl}users/signin`, userObj)
   }
 
   login(loginObj: any){
-    return this.http.post<any>(`${this.baseUrl}users/login`, loginObj)
+    return this.http.post<any>(`${this.restUrl}users/login`, loginObj)
   }
 
   storeToken(tokenValue: string){

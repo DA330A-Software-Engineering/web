@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { HttpClient, HttpClientModule} from '@angular/common/http'
+import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/http'
 import { AppRoutingModule } from './app-routing.module';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
@@ -20,23 +20,21 @@ import { environment } from '../environments/environment';
 import { provideFirestore,getFirestore } from '@angular/fire/firestore';
 import {MatSlideToggleModule} from '@angular/material/slide-toggle';
 import {MatButtonToggleModule} from '@angular/material/button-toggle';
-import { DoorComponent } from './devices/door/door.component';
-import { ToggleComponent } from './devices/toggle/toggle.component';
 import { DevicesModule } from './devices/devices.module';
 import { DeviceContainerComponent } from './devices/device-container/device-container.component';
-
-
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
+import { NgToastModule } from 'ng-angular-popup'
+import { AuthGuard } from './guards/auth.guard';
+import { TokenInterceptor } from './interceptors/token.interceptor';
 
 const appRoute: Routes = [
-  {path:'home', component: HomeComponent},
-  {path:'devices', component: DeviceContainerComponent},
-  {path:'groups', component: GroupsComponent},
-  {path:'routines', component: RoutinesComponent},
-  {path:'aboutus', component: AboutusComponent},
+  {path:'home', component: HomeComponent, canActivate:[AuthGuard]},
+  {path:'devices', component: DeviceContainerComponent, canActivate:[AuthGuard]},
+  {path:'groups', component: GroupsComponent, canActivate:[AuthGuard]},
+  {path:'routines', component: RoutinesComponent, canActivate:[AuthGuard]},
+  {path:'aboutus', component: AboutusComponent, canActivate:[AuthGuard]},
   {path:'login', component: LoginComponent},
-  {path:'', component: HomeComponent}, 
-  //{path:'', redirectTo: 'login', pathMatch: 'full'}
-  
+  {path:'', component: LoginComponent}  
 ]
 
 @NgModule({
@@ -47,7 +45,7 @@ const appRoute: Routes = [
     GroupsComponent,
     RoutinesComponent,
     AboutusComponent,
-    LoginComponent,
+    LoginComponent
   
   ],
   imports: [
@@ -64,9 +62,16 @@ const appRoute: Routes = [
     provideFirestore(() => getFirestore()),
     MatSlideToggleModule,
     MatButtonToggleModule,
-    DevicesModule
+    DevicesModule,
+    FormsModule,
+    ReactiveFormsModule,
+    NgToastModule
   ],
-  providers: [],
+  providers: [{
+    provide: HTTP_INTERCEPTORS,
+    useClass:TokenInterceptor,
+    multi:true
+  }],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

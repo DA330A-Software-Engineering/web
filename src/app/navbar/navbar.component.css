@@ -5,6 +5,18 @@ body {
   
 }
 
+.logout-btn{
+  padding-top: 40px;
+  padding-left: 25px;
+}
+
+.btn{
+  background-color: #9ABDDC;
+  font-family: 'Montserrat', sans-serif;
+  color: black !important;
+  padding: 25px;
+}
+
 .header-link {
     font-family: 'Montserrat', sans-serif;
     color: black !important;

@@ -11,8 +11,8 @@
 			<div class="signup">
 				<form [formGroup]="signupForm">
 					<label class="text_signup" for="chk" aria-hidden="true">Sign up</label>
-					<small *ngIf="signupForm.controls['username'].dirty && signupForm.hasError('required', 'username')" class="text-danger">*Username is required</small>
-					<input formControlName="username" type="text" name="txt" placeholder="Username">
+					<small *ngIf="signupForm.controls['name'].dirty && signupForm.hasError('required', 'name')" class="text-danger">*Name is required</small>
+					<input formControlName="name" type="text" name="txt" placeholder="Name">
 					<small *ngIf="signupForm.controls['email'].dirty && signupForm.hasError('required', 'email')" class="text-danger">*Email is required</small>
 					<input formControlName="email" type="email" name="email" placeholder="Email">
 					<small *ngIf="signupForm.controls['password'].dirty && signupForm.hasError('required', 'password')" class="text-danger">*Password is required</small>

@@ -17,11 +17,11 @@ export class AuthService {
   constructor(private http: HttpClient, private router: Router ) {}
 
   signup(userObj: any){
-    return this.http.post<any>(`${this.restUrl}users/signin`, userObj)
+    return this.http.post<any>(`${this.restUrl}signin`, userObj)
   }
 
   login(loginObj: any){
-    return this.http.post<any>(`${this.restUrl}users/login`, loginObj)
+    return this.http.post<any>(`${this.restUrl}login`, loginObj)
   }
 
   storeToken(tokenValue: string){

@@ -1,11 +1,11 @@
 <div class="devices-container">
-    <div *ngFor="let device of devices | async" class="show-devices" [ngSwitch]="device.type">
-        <app-toggle *ngSwitchCase="toggleType" [device]="device"></app-toggle>
+    <div class="device-wrapper" *ngFor="let device of devices | async" class="show-devices" [ngSwitch]="device.type">
         <app-door *ngSwitchCase="doorType" [device]="device"></app-door>
         <app-fan *ngSwitchCase="fanType" [device]="device"></app-fan>
         <app-window *ngSwitchCase="windowType" [device]="device"></app-window>
         <app-screen *ngSwitchCase="screenType" [device]="device"></app-screen>
-        <app-buzzer *ngSwitchCase="buzzerType" [device] ="device"></app-buzzer>
+        <!--<app-buzzer *ngSwitchCase="buzzerType" [device] ="device"></app-buzzer>
+        <app-toggle *ngSwitchCase="toggleType" [device]="device"></app-toggle>-->
   </div>
   
 </div>

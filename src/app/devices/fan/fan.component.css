@@ -1,5 +1,17 @@
 .show-fans {
-    max-width: 600px;
-    font-size: 16px;
-    margin-left: 30px;
+    position: fixed;
+    top: 30%;
+    left: 0;
+    width: 300px;
+    text-align: center;
+    padding-left: 35%;
     }
+
+.fan-image {
+    width: 40px; /* Set the width to 200 pixels */
+    height: auto; /* Automatically adjust the height based on the aspect ratio */
+    }
+
+.fan-btn{
+    margin-right: 10px;
+}

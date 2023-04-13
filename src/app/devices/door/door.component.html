@@ -1,7 +1,7 @@
-<div class="show-devices">
-    <p>{{ device.type }}</p>
+<div class="show-doors">
+    <img src="assets/door-17.png" class="door-image">
     <p>Locked: {{device.state.locked}}</p>
     <p>Open: {{device.state.open}}</p>
-    <button mat-raised-button (click)="toggleLocked()">Lock/Unlock</button>
-    <button mat-raised-button (click)="toggleOpen()">Open/Close</button>
+    <button mat-raised-button (click)="toggleLocked()" class="lock-btn">Lock/Unlock</button>
+    <button mat-raised-button (click)="toggleOpen()" class="open-btn">Open/Close</button>
 </div>

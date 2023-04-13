@@ -1,9 +1,13 @@
 <div class="show-screens">
-    
-    <p>{{ device.type }}</p>
+    <img src="assets/display.png" class="display-image">
     <p>On: {{device.state.on}}</p>
-    <button mat-raised-button (click)="screenToggleOn()">On/Off</button>
-    <p>Text {{device.state.text}}</p>
-    <input type="text" #box placeholder="Enter text" name="usertext">
-    <button mat-raised-button (click)="screenToggleText(box.value)">Submit</button>
+    <!--<p>Text: {{device.state.text}}</p>-->
+    <div class="button-container">
+        <button mat-raised-button (click)="screenToggleOn()" class="btn">On/Off</button>
+        <div class="input-container">
+            <input type="text" #box placeholder="Enter text" name="usertext" class="input">
+            <button mat-raised-button (click)="screenToggleText(box.value)">Submit</button>
+        </div>
+    </div>
+    
 </div>

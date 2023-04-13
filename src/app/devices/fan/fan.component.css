@@ -1,17 +1,29 @@
 .show-fans {
     position: fixed;
-    top: 30%;
+    top: 29%;
     left: 0;
     width: 300px;
     text-align: center;
     padding-left: 35%;
+    z-index: 9999;
     }
 
 .fan-image {
-    width: 40px; /* Set the width to 200 pixels */
+    width: 50px; /* Set the width to 200 pixels */
     height: auto; /* Automatically adjust the height based on the aspect ratio */
     }
 
 .fan-btn{
     margin-right: 10px;
 }
+
+.red {
+    background-color: red;
+
+  }
+  
+  .green {
+    background-color: green;
+ 
+  }
+  

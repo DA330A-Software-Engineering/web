@@ -30,4 +30,10 @@ export class DoorComponent {
       console.error(error);
     });
   }
+
+    
+  getButtonColor(state: boolean): string {
+    return state ? 'green' : 'red';
+  }
+
 }

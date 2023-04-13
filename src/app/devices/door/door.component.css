@@ -5,15 +5,28 @@
     width: 300px;
     text-align: center;
     padding-left: 20%;
+    z-index: 9999;
   }
   
 
 .door-image {
-  width: 50px; /* Set the width to 200 pixels */
-  height: auto; /* Automatically adjust the height based on the aspect ratio */
+  width: 60px; 
+  height: auto; 
 }
 
 .lock-btn {
-    margin-right: 10px; /* Add 10 pixels of margin to the right of the lock button */
+    margin-right: 10px; 
+   
 }
+
+.red {
+  background-color: red;
+  color: white;
+}
+
+.green {
+  background-color: green;
+  color: white;
+}
+
   

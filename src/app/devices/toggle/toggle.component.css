@@ -1,18 +1,20 @@
 
-  
-.show-toggle {
-  top: 30%;
-    left: 0;
-    text-align: center;
-    padding-left: 30%;
 
-  font-size: 16px;
 
-}
+
 
 .toggle-image {
-  width: 50px; /* Set the width to 200 pixels */
-  height: auto; /* Automatically adjust the height based on the aspect ratio */
+  width: 60px; 
+  height: auto; 
 }
+
+.red {
+  background-color: red;
+}
+
+.green {
+  background-color: green;
+}
+
 
   

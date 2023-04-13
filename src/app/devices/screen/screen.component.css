@@ -24,12 +24,22 @@
 
 .input{
     width: 100px;
-    margin-right: 5px;
+    margin: 5px;
 }
 
-button {
-    margin-top: 5px;
-}
+.red {
+    background-color: red;
+
+  }
+  
+  .green {
+    background-color: green;
+  }
+  
+
+
+
+
 
 
 

@@ -1,6 +1,11 @@
-<div class="show-screens">
-    <p>{{ device.type }}</p>
+<div class="show-speakers">
+    <img src="assets/speaker.png" class="speaker-image">
     <p>Tune: {{device.state.tune}}</p>
-    <input type="text" #box placeholder="Enter tune" name="usertext">
-    <button mat-raised-button (click)="buzzerTune(box.value)">Submit</button>
+    <div class="button-container">
+        <div class="input-container">
+            <input type="text" #box placeholder="Enter tune" name="usertext" class="input">
+            <br>
+            <button mat-raised-button (click)="buzzerTune(box.value)" class="speaker-btn">Submit</button>
+        </div>
+    </div>
 </div>

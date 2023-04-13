@@ -1,11 +1,12 @@
 <div class="show-screens">
     <img src="assets/display.png" class="display-image">
     <p>On: {{device.state.on}}</p>
-    <!--<p>Text: {{device.state.text}}</p>-->
+    <p>Text: {{device.state.text}}</p>
     <div class="button-container">
-        <button mat-raised-button (click)="screenToggleOn()" class="btn">On/Off</button>
+        <button mat-raised-button [ngClass]="getButtonColor(device.state.on)" (click)="screenToggleOn()" class="btn">On/Off</button>
         <div class="input-container">
             <input type="text" #box placeholder="Enter text" name="usertext" class="input">
+            <br>
             <button mat-raised-button (click)="screenToggleText(box.value)">Submit</button>
         </div>
     </div>

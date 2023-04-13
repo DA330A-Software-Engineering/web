@@ -2,6 +2,6 @@
     <img src="assets/fan.png" class="fan-image">
     <p>On: {{device.state.on}}</p>
     <p>Reverse: {{device.state.reverse}}</p>
-    <button mat-raised-button (click)="fanToggleOn()" class="fan-btn">On/Off</button>
-    <button mat-raised-button (click)="fanToggleReverse()">Reverse</button>
+    <button mat-raised-button [ngClass]="getButtonColor(device.state.on)" (click)="fanToggleOn()" class="fan-btn">On/Off</button>
+    <button mat-raised-button [ngClass]="getButtonColor(device.state.reverse)" (click)="fanToggleReverse()">Reverse</button>
 </div>

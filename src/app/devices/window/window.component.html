@@ -1,0 +1,8 @@
+
+<div class="show-windows">
+    <p>{{ device.type }}</p>
+    <p>Locked: {{device.state.locked}}</p>
+    <p>Open: {{device.state.open}}</p>
+    <button mat-raised-button (click)="windowToggleLocked()">Lock/Unlock</button>
+    <button mat-raised-button (click)="windowToggleOpen()">Open/Close</button>
+</div>

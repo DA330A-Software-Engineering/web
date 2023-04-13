@@ -20,3 +20,41 @@ export class DoorState extends DeviceState{
     }
 }
 
+export class FanState extends DeviceState{
+    on : boolean;
+    reverse : boolean;
+    constructor(on: boolean, reverse: boolean){
+        super();
+        this.on = on;
+        this.reverse = reverse;
+    }
+}
+
+export class WindowState extends DeviceState{
+    locked : boolean;
+    open : boolean;
+    constructor(locked: boolean, open: boolean){
+        super();
+        this.locked = locked;
+        this.open = open;
+    }
+}
+
+export class ScreenState extends DeviceState{
+    on : boolean;
+    text : string;
+    constructor(on: boolean, text: string){
+        super();
+        this.on = on;
+        this.text = text;
+    }
+}
+
+export class BuzzerState extends DeviceState{
+    tune : string;
+    constructor(tune: string){
+        super();
+        this.tune = tune;
+    }
+}
+

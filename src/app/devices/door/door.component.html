@@ -1,8 +1,7 @@
 <div class="show-devices">
-    <p>{{ device.id }}</p>
     <p>{{ device.type }}</p>
-    <p>State: {{device.state.locked}}</p>
-    <p>State: {{device.state.open}}</p>
-    <button mat-raised-button (click)="toggleLocked()">Click me</button>
-    <button mat-raised-button (click)="toggleOpen()">Click me</button>
+    <p>Locked: {{device.state.locked}}</p>
+    <p>Open: {{device.state.open}}</p>
+    <button mat-raised-button (click)="toggleLocked()">Lock/Unlock</button>
+    <button mat-raised-button (click)="toggleOpen()">Open/Close</button>
 </div>

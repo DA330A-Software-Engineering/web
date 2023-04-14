@@ -3,7 +3,7 @@ import { DeviceState } from 'src/app/models/deviceState';
 import { DeviceTypes } from 'src/app/models/deviceType';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
-import { Firestore, collection, addDoc, collectionData, doc, updateDoc } from '@angular/fire/firestore';
+import { Firestore, collection, addDoc, collectionData, doc, updateDoc, onSnapshot, query } from '@angular/fire/firestore';
 import { Device } from 'src/app/models/device';
 import { Type } from '@angular/compiler';
 import Constants from 'src/app/constants';
@@ -37,4 +37,17 @@ export class DeviceService {
         });
       }));
   }
+  getGroupsByProfile(profileId: string): Observable<any> {
+    const groupCollection = collection(doc(this.firestore, 'profiles', profileId), 'groups');
+    const groupQuery = query(groupCollection);
+
+    return new Observable((observer) => {
+      const unsubscribe = onSnapshot(groupQuery, (snapshot) => {
+        observer.next(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+      });
+
+      return () => unsubscribe();
+    });
+  }
+  
 }

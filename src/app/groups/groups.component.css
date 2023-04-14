@@ -1,7 +1,15 @@
 .container {
   max-width: 800px;
-  margin: 140px auto;
+  margin: 50px auto;
   text-align: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+}
+
+.groups{
+  padding-top: 20%;
 }
 
 h1 {
@@ -118,4 +126,5 @@ ul.list-group {
   max-width: 200px;
   height: auto;
 }
+
 

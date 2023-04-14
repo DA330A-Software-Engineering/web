@@ -1,37 +1,19 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { Observable } from 'rxjs';
+import { DeviceService } from '../service/deviceService/device.service';
 
 @Component({
   selector: 'app-groups',
   templateUrl: './groups.component.html',
   styleUrls: ['./groups.component.css']
 })
-export class GroupsComponent {
-  showNavBar = true
-  groups = [    {      
-      name: 'Group 1',
-      image: "assets/lightbulb.png",
-      devices: [       
-        { name: 'Kitchen light' },       
-        { name: 'Bedroom light' },       
-        { name: 'Bathroom light' }     
-       ]
-    },
-    {
-      name: 'Group 2',
-      image: "assets/door-17.png",
-      devices: [
-        { name: 'Kitchen door' },
-        { name: 'Livingroom door' }
-      ]
-    },
-    {
-      name: 'Group 3',
-      image: "assets/window.png",
-      devices: [
-        { name: 'Kitchen window' },
-        { name: 'Livingroom window' },
-        { name: 'Bedroom window' }
-      ]
-    }
-  ];
+export class GroupsComponent implements OnInit{
+  groups$!: Observable<any>;
+  profileId = 'PbzEcJhIcv06ybA6BUWx'; // Profile ID
+
+  constructor(private deviceService: DeviceService) {}
+
+  ngOnInit(): void {
+    this.groups$ = this.deviceService.getGroupsByProfile(this.profileId);
+  }
 }

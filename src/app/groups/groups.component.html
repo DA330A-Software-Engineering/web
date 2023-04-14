@@ -1,4 +1,4 @@
-<div class="container">
+<!--<div class="container">
   <div class="row">
     <div class="col-md-6">
       <div *ngIf="groups.length === 0">
@@ -25,4 +25,27 @@
       </div>
     </div>
   </div>
+</div> -->
+
+<div class="container">
+<div class="groups"></div>
+<button mat-icon-button class="add-button">
+  <mat-icon>add</mat-icon>
+  <span class="add-text">Create group</span>
+</button>
+<button mat-icon-button class="remove-button">
+  <mat-icon>remove</mat-icon>
+  <span class="remove-text">Delete group</span>
+</button>
+<h2>Groups</h2>
+<ul *ngIf="(groups$ | async) as groups">
+  <li *ngFor="let group of groups">
+    {{ group.name }} - {{ group.description }} - {{group.id}} 
+    <ul>
+      <li *ngFor="let device of group.devices">
+        {{ device }}
+      </li>
+    </ul>
+  </li>
+</ul>
 </div>

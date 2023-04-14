@@ -49,5 +49,18 @@ export class DeviceService {
       return () => unsubscribe();
     });
   }
-  
+
+
+  getAllDevices(): Observable<any> {
+    const deviceCollection = collection(this.firestore, 'devices')
+    const deviceQuery = query(deviceCollection);
+
+    return new Observable((observer) => {
+      const unsubscribe = onSnapshot(deviceQuery, (snapshot) => {
+        observer.next(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
+        
+      });
+      return () => unsubscribe();
+    });
+  } 
 }

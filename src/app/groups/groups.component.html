@@ -38,14 +38,13 @@
   <span class="remove-text">Delete group</span>
 </button>
 <h2>Groups</h2>
-<ul *ngIf="(groups$ | async) as groups">
-  <li *ngFor="let group of groups">
-    {{ group.name }} - {{ group.description }} - {{group.id}} 
-    <ul>
-      <li *ngFor="let device of group.devices">
-        {{ device }}
-      </li>
-    </ul>
+<ul *ngFor="let group of groupsDevices$">
+  {{group.name}}
+  {{group.description}}
+  <li *ngFor="let device of group.devicesNames">
+    {{device}}
   </li>
+
+  
 </ul>
 </div>

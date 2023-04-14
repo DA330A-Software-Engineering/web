@@ -39,12 +39,11 @@
 </button>
 <h2>Groups</h2>
 <ul *ngFor="let group of groupsDevices$">
-  {{group.name}}
-  {{group.description}}
-  <li *ngFor="let device of group.devicesNames">
-    {{device}}
-  </li>
-
+{{group.name}}
+{{group.description}}
+<li *ngFor="let device of group.devices">
+  {{device.data.name}}
+</li>
   
 </ul>
 </div>

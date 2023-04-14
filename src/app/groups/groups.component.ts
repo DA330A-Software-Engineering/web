@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
 import { DeviceService } from '../service/deviceService/device.service';
+import { Group } from '../models/group';
 
 @Component({
   selector: 'app-groups',
@@ -8,35 +8,28 @@ import { DeviceService } from '../service/deviceService/device.service';
   styleUrls: ['./groups.component.css']
 })
 export class GroupsComponent implements OnInit{
-  groupsDevices$!: any[];
+  groupsDevices$!: Group[];
   profileId = 'PbzEcJhIcv06ybA6BUWx'; // Profile ID
 
   constructor(private deviceService: DeviceService) {}
 
-  ngOnInit(): void {
-    this.groupsDevices$ = []
+  async ngOnInit() {
 
-    const allDevices = this.deviceService.getAllDevices();
-    
-    const groups = this.deviceService.getGroupsByProfile(this.profileId);
-
-    groups.subscribe((data:any[]) => {
-      data.forEach((group: any) => {
-        group["devicesNames"] = []
-        allDevices.subscribe((data: any[]) => {
-            data.forEach((device: any) => {
-              const id = " " + device["id"]
-              if (group["devices"].includes(id)) {
-                group["devicesNames"].push(device["name"])
-              }
-            })
-        })
-
-    })
-    this.groupsDevices$ = data
-    console.log(this.groupsDevices$)
-
-    })
+    // Get all devies and groups
+    const devices = await this.deviceService.getAllDevices();
+    const groups: Group[] = await this.deviceService.getGroupsByProfile(this.profileId);
+    // Update devices for each group
+    await Promise.all(groups.map(async (g: Group) => {
+      const foundDevices = await Promise.all(g.devices.map(async (id: string) => {
+        const groupId = id.replace(/\s+/g, '');
+        const foundDevice = devices.find(device => device.id === groupId);
+        return foundDevice;
+      }));
+      // Filter out if there is any undefined items in the array
+      g.devices = foundDevices.filter(device => device !== undefined);
+    }));
+    // set the groups
+    this.groupsDevices$ = groups;
   }
   
 }

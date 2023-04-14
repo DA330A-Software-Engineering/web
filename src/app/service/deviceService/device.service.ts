@@ -3,7 +3,7 @@ import { DeviceState } from 'src/app/models/deviceState';
 import { DeviceTypes } from 'src/app/models/deviceType';
 import { HttpClient } from '@angular/common/http';
 import { map, Observable } from 'rxjs';
-import { Firestore, collection, addDoc, collectionData, doc, updateDoc, onSnapshot, query } from '@angular/fire/firestore';
+import { Firestore, collection, addDoc, collectionData, doc, updateDoc, onSnapshot, query, CollectionReference, DocumentData, QuerySnapshot, getDocs } from '@angular/fire/firestore';
 import { Device } from 'src/app/models/device';
 import { Type } from '@angular/compiler';
 import Constants from 'src/app/constants';
@@ -37,30 +37,26 @@ export class DeviceService {
         });
       }));
   }
-  getGroupsByProfile(profileId: string): Observable<any> {
-    const groupCollection = collection(doc(this.firestore, 'profiles', profileId), 'groups');
-    const groupQuery = query(groupCollection);
 
-    return new Observable((observer) => {
-      const unsubscribe = onSnapshot(groupQuery, (snapshot) => {
-        observer.next(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
-      });
-
-      return () => unsubscribe();
+  /** Get Groups from ID */
+  async getGroupsByProfile(profileId: string): Promise<any> {
+    const groupCollection: CollectionReference<DocumentData> = collection(doc(this.firestore, 'profiles', profileId), 'groups');
+    const groupQuery: QuerySnapshot<DocumentData> = await getDocs(groupCollection);
+    const groups: any[] = groupQuery.docs.map((doc) => {
+      const data = doc.data();
+      return data
     });
+    return groups;
   }
 
 
-  getAllDevices(): Observable<any> {
-    const deviceCollection = collection(this.firestore, 'devices')
-    const deviceQuery = query(deviceCollection);
-
-    return new Observable((observer) => {
-      const unsubscribe = onSnapshot(deviceQuery, (snapshot) => {
-        observer.next(snapshot.docs.map(doc => ({ id: doc.id, ...doc.data() })));
-        
-      });
-      return () => unsubscribe();
+  /** Get all devices */
+  async getAllDevices(): Promise<{id: string, data: any}[]> {
+    const deviceCollection: CollectionReference<DocumentData> = collection(this.firestore, 'devices');
+    const deviceQuery: QuerySnapshot<DocumentData> = await getDocs(deviceCollection);
+    const devices: any[] = deviceQuery.docs.map((doc) => {
+      return { id: doc.id, data: doc.data() }
     });
-  } 
+    return devices;
+  }
 }

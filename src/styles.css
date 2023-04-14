@@ -2,8 +2,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Nunito:ital,wght@1,300&display=swap');
 
 html, body { height: 100%; }
-body { margin: 0; font-family: 'Montserrat', sans-serif; }
+body { margin: 0; font-family: 'Montserrat', sans-serif; background-color: #F5F5F5 !important; }
 
 
-html, body { height: 100%; }
-body { margin: 0; font-family: 'Montserrat', sans-serif; }

@@ -25,4 +25,8 @@ export class ToggleComponent {
     });
   }
 
+  getButtonColor(state: boolean): string {
+    return state ? 'green' : 'red';
+  }
+
 }

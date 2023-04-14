@@ -31,5 +31,9 @@ export class FanComponent {
     });
 
   }
+
+  getButtonColor(state: boolean): string {
+    return state ? 'green' : 'red';
+  }
   
 }

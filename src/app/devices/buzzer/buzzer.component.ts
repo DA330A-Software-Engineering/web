@@ -13,8 +13,9 @@ export class BuzzerComponent {
 
   constructor(private deviceService: DeviceService){}
 
-  buzzerTune(text : string){
-    this.deviceService.sendAction(this.device.id, this.device.type, {text: text} )
+  buzzerTune(event: MouseEvent, text : string){
+    event.preventDefault();
+    this.deviceService.sendAction(this.device.id, this.device.type, {tune: text} )
     .subscribe(() => {
       console.log('sent');
     }, (error) => {

@@ -51,10 +51,12 @@ export class ScreenState extends DeviceState{
 }
 
 export class BuzzerState extends DeviceState{
+    text : string;
     tune : string;
-    constructor(tune: string){
+    constructor(text: string, tune: string){
         super();
         this.tune = tune;
+        this.text = text;
     }
 }
 

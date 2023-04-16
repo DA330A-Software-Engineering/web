@@ -1,8 +1,8 @@
 
-<div class="show-doors">
+<div *ngIf="device.tag === 'door'" class="show-doors">
     <img src="assets/door-17.png" class="door-image">
     <p>Locked: {{device.state.locked}}</p>
     <p>Open: {{device.state.open}}</p>
     <button mat-raised-button [ngClass]="getButtonColor(device.state.locked)" (click)="toggleLocked()" class="lock-btn">Lock/Unlock</button>
-    <button mat-raised-button [ngClass]="getButtonColor(device.state.open)" (click)="toggleOpen()">Open/Close</button>
+    <button mat-raised-button [ngClass]="getButtonColor(device.state.open)" (click)="toggleOpen()" class="open-btn">Open/Close</button>
 </div>

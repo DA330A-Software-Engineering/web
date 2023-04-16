@@ -32,7 +32,7 @@ export class DeviceService {
     this.devices$ = collectionData(collectionInstance, { idField: 'id' })
       .pipe(map(collection => {
         return collection.map(deviceDoc => {
-          return new Device(deviceDoc['id'], deviceDoc['available'], deviceDoc['type'], deviceDoc['state'], deviceDoc['name'], deviceDoc['description'])
+          return new Device(deviceDoc['id'], deviceDoc['available'], deviceDoc['type'], deviceDoc['state'], deviceDoc['name'], deviceDoc['description'], deviceDoc['tag'])
 
         });
       }));

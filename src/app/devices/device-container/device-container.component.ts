@@ -15,9 +15,8 @@ import { DeviceService } from '../../service/deviceService/device.service';
 export class DeviceContainerComponent {
   devices!: Observable<any>
   toggleType = DeviceTypes.TOGGLE
-  doorType = DeviceTypes.DOOR
+  openLockType = DeviceTypes.OPENLOCK
   fanType = DeviceTypes.FAN
-  windowType = DeviceTypes.WINDOW
   screenType = DeviceTypes.SCREEN
   buzzerType = DeviceTypes.BUZZER
 

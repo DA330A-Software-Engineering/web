@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Device } from 'src/app/models/device';
-import { WindowState } from 'src/app/models/deviceState';
+import { OpenLockState} from 'src/app/models/deviceState';
 import { DeviceService } from 'src/app/service/deviceService/device.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { DeviceService } from 'src/app/service/deviceService/device.service';
   styleUrls: ['./window.component.css']
 })
 export class WindowComponent {
-  @Input() device!: Device<WindowState>
+  @Input() device!: Device<OpenLockState>
 
   constructor(private deviceService: DeviceService){}
 

@@ -27,6 +27,7 @@ import { NgToastModule } from 'ng-angular-popup'
 import { AuthGuard } from './guards/auth.guard';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 
+
 const appRoute: Routes = [
   {path:'home', component: HomeComponent, canActivate:[AuthGuard]},
   {path:'devices', component: DeviceContainerComponent, canActivate:[AuthGuard]},

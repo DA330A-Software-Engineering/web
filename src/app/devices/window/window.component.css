@@ -12,8 +12,10 @@
     height: auto; /* Automatically adjust the height based on the aspect ratio */
 }
 
-.window-btn{
+.lock-btn, .open-btn{
     margin-right: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
 }
 
 .red {

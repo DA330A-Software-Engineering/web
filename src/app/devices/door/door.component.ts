@@ -1,6 +1,6 @@
 import { Component, Input } from '@angular/core';
 import { Device } from '../../models/device';
-import { DoorState } from '../../models/deviceState';
+import { OpenLockState } from '../../models/deviceState';
 import { DeviceService } from '../../service/deviceService/device.service';
 
 @Component({
@@ -9,7 +9,7 @@ import { DeviceService } from '../../service/deviceService/device.service';
   styleUrls: ['./door.component.css']
 })
 export class DoorComponent {
-  @Input() device!: Device<DoorState>
+  @Input() device!: Device<OpenLockState>
 
   constructor(private deviceService: DeviceService){}
 

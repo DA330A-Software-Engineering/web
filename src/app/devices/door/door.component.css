@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Nunito:ital,wght@1,300&display=swap');
+
 .show-doors {
     position: fixed;
     top: 30%;
@@ -16,7 +18,14 @@
 
 .lock-btn {
     margin-right: 10px; 
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
    
+}
+
+.open-btn{
+  font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
 }
 
 .red {

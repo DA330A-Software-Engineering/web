@@ -1,8 +1,8 @@
 <div class="devices-container">
   <div class="device-wrapper" *ngFor="let device of devices | async" [ngClass]="device.type === toggleType ? 'toggle-wrapper' : ''" [ngSwitch]="device.type">
-      <app-door *ngSwitchCase="doorType" [device]="device"></app-door>
+      <app-door *ngSwitchCase="openLockType" [device]="device"></app-door>
       <app-fan *ngSwitchCase="fanType" [device]="device"></app-fan>
-      <app-window *ngSwitchCase="windowType" [device]="device"></app-window>
+      <app-window *ngSwitchCase="openLockType" [device]="device"></app-window>
       <app-screen *ngSwitchCase="screenType" [device]="device"></app-screen>
       <app-buzzer *ngSwitchCase="buzzerType" [device] ="device"></app-buzzer>
       <div class="toggle-container">

@@ -8,8 +8,20 @@
 }
 
 .display-image {
-    width: 80px; /* Set the width to 200 pixels */
-    height: auto; /* Automatically adjust the height based on the aspect ratio */
+    width: 80px; 
+    height: auto;
+}
+
+.btn, .sub-btn {
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+
+}
+
+.sub-btn{
+    background-color: #9ABDDC;
+    border-radius: 10px;
+    padding: 10px 20px;
 }
 
 .button-container {

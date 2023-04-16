@@ -1,3 +1,5 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Nunito:ital,wght@1,300&display=swap');
+
 .show-fans {
     position: fixed;
     top: 29%;
@@ -9,12 +11,19 @@
     }
 
 .fan-image {
-    width: 50px; /* Set the width to 200 pixels */
-    height: auto; /* Automatically adjust the height based on the aspect ratio */
+    width: 50px; 
+    height: auto; 
     }
 
 .fan-btn{
     margin-right: 10px;
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
+}
+
+.rev-btn{
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 700;
 }
 
 .red {

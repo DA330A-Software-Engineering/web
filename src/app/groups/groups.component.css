@@ -8,6 +8,54 @@
   align-items: center;
 }
 
+.create-group {
+  margin-top: 50px;
+  margin-left: 120px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+}
+
+.create-group div {
+  margin-bottom: 10px;
+}
+
+.create-group button {
+  margin-top: 10px;
+}
+
+
+.create-group h3 {
+  font-weight: bold;
+}
+
+.create-group label {
+  display: inline-block;
+  width: 120px;
+  margin-right: 10px;
+  text-align: right;
+}
+
+.create-group input {
+  width: 200px;
+}
+
+.no-bullet {
+  list-style-type: none;
+}
+
+
+.group-item {
+  margin-bottom: 20px;
+  padding-bottom: 10px;
+  border-bottom: 1px solid #ccc;
+}
+
+.delete-group-btn {
+  margin-top: 10px;
+}
+
+
 .groups{
   padding-top: 20%;
 }

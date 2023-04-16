@@ -31,5 +31,17 @@ export class GroupsComponent implements OnInit{
     // set the groups
     this.groupsDevices$ = groups;
   }
+
+  devices: string[] = [];
+  deviceName!: string
+
+addDevice(deviceId:string) {
+  this.devices.push(deviceId);
+}
+
+submitGroup(name:string, description:string) {
+  this.deviceService.createNewGroup({name:name, description:description, devices:this.devices})
+}
+
   
 }

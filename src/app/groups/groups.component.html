@@ -29,21 +29,44 @@
 
 <div class="container">
 <div class="groups"></div>
-<button mat-icon-button class="add-button">
+<!--<button mat-icon-button class="add-button">
   <mat-icon>add</mat-icon>
   <span class="add-text">Create group</span>
 </button>
 <button mat-icon-button class="remove-button">
   <mat-icon>remove</mat-icon>
   <span class="remove-text">Delete group</span>
-</button>
+</button> -->
 <h2>Groups</h2>
 <ul *ngFor="let group of groupsDevices$">
-{{group.name}}
-{{group.description}}
-<li *ngFor="let device of group.devices">
-  {{device.data.name}}
-</li>
-  
+  <li class="group-item">
+    <span>{{group.name}} - {{group.description}}</span>
+    <ul>
+      <li *ngFor="let device of group.devices" class="no-bullet">{{device.data.name}}</li>
 </ul>
+<button class="delete-group-btn">Delete Group</button>
+</li>
+</ul>
+
+
+<div class="create-group">
+  <h3>Create Group</h3>
+  <div>
+    <label for="groupName">Group Name:</label>
+    <input type="text" id="groupName" name="groupName">
+  </div>
+  <div>
+    <label for="groupDescription">Group Description:</label>
+    <input type="text" id="groupDescription" name="groupDescription">
+  </div>
+  <div>
+    <label for="deviceName">Device Name:</label>
+    <input [(ngModel)] = "deviceName" type="text" id="deviceName" name="deviceName">
+  </div>
+  <div *ngFor="let device of devices; let i = index;">
+    <label for="deviceName{{i}}">Device Name:</label>
+    <input type="text" id="deviceName{{i}}" name="deviceName{{i}}">
+  </div>
+  <button (click)="addDevice(deviceName)">Add Device</button>
+  <button type="submit">Send</button>
 </div>

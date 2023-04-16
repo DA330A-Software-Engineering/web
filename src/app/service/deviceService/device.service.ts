@@ -59,4 +59,12 @@ export class DeviceService {
     });
     return devices;
   }
+
+
+   createNewGroup(groupData: any): Observable<any> {
+    const url = `http://${Constants.ip}:${Constants.port}/groups`;
+    return this.http.post(url, groupData);
+  }
+
 }
+

@@ -4,6 +4,7 @@ import { HTTP_INTERCEPTORS, HttpClient, HttpClientModule} from '@angular/common/
 import { AppRoutingModule } from './app-routing.module';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import { MatMenuModule } from '@angular/material/menu';
+import { MatIconModule } from '@angular/material/icon';
 import {MatButtonModule} from '@angular/material/button';
 import { MatCardModule } from '@angular/material/card';
 import { AppComponent } from './app.component';
@@ -54,6 +55,7 @@ const appRoute: Routes = [
     BrowserAnimationsModule,
     MatToolbarModule,
     MatMenuModule,
+    MatIconModule,
     MatButtonModule,
     MatCardModule,
     RouterModule.forRoot(appRoute),

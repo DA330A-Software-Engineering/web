@@ -1,0 +1,72 @@
+<!--<div class="container">
+  <div class="row">
+    <div class="col-md-6">
+      <div *ngIf="groups.length === 0">
+        You don't have any groups yet. Create a new group by 
+        clicking the blue icon in the bottom right corner.</div>
+      <button mat-icon-button class="add-button">
+        <mat-icon>add</mat-icon>
+        <span class="add-text">Create group</span>
+      </button>
+      <button mat-icon-button class="remove-button">
+        <mat-icon>remove</mat-icon>
+        <span class="remove-text">Delete group</span>
+      </button>
+      <div class="group-container" *ngFor="let group of groups">
+        <div class="group-image-container">
+          <img class="group-image" [src]="group.image" alt="Group Image">
+        </div>
+        <div class="group-info-container">
+          <h2 class="group-name">{{ group.name }}</h2>
+          <ul class="list-group">
+            <li *ngFor="let device of group.devices" class="list-group-item">{{ device.name }}</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</div> -->
+
+<div class="container">
+<div class="groups"></div>
+<!--<button mat-icon-button class="add-button">
+  <mat-icon>add</mat-icon>
+  <span class="add-text">Create group</span>
+</button>
+<button mat-icon-button class="remove-button">
+  <mat-icon>remove</mat-icon>
+  <span class="remove-text">Delete group</span>
+</button> -->
+<h2>Groups</h2>
+<ul *ngFor="let group of groupsDevices$">
+  <li class="group-item">
+    <span>{{group.name}} - {{group.description}}</span>
+    <ul>
+      <li *ngFor="let device of group.devices" class="no-bullet">{{device.data.name}}</li>
+</ul>
+<button class="delete-group-btn">Delete Group</button>
+</li>
+</ul>
+
+
+<div class="create-group">
+  <h3>Create Group</h3>
+  <div>
+    <label for="groupName">Group Name:</label>
+    <input type="text" id="groupName" name="groupName">
+  </div>
+  <div>
+    <label for="groupDescription">Group Description:</label>
+    <input type="text" id="groupDescription" name="groupDescription">
+  </div>
+  <div>
+    <label for="deviceName">Device Name:</label>
+    <input [(ngModel)] = "deviceName" type="text" id="deviceName" name="deviceName">
+  </div>
+  <div *ngFor="let device of devices; let i = index;">
+    <label for="deviceName{{i}}">Device Name:</label>
+    <input type="text" id="deviceName{{i}}" name="deviceName{{i}}">
+  </div>
+  <button (click)="addDevice(deviceName)">Add Device</button>
+  <button type="submit">Send</button>
+</div>

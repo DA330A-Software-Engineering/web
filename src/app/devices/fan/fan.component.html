@@ -3,5 +3,5 @@
     <p>On: {{device.state.on}}</p>
     <p>Reverse: {{device.state.reverse}}</p>
     <button mat-raised-button [ngClass]="getButtonColor(device.state.on)" (click)="fanToggleOn()" class="fan-btn">{{getOnButtonText()}}</button>
-    <button mat-raised-button [ngClass]="getButtonColor(device.state.reverse)" (click)="fanToggleReverse()" class="rev-btn">Reverse</button>
+    <button mat-raised-button [ngClass]="getButtonColor(device.state.reverse)" (click)="fanToggleReverse()" class="rev-btn">{{getRevButtonText()}}</button>
 </div>

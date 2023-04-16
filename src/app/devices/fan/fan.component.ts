@@ -40,5 +40,9 @@ export class FanComponent {
   getOnButtonText(): string {
     return getOnButtonText(this.device.state.on);
   }
+
+  getRevButtonText(): string {
+    return this.device.state.reverse ? 'Clockwise' : 'Anti-clockwise';
+  }
   
 }

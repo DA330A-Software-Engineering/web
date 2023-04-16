@@ -1,13 +1,16 @@
 <div class="devices-container">
-  <div class="device-wrapper" *ngFor="let device of devices | async" [ngClass]="device.type === toggleType ? 'toggle-wrapper' : ''" [ngSwitch]="device.type">
-      <app-door *ngSwitchCase="doorType" [device]="device"></app-door>
-      <app-fan *ngSwitchCase="fanType" [device]="device"></app-fan>
-      <app-window *ngSwitchCase="windowType" [device]="device"></app-window>
-      <app-screen *ngSwitchCase="screenType" [device]="device"></app-screen>
-      <app-buzzer *ngSwitchCase="buzzerType" [device] ="device"></app-buzzer>
-      <div class="toggle-container">
-        <app-toggle *ngSwitchCase="toggleType" [device]="device"></app-toggle>
-      </div>
+  <div *ngFor="let device of devices | async" [ngClass]="device.type === toggleType ? 'toggle-wrapper' : ''" [ngSwitch]="device.type">
+    <app-door *ngSwitchCase="openLockType" [device]="device" class="door"></app-door>
+    <app-fan *ngSwitchCase="fanType" [device]="device" class="fan"></app-fan>
+    <app-window *ngSwitchCase="openLockType" [device]="device" class="window"></app-window>
+    <app-screen *ngSwitchCase="screenType" [device]="device" class="screen"></app-screen>
+  </div>
+</div>
+
+<div class="devices-container2">
+  <div *ngFor="let device of devices | async" [ngClass]="device.type === toggleType ? 'toggle-wrapper' : ''" [ngSwitch]="device.type">
+    <app-buzzer *ngSwitchCase="buzzerType" [device] ="device" class="buzzer"></app-buzzer>
+    <app-toggle *ngSwitchCase="toggleType" [device]="device" class="toggle"></app-toggle>
   </div>
 </div>
 

@@ -1,11 +1,15 @@
 <div class="show-speakers">
     <img src="assets/speaker.png" class="speaker-image">
     <p>Tune: {{device.state.tune}}</p>
-    <div class="button-container">
-        <div class="input-container">
-            <input type="text" #box placeholder="Enter tune" name="usertext" class="input">
-            <br>
-            <button mat-raised-button (click)="buzzerTune(box.value)" class="speaker-btn">Submit</button>
-        </div>
+    <div class="dropdown">
+      <button class="dropbtn">Select tune</button>
+      <div class="dropdown-content">
+        <a href="#" (click)="buzzerTune($event, 'pirate')">Pirate</a>
+        <a href="#" (click)="buzzerTune($event, 'alarm')">Alarm</a>
+        <a href="#" (click)="buzzerTune($event, 'pokemon')">Pokémon</a>
+      </div>
     </div>
-</div>
+  </div>
+
+
+  

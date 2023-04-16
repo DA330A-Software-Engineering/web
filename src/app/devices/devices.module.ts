@@ -9,7 +9,7 @@ import { FanComponent } from './fan/fan.component';
 import { WindowComponent } from './window/window.component';
 import { ScreenComponent } from './screen/screen.component';
 import { BuzzerComponent } from './buzzer/buzzer.component';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 
 @NgModule({
@@ -25,7 +25,8 @@ import { ReactiveFormsModule } from '@angular/forms';
   imports: [
     CommonModule,
     MatButtonModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
   ],
   exports: [
     DeviceContainerComponent

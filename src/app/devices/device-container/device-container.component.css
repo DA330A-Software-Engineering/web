@@ -1,14 +1,29 @@
-.devices-container {
-    display: flex;
-    flex-wrap: wrap;
-}
-
-
-.toggle-wrapper {
-    flex-basis: 280px; 
-}
 
 .devices-container{
-    margin-top: 33%;
-    margin-left: 42%;
+    display: flex;
+    padding-top: 15%;
+    justify-content: center;
+    flex-wrap: wrap;
+    text-align: center;
 }
+
+.devices-container2{
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  text-align: center;
+}
+.devices-container > *:not(:last-child) {
+  margin-right: 3%;
+}
+
+.devices-container2 > *:not(:last-child) {
+  margin-right: 3%;
+}
+
+
+
+
+
+
+

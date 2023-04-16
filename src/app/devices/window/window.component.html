@@ -1,8 +1,8 @@
 
-<div class="show-windows">
+<div *ngIf="device.tag === 'window'" class="show-windows">
     <img src="assets/window.png" class="window-image">
     <p>Locked: {{device.state.locked}}</p>
     <p>Open: {{device.state.open}}</p>
-    <button mat-raised-button [ngClass]="getButtonColor(device.state.locked)" (click)="windowToggleLocked()" class="window-btn">Lock/Unlock</button>
-    <button mat-raised-button [ngClass]="getButtonColor(device.state.open)" (click)="windowToggleOpen()">Open/Close</button>
+    <button mat-raised-button [ngClass]="getButtonColor(device.state.locked)" (click)="windowToggleLocked()" class="lock-btn">{{getLockButtonText()}}</button>
+    <button mat-raised-button [ngClass]="getButtonColor(device.state.open)" (click)="windowToggleOpen()" class="open-btn">{{getOpenButtonText()}}</button>
 </div>

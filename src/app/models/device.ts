@@ -9,13 +9,15 @@ export class Device <Type extends DeviceState> {
     state: Type;
     name: string;
     description: string;
+    tag: string;
 
-    constructor(id: string, available: boolean, type: DeviceTypes, state: Type, name:string, description: string){
+    constructor(id: string, available: boolean, type: DeviceTypes, state: Type, name:string, description: string, tag: string){
         this.id = id;
         this.available = available;
         this.type = type;
         this.state = state;
         this.name = name;
         this.description = description;
+        this.tag = tag;
     }
 }

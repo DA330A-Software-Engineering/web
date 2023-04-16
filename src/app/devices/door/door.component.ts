@@ -1,7 +1,8 @@
 import { Component, Input } from '@angular/core';
 import { Device } from '../../models/device';
-import { DoorState } from '../../models/deviceState';
+import { OpenLockState } from '../../models/deviceState';
 import { DeviceService } from '../../service/deviceService/device.service';
+import { getLockButtonText, getOpenButtonText } from 'src/app/constants';
 
 @Component({
   selector: 'app-door',
@@ -9,7 +10,7 @@ import { DeviceService } from '../../service/deviceService/device.service';
   styleUrls: ['./door.component.css']
 })
 export class DoorComponent {
-  @Input() device!: Device<DoorState>
+  @Input() device!: Device<OpenLockState>
 
   constructor(private deviceService: DeviceService){}
 
@@ -36,4 +37,12 @@ export class DoorComponent {
     return state ? 'green' : 'red';
   }
 
+  getLockButtonText(): string {
+    return getLockButtonText(this.device.state.locked);
+  }
+
+  getOpenButtonText(): string {
+    return getOpenButtonText(this.device.state.open);
+  }
+  
 }

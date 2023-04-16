@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { Device } from 'src/app/models/device';
 import { ToggleState } from 'src/app/models/deviceState';
 import { DeviceService } from '../../service/deviceService/device.service';
+import { getOnButtonText } from 'src/app/constants';
 
 
 @Component({
@@ -29,4 +30,7 @@ export class ToggleComponent {
     return state ? 'green' : 'red';
   }
 
+  getOnButtonText(): string {
+    return getOnButtonText(this.device.state.on);
+  }
 }

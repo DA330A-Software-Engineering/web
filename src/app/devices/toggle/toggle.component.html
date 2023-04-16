@@ -3,9 +3,7 @@
       <img src="assets/lightbulb.png" class="toggle-image">
       <p>{{ device.description }}</p>
       <p>On: {{device.state.on}}</p>
-      <button mat-raised-button [ngClass]="getButtonColor(device.state.on)" (click)="toggle()">On/Off</button>
+      <button mat-raised-button [ngClass]="getButtonColor(device.state.on)" (click)="toggle()" class="btn">{{getOnButtonText()}}</button>
     </div>
-
-    <!-- Add more toggle elements here -->
   </div>
   

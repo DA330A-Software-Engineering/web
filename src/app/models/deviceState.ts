@@ -10,7 +10,7 @@ export class ToggleState extends DeviceState{
     }
 }
 
-export class DoorState extends DeviceState{
+export class OpenLockState extends DeviceState{
     locked : boolean;
     open : boolean;
     constructor(locked: boolean, open: boolean){
@@ -30,15 +30,6 @@ export class FanState extends DeviceState{
     }
 }
 
-export class WindowState extends DeviceState{
-    locked : boolean;
-    open : boolean;
-    constructor(locked: boolean, open: boolean){
-        super();
-        this.locked = locked;
-        this.open = open;
-    }
-}
 
 export class ScreenState extends DeviceState{
     on : boolean;
@@ -51,10 +42,12 @@ export class ScreenState extends DeviceState{
 }
 
 export class BuzzerState extends DeviceState{
+    text : string;
     tune : string;
-    constructor(tune: string){
+    constructor(text: string, tune: string){
         super();
         this.tune = tune;
+        this.text = text;
     }
 }
 

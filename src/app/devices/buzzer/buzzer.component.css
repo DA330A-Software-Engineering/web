@@ -1,0 +1,29 @@
+.speaker-image {
+    width: 70px; /* Set the width to 200 pixels */
+    height: auto; /* Automatically adjust the height based on the aspect ratio */
+}
+
+.show-speakers {
+    position: fixed;
+    top: 65%;
+    left: 0;
+    width: 300px;
+    text-align: center;
+    padding-left: 20%;
+    z-index: 9999;
+}
+
+.button-container {
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+}
+
+.input-container {
+    margin-bottom: 5px;
+}
+
+.input{
+    width: 100px;
+    margin: 5px;
+}

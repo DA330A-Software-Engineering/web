@@ -1,11 +1,20 @@
 
-  
-.show-toggle {
-  max-width: 600px;
-  font-size: 16px;
-  margin-left: 30px;
+
+
+
+
+.toggle-image {
+  width: 60px; 
+  height: auto; 
 }
 
-  
+.red {
+  background-color: red;
+}
+
+.green {
+  background-color: green;
+}
+
 
   

@@ -26,6 +26,7 @@ export class TokenInterceptor implements HttpInterceptor {
         //setHeaders: {Authorization: `x-auth-header ${myToken}`}
       })
     }
+    console.log("Interceptor line 29")
     return next.handle(request).pipe(
       catchError((err:any)=>{
         if(err instanceof HttpErrorResponse){

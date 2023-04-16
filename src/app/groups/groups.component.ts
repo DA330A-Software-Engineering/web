@@ -1,6 +1,11 @@
 import { Component, OnInit } from '@angular/core';
 import { DeviceService } from '../service/deviceService/device.service';
 import { Group } from '../models/group';
+import { Observable, map } from 'rxjs';
+import { groupBy } from 'src/utils';
+import { DeviceTypes } from '../models/deviceType';
+import { Device } from '../models/device';
+import { DeviceState } from '../models/deviceState';
 
 @Component({
   selector: 'app-groups',
@@ -9,7 +14,14 @@ import { Group } from '../models/group';
 })
 export class GroupsComponent implements OnInit{
   groupsDevices$!: Group[];
-  profileId = 'PbzEcJhIcv06ybA6BUWx'; // Profile ID
+  deviceTypes!: String[];
+  typeMappedDevices$!: Observable< Record<string, Device<DeviceState>[]>>
+  profileId = 'linnea@hotmail.com'; // Profile ID
+
+  selectedDevices: string[] = [];
+  selectedType!: string;
+  newGroupName!: string;
+  newGroupDescription!: string;
 
   constructor(private deviceService: DeviceService) {}
 
@@ -28,20 +40,46 @@ export class GroupsComponent implements OnInit{
       // Filter out if there is any undefined items in the array
       g.devices = foundDevices.filter(device => device !== undefined);
     }));
+
+    this.typeMappedDevices$ =  this.deviceService.devices$.pipe(
+      map(devices =>{
+        return groupBy(devices, device => device.type)
+
+      })
+    )
+
     // set the groups
     this.groupsDevices$ = groups;
+    this.typeMappedDevices$.subscribe(devices => {
+      console.log(devices)
+      this.deviceTypes = Object.keys(devices)
+    })
+    
+
   }
 
-  devices: string[] = [];
-  deviceName!: string
+  addDevice(deviceId:string) {
+    this.selectedDevices.push(deviceId);
+  }
 
-addDevice(deviceId:string) {
-  this.devices.push(deviceId);
-}
+  clearDevices() {
+    this.selectedDevices = []
+  }
 
-submitGroup(name:string, description:string) {
-  this.deviceService.createNewGroup({name:name, description:description, devices:this.devices})
-}
+
+  submitGroup(name:string, description:string) {
+    this.deviceService.createNewGroup({name:name, description:description, devices:this.selectedDevices})
+    .subscribe(() => {
+      console.log('sent');
+    }, (error) => {
+      console.error(error);
+    });
+  }
+
+
+  isSelected(deviceId:string) {
+    return this.selectedDevices.includes(deviceId)
+  }
 
   
 }

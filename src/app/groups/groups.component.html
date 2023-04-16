@@ -53,20 +53,21 @@
   <h3>Create Group</h3>
   <div>
     <label for="groupName">Group Name:</label>
-    <input type="text" id="groupName" name="groupName">
+    <input [(ngModel)]="newGroupName" type="text" id="groupName" name="groupName">
   </div>
   <div>
     <label for="groupDescription">Group Description:</label>
-    <input type="text" id="groupDescription" name="groupDescription">
+    <input [(ngModel)]="newGroupDescription" type="text" id="groupDescription" name="groupDescription">
   </div>
-  <div>
-    <label for="deviceName">Device Name:</label>
-    <input [(ngModel)] = "deviceName" type="text" id="deviceName" name="deviceName">
+  <label for="typeSelector">Choose type:</label>
+  <select [(ngModel)]="selectedType" name="typeSelector" id="typeSelector" (change)="clearDevices()">
+    <option *ngFor="let type of deviceTypes" value="{{type}}">{{type}}</option>
+  </select>
+  <div class="selectable-device-list">
+    <div *ngFor="let device of (typeMappedDevices$ | async)![selectedType]" (click)="addDevice(device.id)" class="device-card">
+      <h3>{{device.name}}</h3>
+      <p *ngIf="isSelected(device.id)" >Selected</p>
+    </div>
   </div>
-  <div *ngFor="let device of devices; let i = index;">
-    <label for="deviceName{{i}}">Device Name:</label>
-    <input type="text" id="deviceName{{i}}" name="deviceName{{i}}">
-  </div>
-  <button (click)="addDevice(deviceName)">Add Device</button>
-  <button type="submit">Send</button>
+  <button (click)="submitGroup(newGroupName, newGroupDescription)" type="submit">Send</button>
 </div>

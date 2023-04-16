@@ -42,7 +42,7 @@ export class FanComponent {
   }
 
   getRevButtonText(): string {
-    return this.device.state.reverse ? 'Clockwise' : 'Anti-clockwise';
+    return this.device.state.reverse ? 'Clockwise' : 'Reverse';
   }
   
 }

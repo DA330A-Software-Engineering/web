@@ -9,16 +9,20 @@
 }
 
 .red {
-  background-color: red;
+  background-color: #AECCE4;
+  color: white;
 }
 
 .green {
-  background-color: green;
+  background-color: #9ABDDC;
+  color: white;
 }
+
 
 .btn{
   font-family: 'Montserrat', sans-serif;
     font-weight: 700;
+    border-radius: 10px;
 }
 
 

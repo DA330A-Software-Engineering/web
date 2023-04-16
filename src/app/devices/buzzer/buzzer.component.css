@@ -1,10 +1,12 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Nunito:ital,wght@1,300&display=swap');
+
+
 
 .speaker-image {
     width: 70px; 
     height: auto; 
 }
 
+/*
 .show-speakers {
     position: fixed;
     top: 65%;
@@ -15,26 +17,17 @@
     z-index: 9999;
 }
 
+
 .button-container {
     display: flex;
     align-items: center;
     flex-direction: column;
 }
 
-.input-container {
-    margin-bottom: 5px;
-}
 
-.input{
-    width: 100px;
-    margin: 5px;
-}
+*/
 
 
-
-
-
-/* Dropdown Button */
 .dropbtn {
     background-color: #9ABDDC;
     color: white;
@@ -82,3 +75,4 @@
   
  
   .dropdown:hover .dropbtn {background-color: #9ABDDC;}
+  

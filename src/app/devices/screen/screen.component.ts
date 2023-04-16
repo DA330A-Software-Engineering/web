@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { getOnButtonText } from 'src/app/constants';
 import { Device } from 'src/app/models/device';
 import { ScreenState } from 'src/app/models/deviceState';
 import { DeviceService } from 'src/app/service/deviceService/device.service';
@@ -49,6 +50,10 @@ export class ScreenComponent implements OnInit{
 
   clearStorage(): void {
     localStorage.removeItem('inputValue');
+  }
+
+  getOnButtonText(): string {
+    return getOnButtonText(this.device.state.on);
   }
   
   

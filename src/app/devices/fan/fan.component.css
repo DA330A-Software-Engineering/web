@@ -1,14 +1,4 @@
-@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Nunito:ital,wght@1,300&display=swap');
 
-.show-fans {
-    position: fixed;
-    top: 29%;
-    left: 0;
-    width: 300px;
-    text-align: center;
-    padding-left: 35%;
-    z-index: 9999;
-    }
 
 .fan-image {
     width: 50px; 
@@ -19,20 +9,22 @@
     margin-right: 10px;
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
+    border-radius: 10px;
 }
 
 .rev-btn{
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
+    border-radius: 10px;
 }
 
 .red {
-    background-color: red;
-
+    background-color: #AECCE4;
+    color: white;
   }
   
   .green {
-    background-color: green;
- 
+    background-color: #9ABDDC;
+    color: white;
   }
   

@@ -2,6 +2,7 @@ import { Component, Input } from '@angular/core';
 import { FanState } from 'src/app/models/deviceState';
 import { DeviceService } from 'src/app/service/deviceService/device.service';
 import { Device } from '../../models/device';
+import { getOnButtonText } from 'src/app/constants';
 
 @Component({
   selector: 'app-fan',
@@ -34,6 +35,10 @@ export class FanComponent {
 
   getButtonColor(state: boolean): string {
     return state ? 'green' : 'red';
+  }
+
+  getOnButtonText(): string {
+    return getOnButtonText(this.device.state.on);
   }
   
 }

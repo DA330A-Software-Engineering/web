@@ -1,40 +1,32 @@
 @import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Nunito:ital,wght@1,300&display=swap');
 
-.show-doors {
-    position: fixed;
-    top: 30%;
-    left: 0;
-    width: 300px;
-    text-align: center;
-    padding-left: 20%;
-    z-index: 9999;
-  }
-  
-
 .door-image {
-  width: 60px; 
+  width: 70px; 
   height: auto; 
 }
 
-.lock-btn {
-    margin-right: 10px; 
+.open-btn {
     font-family: 'Montserrat', sans-serif;
     font-weight: 700;
+    border-radius: 10px;
+
    
 }
 
-.open-btn{
-  font-family: 'Montserrat', sans-serif;
-    font-weight: 700;
+.lock-btn{
+  margin-right: 10px;
+  border-radius: 10px;
+  
+
 }
 
 .red {
-  background-color: red;
+  background-color: #AECCE4;
   color: white;
 }
 
 .green {
-  background-color: green;
+  background-color: #9ABDDC;
   color: white;
 }
 

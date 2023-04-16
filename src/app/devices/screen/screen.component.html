@@ -4,7 +4,7 @@
     <p>On: {{device.state.on}}</p>
     <p>Text: {{device.state.text}}</p>
     <div class="button-container">
-        <button mat-raised-button [ngClass]="getButtonColor(device.state.on)" (click)="screenToggleOn()" class="btn">On/Off</button>
+        <button mat-raised-button [ngClass]="getButtonColor(device.state.on)" (click)="screenToggleOn()" class="btn">{{getOnButtonText()}}</button>
         <div class="input-container">
             <input type="text" [(ngModel)]="inputValue" (ngModelChange)="storeInputValue()" name="usertext" class="input">
             <br>

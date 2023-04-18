@@ -45,6 +45,7 @@ export class DeviceService {
     const groupQuery: QuerySnapshot<DocumentData> = await getDocs(groupCollection);
     const groups: any[] = groupQuery.docs.map((doc) => {
       const data = doc.data();
+      data['id'] = doc.id
       return data
     });
     return groups;
@@ -68,5 +69,9 @@ export class DeviceService {
     return this.http.post(url, groupData);
   }
 
-}
+  deleteExistingGroup(groupId: any): Observable<any> {
+    const url = `http://${Constants.ip}:${Constants.port}/groups`;
+    return this.http.delete(url, groupId);
+  }
 
+}

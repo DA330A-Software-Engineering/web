@@ -44,7 +44,7 @@
     <ul>
       <li *ngFor="let device of group.devices" class="no-bullet">{{device.data.name}}</li>
 </ul>
-<button class="delete-group-btn">Delete Group</button>
+<button class="delete-group-btn" (click)="deleteGroup(group)">Delete Group</button>
 </li>
 </ul>
 

@@ -22,6 +22,7 @@ export class GroupsComponent implements OnInit{
   selectedType!: string;
   newGroupName!: string;
   newGroupDescription!: string;
+  groupId!: string;
 
   constructor(private deviceService: DeviceService) {}
 
@@ -76,6 +77,16 @@ export class GroupsComponent implements OnInit{
     });
   }
 
+  deleteGroup(groupId:any) {
+    console.log(groupId)
+    this.deviceService.deleteExistingGroup(groupId)
+    .subscribe(() => {
+      console.log('Group deleted');
+    }, (error) => {
+      console.error(error);
+    });
+
+  }
 
   isSelected(deviceId:string) {
     return this.selectedDevices.includes(deviceId)

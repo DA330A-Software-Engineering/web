@@ -78,7 +78,8 @@ export class GroupsComponent implements OnInit{
   }
 
   deleteGroup(groupId:any) {
-    console.log(groupId)
+    console.log("groupId")
+    //console.log(groupId.id)
     this.deviceService.deleteExistingGroup(groupId)
     .subscribe(() => {
       console.log('Group deleted');

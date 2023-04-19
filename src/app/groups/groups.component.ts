@@ -24,11 +24,11 @@ export class GroupsComponent implements OnInit{
   newGroupDescription!: string;
   groupId!: string;
 
-  constructor(private deviceService: DeviceService) {}
+  constructor(private deviceService: DeviceService) {}  // Lägg till profileId här senare
 
   async ngOnInit() {
 
-    // Get all devies and groups
+    // Get all devices and groups
     const devices = await this.deviceService.getAllDevices();
     const groups: Group[] = await this.deviceService.getGroupsByProfile(this.profileId);
     // Update devices for each group
@@ -77,9 +77,8 @@ export class GroupsComponent implements OnInit{
     });
   }
 
-  deleteGroup(groupId:any) {
+  deleteGroup(groupId:string) {
     console.log("groupId")
-    //console.log(groupId.id)
     this.deviceService.deleteExistingGroup(groupId)
     .subscribe(() => {
       console.log('Group deleted');

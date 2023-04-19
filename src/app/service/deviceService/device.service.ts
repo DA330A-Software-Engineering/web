@@ -62,16 +62,15 @@ export class DeviceService {
     return devices;
   }
 
-
    createNewGroup(groupData: any): Observable<any> {
     console.log(groupData)
     const url = `http://${Constants.ip}:${Constants.port}/groups`;
     return this.http.post(url, groupData);
   }
 
-  deleteExistingGroup(groupId: any): Observable<any> {
-    const url = `http://${Constants.ip}:${Constants.port}/groups`;
-    return this.http.delete(url, groupId);
+  deleteExistingGroup(groupId: string): Observable<any> {
+    const url = `http://${Constants.ip}:${Constants.port}/groups/${groupId}`;
+    return this.http.delete(url);
   }
 
 }

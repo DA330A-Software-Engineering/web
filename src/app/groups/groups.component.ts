@@ -170,19 +170,33 @@ export class GroupsComponent implements OnInit{
 
   }
 
-openEditGroupDialog(group: Group): void {
-  const dialogRef = this.dialog.open(EditGroupDialogComponent, {
-    width: '400px',
-    data: { group: JSON.parse(JSON.stringify(group)) } // Create a deep copy of the group object
-  });
+  openEditGroupDialog(group: Group): void {
+    const dialogRef = this.dialog.open(EditGroupDialogComponent, {
+      width: '400px',
+      data: {group: JSON.parse(JSON.stringify(group))} // Create a deep copy of the group object
+    });
 
-  dialogRef.afterClosed().subscribe(result => {
-    if (result) {
-      const index = this.groupsDevices$.findIndex(g => g.id === result.id);
-      if (index !== -1) {
-        this.groupsDevices$[index] = result;
+    dialogRef.afterClosed().subscribe(async result => {
+      if (result) {
+        const index = this.groupsDevices$.findIndex(g => g.id === result.id);
+        if (index !== -1) {
+          // Update the group locally
+          this.groupsDevices$[index] = result;
+
+          // Update the group in the database
+          try {
+            await this.deviceService.updateGroup(result.id, {
+              name: result.name,
+              description: result.description,
+              devices: result.devices.map((device: { id: string }) => device.id),
+            }).toPromise();
+            console.log('Group updated successfully');
+          } catch (error) {
+            console.error('Failed to update group:', error);
+          }
+        }
       }
-    }
-  });
-}
+    });
+  }
+
 }

@@ -9,6 +9,8 @@ import { BuzzerState, DeviceState, FanState, OpenLockState, ScreenState, ToggleS
 import { NgToastService } from 'ng-angular-popup';
 import { state } from '@angular/animations';
 import { Type } from '@angular/compiler';
+import {MatDialog} from "@angular/material/dialog";
+import {EditGroupDialogComponent} from "../edit-group-dialog/edit-group-dialog.component";
 
 @Component({
   selector: 'app-groups',
@@ -24,7 +26,7 @@ export class GroupsComponent implements OnInit{
   groupsDevices$!: Group[];
   deviceTypes!: String[];
   typeMappedDevices$!: Observable< Record<string, Device<DeviceState>[]>>
-  profileId = 'linnea@hotmail.com'; // Profile ID
+  profileId = 'tester@tester.com'; // Profile ID
 
   selectedDevices: string[] = [];
   selectedType!: string;
@@ -32,7 +34,7 @@ export class GroupsComponent implements OnInit{
   newGroupDescription!: string;
   groupId!: string;
 
-  constructor(private deviceService: DeviceService, private toastService: NgToastService) {}  // Lägg till profileId här senare
+  constructor(private deviceService: DeviceService, private toastService: NgToastService, public dialog: MatDialog) {}  // Lägg till profileId här senare
 
   async ngOnInit() {
 
@@ -63,7 +65,7 @@ export class GroupsComponent implements OnInit{
       console.log(devices)
       this.deviceTypes = Object.keys(devices)
     })
-    
+
 
   }
 
@@ -108,7 +110,7 @@ export class GroupsComponent implements OnInit{
         return device.state.on
       case "openLock":
         return device.state.open
-    
+
       default:
         break;
     }
@@ -125,7 +127,7 @@ export class GroupsComponent implements OnInit{
         device.state.open = newValue
         device.state.locked = !newValue
         break;
-    
+
       default:
         break;
     }
@@ -139,13 +141,13 @@ export class GroupsComponent implements OnInit{
     devices.forEach(element => {
       if (this.getDeviceRuleVar(element.data)) {
         turnOnDevices = false;
-        return; 
-        
+        return;
+
       }
-      
+
     });
     return turnOnDevices;
-    
+
   }
 
 
@@ -163,10 +165,24 @@ export class GroupsComponent implements OnInit{
       }, (error) => {
         console.error(error);
       });
-  
+
     });
 
   }
 
- 
+openEditGroupDialog(group: Group): void {
+  const dialogRef = this.dialog.open(EditGroupDialogComponent, {
+    width: '400px',
+    data: { group: JSON.parse(JSON.stringify(group)) } // Create a deep copy of the group object
+  });
+
+  dialogRef.afterClosed().subscribe(result => {
+    if (result) {
+      const index = this.groupsDevices$.findIndex(g => g.id === result.id);
+      if (index !== -1) {
+        this.groupsDevices$[index] = result;
+      }
+    }
+  });
+}
 }

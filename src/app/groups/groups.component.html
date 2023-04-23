@@ -16,6 +16,7 @@
       <li *ngFor="let device of group.devices" class="no-bullet">{{device.data.name}} - {{device.data.type}} - {{device.data.state.on}} - {{device.data.state.locked}} - {{device.data.state.open}} - {{device.data.state.reverse}} - {{device.data.state.tune}} - {{device.data.state.text}}</li>
       <button class="delete-group-btn" (click)="deleteGroup(group.id)">Delete Group</button>
       <button class="toggle-state-btn" (click)="toggleGroupState(group)">Toggle On/Off</button>
+      <button class="edit-group-btn" (click)="openEditGroupDialog(group)">Edit Group</button>
     </ul>
   </li>
 </ul>

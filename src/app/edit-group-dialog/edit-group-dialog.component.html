@@ -1,0 +1,13 @@
+<h1 mat-dialog-title>Edit Group</h1>
+<div mat-dialog-content>
+  <ul>
+    <li *ngFor="let device of data.group.devices" class="no-bullet">
+      {{device.data.name}} - {{device.data.type}}
+      <button (click)="removeDevice(device.id)">Remove</button>
+    </li>
+  </ul>
+</div>
+<div mat-dialog-actions>
+  <button mat-button (click)="save()">SAVE</button>
+  <button mat-button (click)="discard()">DISCARD</button>
+</div>

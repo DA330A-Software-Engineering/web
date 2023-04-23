@@ -1,0 +1,97 @@
+<div class="routines">
+  <h2>Routines</h2>
+  <ul *ngFor="let routine of routines$">
+    <li class="routine-item">
+      <span>{{routine.name}} - {{routine.description}} - {{routine.schedule}}</span>
+      <ul>
+        <li *ngFor="let action of routine.actions">
+          {{deviceNames[action.id]}}
+          <div *ngIf="action.state">
+            <div *ngFor="let key of getActionState(action)">
+              {{key}}: {{action.state[key]}}
+            </div>
+          </div>
+        </li>
+      </ul>
+      <button (click)="removeRoutine(routine.id)">Remove Routine</button>
+    </li>
+  </ul>
+
+  <div class="create-routine">
+    <h2>Create Routine</h2>
+    <div>
+      <label for="routineName">Routine Name:</label>
+      <input [(ngModel)]="newRoutineName" type="text" id="routineName" name="routineName">
+    </div>
+    <div>
+      <label for="routineDescription">Routine Description:</label>
+      <input [(ngModel)]="newRoutineDescription" type="text" id="routineDescription" name="routineDescription">
+    </div>
+    <div>
+      <label for="routineSchedule">Routine Schedule:</label>
+      <input [(ngModel)]="newRoutineSchedule" type="text" id="routineSchedule" name="routineSchedule">
+    </div>
+    <div>
+      <label for="routineRepeatable">Routine Repeatable:</label>
+      <input [(ngModel)]="newRoutineRepeatable" type="checkbox" id="routineRepeatable" name="routineRepeatable">
+    </div>
+    <div>
+      <label for="routineEnabled">Routine Enabled:</label>
+      <input [(ngModel)]="newRoutineEnabled" type="checkbox" id="routineEnabled" name="routineEnabled">
+    </div>
+    <!-- <label for="deviceSelector">Add a device to routine</label>
+    <select *ngIf="(devices$ | async) as devices" [(ngModel)]="selectedDevice" name="deviceSelector" id="deviceSelector"
+        (change)="addDeviceToRoutine(selectedDevice)" #deviceSelector>
+      <option *ngFor="let device of devices" [ngValue]="device">{{device.name}}</option>
+    </select> -->
+    <div>
+      <ul *ngIf="(devices$ | async) as devices">
+        <li *ngFor="let device of devices">
+          <span>{{ device.name }}</span>
+          <ul>
+            <li *ngFor="let state of device.state | keyvalue">
+              <ng-container [ngSwitch]="state.key">
+                <ng-container *ngSwitchCase="'tune'">
+                  <label>
+                    {{ state.key }}
+                    <input type="text" #inputTune>
+                  </label>
+                  <button (click)="addRoutineAction(device.id, device.type, state.key, inputTune.value)">Add Action</button>
+                </ng-container>
+                <ng-container *ngSwitchCase="'text'">
+                  <label>
+                    {{ state.key }}:
+                    <input type="text" #inputText>
+                  </label>
+                  <button (click)="addRoutineAction(device.id, device.type, state.key, inputText.value)">Add Action</button>
+                </ng-container>
+                <ng-container *ngSwitchDefault>
+                  <label>
+                    {{ state.key }}:
+                    <input type="checkbox" #inputCheckBox>
+                  </label>
+                  <button (click)="addRoutineAction(device.id, device.type, state.key, inputCheckBox.checked)">Add Action</button>
+                </ng-container>
+              </ng-container>
+            </li>
+          </ul>
+        </li>
+      </ul>
+      <button (click)="submitRoutine(newRoutineName, newRoutineDescription, newRoutineSchedule, newRoutineRepeatable, newRoutineEnabled)" type="submit">Create</button>
+    </div>
+    <div>
+      <h3>Selected Actions</h3>
+      <ul>
+        <li *ngFor="let action of routineActions">
+          <p>{{deviceNames[action.id]}}</p>
+          <div *ngIf="action.state">
+            <div *ngFor="let key of getActionState(action)">
+              {{key}}: {{action.state[key]}}
+            </div>
+          </div>
+          <button (click)="removeRoutineAction(action)">Remove Action</button>
+        </li>
+      </ul>
+    </div>
+  </div>
+</div>

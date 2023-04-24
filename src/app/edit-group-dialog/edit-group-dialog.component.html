@@ -8,16 +8,34 @@
         Group name is required
       </div>
     </div>
+
     <div>
       <label for="editGroupDescription">Group Description:</label>
       <input formControlName="description" type="text" id="editGroupDescription" name="editGroupDescription">
     </div>
+
     <ul>
       <li *ngFor="let device of data.group.devices" class="no-bullet">
         {{device.data.name}} - {{device.data.type}}
         <button (click)="removeDevice(device.id)">Remove</button>
       </li>
+
+      <div *ngIf="thereAreDevicesNotInTheList(data.group.devices) && data.group.devices.length != 0">
+        Available Devices:
+        <li *ngFor="let device of sameTypeDevices" class="no-bullet">
+          <div *ngIf="!isDeviceInGroup(device.data.name)">
+            {{device.data.name}} - {{device.data.type}}
+            <button (click)="addDevice(device.data.name)">ADD</button>
+          </div>
+        </li>
+      </div>
+
     </ul>
+
+    <div *ngIf="data.group.devices.length == 0">
+      TODO
+    </div>
+
   </div>
   <div mat-dialog-actions>
     <button mat-button [disabled]="editGroupForm.invalid" (click)="save()">SAVE</button>

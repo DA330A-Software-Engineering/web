@@ -26,7 +26,7 @@ export class GroupsComponent implements OnInit{
   groupsDevices$!: Group[];
   deviceTypes!: String[];
   typeMappedDevices$!: Observable< Record<string, Device<DeviceState>[]>>
-  profileId = 'tester@tester2.com'; // Profile ID
+  profileId = 'linnea@hotmail.com'; // Profile ID
 
   selectedDevices: string[] = [];
   selectedType!: string;

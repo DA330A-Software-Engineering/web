@@ -20,7 +20,7 @@
         <button (click)="removeDevice(device.id)">Remove</button>
       </li>
 
-      <div *ngIf="thereAreDevicesNotInTheList(data.group.devices) && data.group.devices.length != 0">
+      <div *ngIf="thereAreDevicesNotInTheList(data.group.devices)">
         Available Devices:
         <li *ngFor="let device of sameTypeDevices" class="no-bullet">
           <div *ngIf="!isDeviceInGroup(device.data.name)">
@@ -32,13 +32,11 @@
 
     </ul>
 
-    <div *ngIf="data.group.devices.length == 0">
-      TODO
-    </div>
+    <div *ngIf="data.group.devices.length === 0">You must have at least one device in the group!</div>
 
   </div>
   <div mat-dialog-actions>
-    <button mat-button [disabled]="editGroupForm.invalid" (click)="save()">SAVE</button>
+    <button mat-button [disabled]="editGroupForm.invalid || data.group.devices.length === 0" (click)="save()">SAVE</button>
     <button mat-button (click)="discard()">DISCARD</button>
   </div>
 </form>

@@ -44,12 +44,6 @@ export class EditGroupDialogComponent {
     this.dialogRef.close();
   }
 
-  private async getDeviceTypes(): Promise<string[]> {
-    const devices = await this.deviceService.getAllDevices();
-    const deviceTypes = new Set(devices.map(device => device.data.type));
-    return Array.from(deviceTypes);
-  }
-
   isDeviceInGroup(deviceName: string): boolean {
     return this.data.group.devices.some(device => device.data.name === deviceName);
   }

@@ -27,7 +27,8 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgToastModule } from 'ng-angular-popup'
 import { AuthGuard } from './guards/auth.guard';
 import { TokenInterceptor } from './interceptors/token.interceptor';
-
+import { MatDialogModule } from '@angular/material/dialog';
+import { EditGroupDialogComponent } from './edit-group-dialog/edit-group-dialog.component';
 
 const appRoute: Routes = [
   {path:'home', component: HomeComponent, canActivate:[AuthGuard]},
@@ -36,7 +37,7 @@ const appRoute: Routes = [
   {path:'routines', component: RoutinesComponent, canActivate:[AuthGuard]},
   {path:'aboutus', component: AboutusComponent, canActivate:[AuthGuard]},
   {path:'login', component: LoginComponent},
-  {path:'', component: LoginComponent}  
+  {path:'', component: LoginComponent}
 ]
 
 @NgModule({
@@ -47,8 +48,9 @@ const appRoute: Routes = [
     GroupsComponent,
     RoutinesComponent,
     AboutusComponent,
-    LoginComponent
-  
+    LoginComponent,
+    EditGroupDialogComponent
+
   ],
   imports: [
     BrowserModule,
@@ -68,7 +70,8 @@ const appRoute: Routes = [
     DevicesModule,
     FormsModule,
     ReactiveFormsModule,
-    NgToastModule
+    NgToastModule,
+    MatDialogModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

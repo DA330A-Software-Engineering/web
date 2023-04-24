@@ -84,4 +84,10 @@ export class DeviceService {
     return this.http.put(url, groupData);
   }
 
+  updateGroup(id: string, groupData: any): Observable<any> {
+  const url = `http://${Constants.ip}:${Constants.port}/groups/${id}`;
+  return this.http.put(url, groupData);
+}
+
+
 }

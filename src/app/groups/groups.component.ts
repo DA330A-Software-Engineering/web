@@ -1,11 +1,14 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DeviceService } from '../service/deviceService/device.service';
 import { Group } from '../models/group';
 import { Observable, map } from 'rxjs';
 import { groupBy } from 'src/utils';
 import { DeviceTypes } from '../models/deviceType';
 import { Device } from '../models/device';
-import { DeviceState } from '../models/deviceState';
+import { BuzzerState, DeviceState, FanState, OpenLockState, ScreenState, ToggleState } from '../models/deviceState';
+import { NgToastService } from 'ng-angular-popup';
+import { state } from '@angular/animations';
+import { Type } from '@angular/compiler';
 
 @Component({
   selector: 'app-groups',
@@ -13,6 +16,11 @@ import { DeviceState } from '../models/deviceState';
   styleUrls: ['./groups.component.css']
 })
 export class GroupsComponent implements OnInit{
+  @Input() toggleDevice!: Device<ToggleState>
+  @Input() openLockDevice!: Device<OpenLockState>
+  @Input() fanDevice!: Device<FanState>
+  @Input() screenDevice!: Device<ScreenState>
+  @Input() buzzerDevice!: Device<BuzzerState>
   groupsDevices$!: Group[];
   deviceTypes!: String[];
   typeMappedDevices$!: Observable< Record<string, Device<DeviceState>[]>>
@@ -24,7 +32,7 @@ export class GroupsComponent implements OnInit{
   newGroupDescription!: string;
   groupId!: string;
 
-  constructor(private deviceService: DeviceService) {}  // Lägg till profileId här senare
+  constructor(private deviceService: DeviceService, private toastService: NgToastService) {}  // Lägg till profileId här senare
 
   async ngOnInit() {
 
@@ -92,5 +100,73 @@ export class GroupsComponent implements OnInit{
     return this.selectedDevices.includes(deviceId)
   }
 
+
+  getDeviceRuleVar(device:any) { // Set rule for false/true
+
+    switch (device.type) {
+      case "toggle":
+        return device.state.on
+      case "openLock":
+        return device.state.open
+    
+      default:
+        break;
+    }
+
+  }
+
+  updateDeviceState(device:any, newValue:boolean) {
+    switch (device.type) {
+      case "toggle":
+        device.state.on = newValue
+        break;
+
+      case "openLock":
+        device.state.open = newValue
+        device.state.locked = !newValue
+        break;
+    
+      default:
+        break;
+    }
+    return device.state;
+
+  }
+
+
+  determineGroupState(devices: any[]) { // Iterera genom alla states i devices
+    let turnOnDevices = true;
+    devices.forEach(element => {
+      if (this.getDeviceRuleVar(element.data)) {
+        turnOnDevices = false;
+        return; 
+        
+      }
+      
+    });
+    return turnOnDevices;
+    
+  }
+
+
+  toggleGroupState(group:Group) {
+
+    const turnOnDevices = this.determineGroupState(group.devices)
+    console.log("Turning on lights", turnOnDevices)
+    group.devices.forEach(device => {
+      const newState = this.updateDeviceState(device.data, turnOnDevices)
+      console.log(device.data.name, newState)
+
+      this.deviceService.sendAction(device.id, device.data.type, newState)
+      .subscribe(() => {
+        console.log('sent');
+      }, (error) => {
+        console.error(error);
+      });
   
+    });
+
+  }
+
+ 
 }

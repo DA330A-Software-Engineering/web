@@ -29,6 +29,7 @@ import { AuthGuard } from './guards/auth.guard';
 import { TokenInterceptor } from './interceptors/token.interceptor';
 import { MatDialogModule } from '@angular/material/dialog';
 import { EditGroupDialogComponent } from './edit-group-dialog/edit-group-dialog.component';
+import { SensorsComponent } from './sensors/sensors.component';
 
 const appRoute: Routes = [
   {path:'home', component: HomeComponent, canActivate:[AuthGuard]},
@@ -37,7 +38,8 @@ const appRoute: Routes = [
   {path:'routines', component: RoutinesComponent, canActivate:[AuthGuard]},
   {path:'aboutus', component: AboutusComponent, canActivate:[AuthGuard]},
   {path:'login', component: LoginComponent},
-  {path:'', component: LoginComponent}
+  {path:'', component: LoginComponent},
+  { path: 'sensors', component: SensorsComponent },
 ]
 
 @NgModule({
@@ -49,7 +51,8 @@ const appRoute: Routes = [
     RoutinesComponent,
     AboutusComponent,
     LoginComponent,
-    EditGroupDialogComponent
+    EditGroupDialogComponent,
+    SensorsComponent
 
   ],
   imports: [

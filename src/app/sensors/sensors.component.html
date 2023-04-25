@@ -1,0 +1,151 @@
+<div class="sensor-container">
+
+  <div class="sensor-content">
+    <div class="sensor-list">
+      <div class="sensor-box" *ngFor="let sensor of sensors">
+        <div class="sensor-name">{{ sensor.name }}</div>
+        <div class="sensor-value">{{ sensor.value }}</div>
+      </div>
+    </div>
+  </div>
+
+  <div class="event-trigger-list">
+    <div class="event-trigger" *ngFor="let eventTrigger of eventTriggers">
+      <h3>{{ eventTrigger.name }}</h3>
+      <p>{{ eventTrigger.description }}</p>
+      <p>Condition: {{ eventTrigger.condition }}</p>
+      <p>Value: {{ eventTrigger.value }}</p>
+      <p>Reset Value: {{ eventTrigger.resetValue }}</p>
+      <p>Enabled: {{ eventTrigger.enabled }}</p>
+      <div class="actions">
+        <div *ngFor="let action of eventTrigger.actions">
+          <p>Action ID: {{ action.id }}</p>
+          <p>Type: {{ action.type }}</p>
+          <p>State: {{ action.state | json }}</p>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <form [formGroup]="addTriggerForm" (ngSubmit)="onSubmit()" class="add-trigger-form">
+    <label>
+      Sensor:
+      <select formControlName="sensor">
+        <option *ngFor="let sensor of sensors" [value]="sensor">{{ sensor.name }}</option>
+      </select>
+    </label>
+
+    <label>
+      Name:
+      <input formControlName="name" type="text"/>
+    </label>
+
+    <label>
+      Description:
+      <input formControlName="description" type="text"/>
+    </label>
+
+    <label>
+      Value:
+      <input formControlName="value" type="number" min="0" max="1023"/>
+    </label>
+
+    <label>
+      Condition:
+      <select formControlName="condition">
+        <option value="greater">Greater</option>
+        <option value="lesser">Lesser</option>
+      </select>
+    </label>
+
+    <div formArrayName="actions" *ngFor="let action of actions.controls; let i = index">
+      <div [formGroupName]="i">
+        <label>
+          Device Type:
+          <select formControlName="deviceType">
+            <option *ngFor="let device of deviceTypes" [value]="device">{{ device }}</option>
+          </select>
+        </label>
+
+        <ng-container [ngSwitch]="action.get('deviceType')?.value">
+          <ng-container *ngSwitchCase="'toggle'">
+            <label>
+              State:
+              <select formControlName="state.on">
+                <option [value]="true">On</option>
+                <option [value]="false">Off</option>
+              </select>
+            </label>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'openLock'">
+            <label>
+              Locked:
+              <select formControlName="state.locked">
+                <option [value]="true">Locked</option>
+                <option [value]="false">Unlocked</option>
+              </select>
+            </label>
+            <label>
+              Open:
+              <select formControlName="state.open">
+                <option [value]="true">Open</option>
+                <option [value]="false">Closed</option>
+              </select>
+            </label>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'fan'">
+            <label>
+              State:
+              <select formControlName="state.on">
+                <option [value]="true">On</option>
+                <option [value]="false">Off</option>
+              </select>
+            </label>
+            <label>
+              Reverse:
+              <select formControlName="state.reverse">
+                <option [value]="true">Reverse</option>
+                <option [value]="false">Forward</option>
+              </select>
+            </label>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'screen'">
+            <label>
+              State:
+              <select formControlName="state.on">
+                <option [value]="true">On</option>
+                <option [value]="false">Off</option>
+              </select>
+            </label>
+            <label>
+              Text:
+              <input formControlName="state.text" type="text"/>
+            </label>
+          </ng-container>
+
+          <ng-container *ngSwitchCase="'buzzer'">
+            <label>
+              Text:
+              <input formControlName="state.text" type="text"/>
+            </label>
+            <label>
+              Tune:
+              <input formControlName="state.tune" type="text"/>
+            </label>
+          </ng-container>
+        </ng-container>
+      </div>
+    </div>
+
+    <button type="button" (click)="addNewAction()">Add Action</button>
+    <button type="submit" [disabled]="addTriggerForm.invalid">Submit</button>
+
+  </form>
+
+</div>
+
+
+

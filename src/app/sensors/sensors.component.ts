@@ -1,6 +1,8 @@
-import {Component, OnInit} from '@angular/core';
+import {ChangeDetectorRef, Component, OnInit} from '@angular/core';
 import {FormGroup, FormBuilder, Validators, FormArray} from '@angular/forms';
 import {DeviceTypes} from '../models/deviceType';
+import { DeviceService } from '../service/deviceService/device.service';
+
 
 @Component({
   selector: 'app-sensors',
@@ -10,18 +12,6 @@ import {DeviceTypes} from '../models/deviceType';
 export class SensorsComponent implements OnInit {
   addTriggerForm: FormGroup;
   deviceTypes = Object.values(DeviceTypes);
-
-  sensors = [
-    {name: 'Sensor 1', value: '25°C'},
-    {name: 'Sensor 2', value: '30°C'},
-    {name: 'Sensor 3', value: '13°C'},
-    {name: 'Sensor 4', value: '1°C'},
-    {name: 'Sensor 5', value: '-199°C'},
-    {name: 'Sensor 6', value: '56°C'},
-    {name: 'Sensor 7', value: '82°C'},
-    {name: 'Sensor 8', value: '28°C'},
-    // Add more sensors as needed
-  ];
 
   eventTriggers = [
     {
@@ -67,8 +57,11 @@ export class SensorsComponent implements OnInit {
       ],
     },
   ];
-
-  constructor(private formBuilder: FormBuilder) {
+  sensors: any[] = []
+  constructor(
+    private formBuilder: FormBuilder,
+    private deviceService: DeviceService,
+    private cdr: ChangeDetectorRef) {
     this.addTriggerForm = this.formBuilder.group({
       sensor: ['', Validators.required],
       name: ['', Validators.required],
@@ -84,11 +77,19 @@ export class SensorsComponent implements OnInit {
     });
   }
 
+  async ngOnInit(): Promise<void> {
+  const allDevices = await this.deviceService.getAllDevices();
+  this.sensors = allDevices.filter(device => device.data.type === 'sensor');
+  this.cdr.detectChanges();
+  }
+
+
   get actions(): FormArray {
     return this.addTriggerForm.get('actions') as FormArray;
   }
 
   addNewAction(): void {
+    console.log(this.sensors)
     this.actions.push(
       this.formBuilder.group({
         deviceType: ['', Validators.required],
@@ -104,8 +105,5 @@ export class SensorsComponent implements OnInit {
   onSubmit(): void {
     console.log(this.addTriggerForm.value);
     this.eventTriggers.push(this.addTriggerForm.value)
-  }
-
-  ngOnInit(): void {
   }
 }

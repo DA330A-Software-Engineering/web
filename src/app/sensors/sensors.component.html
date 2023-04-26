@@ -1,13 +1,7 @@
 <div class="sensor-container">
 
-  <div class="sensor-content">
-    <div class="sensor-list">
-      <div class="sensor-box" *ngFor="let sensor of sensors">
-        <div class="sensor-name">{{ sensor.name }}</div>
-        <div class="sensor-value">{{ sensor.value }}</div>
-      </div>
-    </div>
-  </div>
+<app-sensor-list [sensors]="sensors"></app-sensor-list>
+
 
   <div class="event-trigger-list">
     <div class="event-trigger" *ngFor="let eventTrigger of eventTriggers">

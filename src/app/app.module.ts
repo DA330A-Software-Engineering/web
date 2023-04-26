@@ -30,6 +30,7 @@ import { TokenInterceptor } from './interceptors/token.interceptor';
 import { MatDialogModule } from '@angular/material/dialog';
 import { EditGroupDialogComponent } from './edit-group-dialog/edit-group-dialog.component';
 import { SensorsComponent } from './sensors/sensors.component';
+import { SensorListComponent } from './sensors/sensor-list/sensor-list.component';
 
 const appRoute: Routes = [
   {path:'home', component: HomeComponent, canActivate:[AuthGuard]},
@@ -52,7 +53,8 @@ const appRoute: Routes = [
     AboutusComponent,
     LoginComponent,
     EditGroupDialogComponent,
-    SensorsComponent
+    SensorsComponent,
+    SensorListComponent
 
   ],
   imports: [

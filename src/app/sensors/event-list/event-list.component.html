@@ -1,0 +1,19 @@
+  <h2>Events</h2>
+  <div class="event-trigger-list">
+    <div class="event-trigger" *ngFor="let eventTrigger of eventTriggers">
+      <h3>{{ eventTrigger.name }}</h3>
+      <p>{{ eventTrigger.description }}</p>
+      <p>Condition: {{ eventTrigger.condition }}</p>
+      <p>Value: {{ eventTrigger.value }}</p>
+      <p>Reset Value: {{ eventTrigger.resetValue }}</p>
+      <p>Enabled: {{ eventTrigger.enabled }}</p>
+      <div class="actions">
+        <div *ngFor="let action of eventTrigger.actions">
+          <p>Action ID: {{ action.id }}</p>
+          <p>Type: {{ action.type }}</p>
+          <p>State: {{ action.state | json }}</p>
+        </div>
+      </div>
+      <button (click)="removeTrigger(eventTrigger.id)">remove</button>
+    </div>
+  </div>

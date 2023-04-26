@@ -31,6 +31,8 @@ import { MatDialogModule } from '@angular/material/dialog';
 import { EditGroupDialogComponent } from './edit-group-dialog/edit-group-dialog.component';
 import { SensorsComponent } from './sensors/sensors.component';
 import { SensorListComponent } from './sensors/sensor-list/sensor-list.component';
+import { CreateEventComponent } from './sensors/create-event/create-event.component';
+import { EventListComponent } from './sensors/event-list/event-list.component';
 
 const appRoute: Routes = [
   {path:'home', component: HomeComponent, canActivate:[AuthGuard]},
@@ -54,7 +56,9 @@ const appRoute: Routes = [
     LoginComponent,
     EditGroupDialogComponent,
     SensorsComponent,
-    SensorListComponent
+    SensorListComponent,
+    CreateEventComponent,
+    EventListComponent
 
   ],
   imports: [

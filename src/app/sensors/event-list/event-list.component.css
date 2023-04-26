@@ -1,0 +1,8 @@
+.event-trigger-list {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: auto;
+  gap: 16px;
+  padding: 16px;
+  margin-top: 16px;
+}

@@ -5,7 +5,55 @@
 	<link rel="stylesheet" type="text/css" href="login.component.css">
 <link href="https://fonts.googleapis.com/css2?family=Jost:wght@500&display=swap" rel="stylesheet">
 </head>
+
+
+
+<div class="outer">
+	<div class="container">
+		<div class="row">
+			<div class="offset-md-2 col-lg-5 col-md-7 offset-lg-4 offset-md-3">
+				<div class="panel border bg-white">
+					<div class="panel-heading">
+						<h3 class="pt-3 font-weight-bold">Login</h3>
+					</div>
+					<div class="panel-body p-3">
+						<form [formGroup]="loginForm">
+							<div class="form-group p-3">
+								<div class="input-field" [class.error]="loginForm.controls['email'].dirty && loginForm.hasError('required', 'email')" >
+									<span class="fa fa-user p-2"></span>
+									<input formControlName="email" type="email" name="email" placeholder="Email">
+								</div>
+							</div>
+							<small *ngIf="loginForm.controls['email'].dirty && loginForm.hasError('required', 'email')" class="text-danger">*Email is required</small>
+							<div class="form-group p-3">
+								<div class="input-field" [class.error]="loginForm.controls['password'].dirty && loginForm.hasError('required', 'password')">
+									<span class="fa fa-lock p-2"></span>
+									<input formControlName="password" [type]="type" name="password" placeholder="Password">
+									<span (click)="hideShowPassword()" class="fa {{eyeIcon}}" toggle-password></span>
+								</div>
+							</div>
+						
+							<small *ngIf="loginForm.controls['password'].dirty && loginForm.hasError('required', 'password')" class="text-danger">*Password is required</small>
+							<div class="form-inline fr mt-4">
+								<a id="forget" class="font-weight-bold">Forgot password?</a>
+							</div>
+							<button (click)="onLogin()" [disabled]="loginForm.invalid" type="submit" class="btn btn-primary btn-lock mt-4 w-100">Login</button>
+							<div class="text-center pt-4 text-muted">Don't have an account? <a id="forget" routerLink="/signup">Sign Up</a></div>
+						</form>
+						<div class="mx-3 my-2 py-2 bordert">
+							<div class="text-center py-3"></div>
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+
+<!--
 <body>
+	<button class="btn btn-primary">Click me!!</button>
 	<div class="main">  	
 		<input type="checkbox" id="chk" aria-hidden="true">
 			<div class="signup">
@@ -34,3 +82,5 @@
 	</div>
 </body>
 </html> 
+
+-->

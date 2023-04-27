@@ -2,7 +2,10 @@
   <div class="create-event-content">
     <h2 class="create-event-heading">Create Event</h2>
 
+<!--    INPUT FIELDS-->
     <form [formGroup]="addTriggerForm" (ngSubmit)="onSubmit()" class="add-trigger-form">
+
+<!--      SENSOR-->
       <label>
         Sensor:
         <select formControlName="sensor">
@@ -14,6 +17,7 @@
         </span>
       </label>
 
+<!--      NAME-->
       <label>
           Name:
           <input formControlName="name" type="text"/>
@@ -22,6 +26,7 @@
           </span>
       </label>
 
+<!--      DESCRIPTION-->
       <label>
         Description:
         <input formControlName="description" type="text"/>
@@ -31,18 +36,21 @@
         </span>
       </label>
 
+<!--      VALUE-->
       <label>
         Value:
         <input formControlName="value" type="range" min="0" max="1023"/>
         <span>{{addTriggerForm.get('value')?.value}}</span>
       </label>
 
+<!--      RESET VALUE-->
       <label>
         Reset Value:
         <input formControlName="resetValue" type="range" min="0" max="1023"/>
         <span>{{addTriggerForm.get('resetValue')?.value}}</span>
       </label>
 
+<!--      CONDITION-->
       <label>
         Condition:
         <select formControlName="condition">
@@ -55,6 +63,7 @@
         </span>
       </label>
 
+<!--      ENABLED-->
       <label>
         Enabled:
         <select formControlName="enabled">
@@ -67,10 +76,13 @@
         </span>
       </label>
 
+
       <!--  ACTIONS-->
       <h4>Actions</h4>
       <div formArrayName="actions" *ngFor="let action of actions.controls; let i = index">
         <div [formGroupName]="i">
+
+<!--          DEVICE SELECTION-->
           <label>
             Device Type:
             <select formControlName="deviceType">
@@ -138,7 +150,7 @@
               </label>
               <label>
                 Text:
-                <input formControlName="text" type="text"/>
+                <input formControlName="text" type="text" maxlength="16"/>
               </label>
             </ng-container>
 

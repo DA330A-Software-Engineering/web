@@ -23,19 +23,19 @@ export class EventListComponent {
     });
 
     dialogRef.afterClosed().subscribe((result) => {
-
     });
   }
 
   async removeTrigger(triggerId: string): Promise<void> {
-    if (this.userId) {
-      try {
-        await this.sensorService.deleteTrigger(this.userId, triggerId);
-      } catch (error) {
-        console.error('Error removing trigger:', error);
-      }
-    } else {
+    if (!this.userId) {
       console.error('Profile ID not found in token');
+      return;
+    }
+
+    try {
+      await this.sensorService.deleteTrigger(this.userId, triggerId);
+    } catch (error) {
+      console.error('Error removing trigger:', error);
     }
   }
 }

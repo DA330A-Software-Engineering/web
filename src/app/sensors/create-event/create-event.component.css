@@ -9,7 +9,11 @@
 .create-event-content {
   max-width: 800px;
   margin: 0 auto;
+  max-height: 80vh;
+  overflow-y: auto;
+  padding: 1em;
 }
+
 
 .create-event-heading {
   font-size: 2rem;

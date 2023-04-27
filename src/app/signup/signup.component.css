@@ -3,11 +3,17 @@
 .outer {
 	height: 100vh;
 	background: #F5F5F5;
+	font-family: 'Montserrat', sans-serif;
 }
 
 .panel-heading{
 	text-align: center;
 	margin-bottom: 10px;
+	
+}
+
+.signup-header{
+	font-size: 25px;
 }
 
 #forget{

@@ -14,16 +14,14 @@ export class EventListComponent {
   }
 
   async removeTrigger(triggerId: string): Promise<void> {
-  if (this.userId) {
-    try {
-      await this.sensorService.deleteTrigger(this.userId, triggerId);
-      console.log('Trigger successfully removed');
-    } catch (error) {
-      console.error('Error removing trigger:', error);
+    if (this.userId) {
+      try {
+        await this.sensorService.deleteTrigger(this.userId, triggerId);
+      } catch (error) {
+        console.error('Error removing trigger:', error);
+      }
+    } else {
+      console.error('Profile ID not found in token');
     }
-  } else {
-    console.error('Profile ID not found in token');
   }
-}
-
 }

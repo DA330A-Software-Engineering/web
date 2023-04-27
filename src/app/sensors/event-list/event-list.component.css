@@ -1,3 +1,15 @@
+.event-content {
+  font-family: 'Montserrat', sans-serif;
+}
+
+.event-heading {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #4a4a4a;
+  margin-bottom: 24px;
+  text-align: center;
+}
+
 .event-trigger-list {
   display: flex;
   flex-wrap: nowrap;
@@ -5,4 +17,55 @@
   gap: 16px;
   padding: 16px;
   margin-top: 16px;
+}
+
+.event-trigger {
+  background-color: #f0f0f0;
+  padding: 16px;
+  border-radius: 4px;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.event-name {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: #4a4a4a;
+  margin-bottom: 8px;
+}
+
+.event-description,
+.event-info {
+  font-size: 1rem;
+  color: #777777;
+  margin-bottom: 4px;
+}
+
+.actions-heading {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: #4a4a4a;
+  margin-top: 12px;
+  margin-bottom: 8px;
+}
+
+.action-info {
+  font-size: 1rem;
+  color: #777777;
+  margin-bottom: 4px;
+}
+
+.remove-trigger-btn {
+  background-color: #9ABDDC;
+  font-family: 'Montserrat', sans-serif;
+  color: black !important;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: 700;
+  margin-top: 12px;
+  cursor: pointer;
+  border: none;
+}
+
+.remove-trigger-btn:hover {
+  background-color: #7da2c1;
 }

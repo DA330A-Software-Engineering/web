@@ -34,6 +34,7 @@ export class CreateEventComponent {
       description: [''],
       value: [0, [Validators.required, Validators.min(0), Validators.max(1023)]],
       condition: ['', Validators.required],
+      enabled: ['', Validators.required],
       resetValue: [0, [Validators.required, Validators.min(0), Validators.max(1023)]],
       actions: this.formBuilder.array([
         this.formBuilder.group({

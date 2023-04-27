@@ -1,12 +1,13 @@
-.event-trigger {
-  background-color: #f0f0f0;
-  border-radius: 4px;
-  padding: 16px;
-  margin-bottom: 16px;
+.create-event-content {
+  font-family: 'Montserrat', sans-serif;
 }
 
-.actions {
-  margin-top: 8px;
+.create-event-heading {
+  font-size: 2rem;
+  font-weight: bold;
+  color: #4a4a4a;
+  margin-bottom: 24px;
+  text-align: center;
 }
 
 .add-trigger-form {
@@ -16,33 +17,53 @@
   margin-top: 16px;
 }
 
-h2 {
-  text-align: center;
+.add-trigger-form label {
+  display: flex;
+  flex-direction: row;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 1rem;
+  color: #777777;
 }
 
-.form-field {
-  position: relative;
+.add-trigger-form input,
+.add-trigger-form select {
+  width: 60%;
+  margin-top: 4px;
+  padding: 4px 8px;
+  font-size: 1rem;
+  color: #4a4a4a;
+  border: 1px solid #cccccc;
+  border-radius: 4px;
+}
+
+.add-trigger-form input[type="range"] {
+  cursor: pointer;
+}
+
+.add-trigger-form button {
+  background-color: #9ABDDC;
+  font-family: 'Montserrat', sans-serif;
+  color: black !important;
+  padding: 6px 12px;
+  border-radius: 4px;
+  font-weight: 700;
+  margin-top: 12px;
+  cursor: pointer;
+  border: none;
+}
+
+.add-trigger-form button:hover {
+  background-color: #7da2c1;
 }
 
 .error-message {
-  position: absolute;
-  font-size: 12px;
-  color: #D32F2F;
-  bottom: -18px;
-  left: 0;
+  font-size: 0.9rem;
+  color: #d9534f;
+  margin-top: 4px;
 }
 
-input.ng-invalid.ng-touched, select.ng-invalid.ng-touched {
-  border-color: #D32F2F;
-}
-
-button[type="submit"] {
-  background-color: #9ABDDC;
-  font-family: 'Montserrat', sans-serif;
-  color: black;
-  padding: 10px 20px;
-  border-radius: 4px;
-  font-weight: 700;
-  cursor: pointer;
-  border: none;
+.add-trigger-form button:disabled {
+  background-color: #cccccc;
+  cursor: not-allowed;
 }

@@ -1,0 +1,36 @@
+<div class="event-content">
+  <h2 class="event-heading">Events</h2>
+
+  <div class="event-trigger-list">
+    <div class="event-trigger" *ngFor="let eventTrigger of eventTriggers">
+
+      <h3 class="event-name">{{ eventTrigger.data.name }}</h3>
+
+      <p class="event-description">{{ eventTrigger.data.description }}</p>
+      <p class="event-info">Value: {{ eventTrigger.data.value }}</p>
+      <p class="event-info">Reset Value: {{ eventTrigger.data.resetValue }}</p>
+      <p class="event-info">Condition: {{ eventTrigger.data.condition | transformCondition }}</p>
+      <p class="event-info">Enabled: {{ eventTrigger.data.enabled }}</p>
+
+      <div class="actions">
+        <h4 class="actions-heading">Actions</h4>
+        <div *ngFor="let action of eventTrigger.data.actions" class="action-info">
+          <p>Type: {{ action.deviceType }}</p>
+          <p>State: </p>
+          <ng-container *ngFor="let prop of action.state | keyvalue">
+            <p>{{ prop.key }}: {{ prop.value }}</p>
+          </ng-container>
+        </div>
+      </div>
+
+      <button class="remove-trigger-btn" (click)="removeTrigger(eventTrigger.id)">remove</button>
+    </div>
+    <button class="add-event-btn" (click)="openCreateEventDialog()">
+      <p class="empty-list-notification" *ngIf="eventTriggers.length === 0">
+        There are no events!
+        <br> Click here to create one.
+      </p>
+      Add Event
+    </button>
+  </div>
+</div>

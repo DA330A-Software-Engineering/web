@@ -1,16 +1,13 @@
-import {Component, Inject, Input, OnInit} from '@angular/core';
+import { Component, Inject } from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
   Validators,
   FormArray,
-  FormControl,
-  AbstractControl,
-  ValidationErrors
 } from '@angular/forms';
-import {DeviceTypes} from "../../models/deviceType";
-import {SensorService} from "../../service/sensor/sensor.service";
-import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
+import { DeviceTypes } from "../../models/deviceType";
+import { SensorService } from "../../service/sensor/sensor.service";
+import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 
 @Component({
   selector: 'app-create-event',
@@ -33,8 +30,16 @@ export class CreateEventComponent {
     this.sensors = data.sensors;
     this.userId = data.userId;
 
-    const selectedDeviceType = this.deviceTypes[0];
-    this.addTriggerForm = this.formBuilder.group({
+    this.addTriggerForm = this.createTriggerForm(this.deviceTypes[0]);
+    this.registerDeviceTypeChange(0);
+  }
+
+  get actions(): FormArray {
+    return this.addTriggerForm.get('actions') as FormArray;
+  }
+
+  createTriggerForm(selectedDeviceType: string): FormGroup {
+    return this.formBuilder.group({
       sensor: ['', Validators.required],
       name: ['', Validators.required],
       description: ['', Validators.required],
@@ -43,32 +48,22 @@ export class CreateEventComponent {
       enabled: ['', Validators.required],
       resetValue: [0, [Validators.required, Validators.min(0), Validators.max(1023)]],
       actions: this.formBuilder.array([
-        this.formBuilder.group({
-          deviceType: [selectedDeviceType, Validators.required],
-          state: this.getStateFormGroup(selectedDeviceType),
-        }),
+        this.createActionFormGroup(selectedDeviceType),
       ], Validators.required),
     });
-
-    this.registerDeviceTypeChange(0);
   }
 
-  get actions(): FormArray {
-    return this.addTriggerForm.get('actions') as FormArray;
+  createActionFormGroup(deviceType: string): FormGroup {
+    return this.formBuilder.group({
+      deviceType: [deviceType, Validators.required],
+      state: this.getStateFormGroup(deviceType),
+    });
   }
 
   addNewAction(): void {
-    const selectedDeviceType = this.deviceTypes[0]; // Set the default selected device type
-    const newIndex = this.actions.length;
-    this.actions.push(
-      this.formBuilder.group({
-        deviceType: [selectedDeviceType, Validators.required],
-        state: this.getStateFormGroup(selectedDeviceType),
-      }),
-    );
-    this.registerDeviceTypeChange(newIndex);
+    this.actions.push(this.createActionFormGroup(this.deviceTypes[0]));
+    this.registerDeviceTypeChange(this.actions.length);
   }
-
 
   removeAction(index: number): void {
     this.actions.removeAt(index);
@@ -76,57 +71,44 @@ export class CreateEventComponent {
 
   async onSubmit(): Promise<void> {
     const formValue = {...this.addTriggerForm.value};
+    formValue.condition = formValue.condition === 'greater' ? 'grt' : 'lsr';
 
-    if (formValue.condition === 'greater') {
-      formValue.condition = 'grt';
-    } else if (formValue.condition === 'lesser') {
-      formValue.condition = 'lsr';
+    if (!this.userId) {
+      console.error('Profile ID not found in token');
+      return;
     }
 
-    if (this.userId) {
-      try {
-        await this.sensorService.addTriggerToProfile(this.userId, formValue);
-        this.dialogRef.close()
-
-      } catch (error) {
-        console.error('Error saving trigger to the database:', error);
-      }
-    } else {
-      console.error('Profile ID not found in token');
+    try {
+      await this.sensorService.addTriggerToProfile(this.userId, formValue);
+      this.dialogRef.close();
+    } catch (error) {
+      console.error('Error saving trigger to the database:', error);
     }
   }
 
-  // @ts-ignore
   getStateFormGroup(deviceType: string): FormGroup {
-    switch (deviceType) {
-      case 'toggle':
-        return this.formBuilder.group({
-          state: [false, Validators.required],
-        });
+    const stateFormGroups: { [key: string]: FormGroup } = {
+      toggle: this.formBuilder.group({state: [false, Validators.required]}),
 
-      case 'openLock':
-        return this.formBuilder.group({
-          locked: [false, Validators.required],
-          open: [false, Validators.required],
-        });
+      openLock: this.formBuilder.group({
+        locked: [false, Validators.required],
+        open: [false, Validators.required],
+      }),
 
-      case 'fan':
-        return this.formBuilder.group({
-          on: [false, Validators.required],
-          reverse: [false, Validators.required],
-        });
+      fan: this.formBuilder.group({
+        on: [false, Validators.required],
+        reverse: [false, Validators.required],
+      }),
 
-      case 'screen':
-        return this.formBuilder.group({
-          on: [false, Validators.required],
-          text: ['', [Validators.required, Validators.maxLength(16)]],
-        });
+      screen: this.formBuilder.group({
+        on: [false, Validators.required],
+        text: ['', [Validators.required, Validators.maxLength(16)]],
+      }),
+      
+      buzzer: this.formBuilder.group({tune: ['alarm', Validators.required]}),
+    };
 
-      case 'buzzer':
-        return this.formBuilder.group({
-          tune: ['alarm', Validators.required],
-        });
-    }
+    return stateFormGroups[deviceType] || this.formBuilder.group({});
   }
 
   registerDeviceTypeChange(index: number): void {

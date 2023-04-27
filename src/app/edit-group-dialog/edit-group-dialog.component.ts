@@ -1,8 +1,8 @@
-import {Component, Inject} from '@angular/core';
-import {MatDialogRef, MAT_DIALOG_DATA} from '@angular/material/dialog';
-import {Group} from '../models/group';
-import {FormBuilder, FormGroup, Validators} from '@angular/forms';
-import {DeviceService} from '../service/deviceService/device.service';
+import { Component, Inject } from '@angular/core';
+import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { Group } from '../models/group';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { DeviceService } from '../service/deviceService/device.service';
 
 @Component({
   selector: 'app-edit-group-dialog',
@@ -18,10 +18,12 @@ export class EditGroupDialogComponent {
     @Inject(MAT_DIALOG_DATA) public data: { group: Group },
     private fb: FormBuilder,
     private deviceService: DeviceService) {
+
     this.editGroupForm = this.fb.group({
       name: [data.group.name, Validators.required],
       description: [data.group.description],
     });
+
     this.getAllSameTypeDevices(this.data.group.devices).then(devices => {
       this.sameTypeDevices = devices;
     });

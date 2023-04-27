@@ -25,6 +25,7 @@
 
       <button class="remove-trigger-btn" (click)="removeTrigger(eventTrigger.id)">remove</button>
     </div>
+
     <button class="add-event-btn" (click)="openCreateEventDialog()">
       <p class="empty-list-notification" *ngIf="eventTriggers.length === 0">
         There are no events!
@@ -32,5 +33,7 @@
       </p>
       Add Event
     </button>
+
   </div>
+
 </div>

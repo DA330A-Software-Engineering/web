@@ -1,4 +1,4 @@
-import {Component, Input, OnInit} from '@angular/core';
+import {Component, Inject, Input, OnInit} from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
@@ -10,6 +10,7 @@ import {
 } from '@angular/forms';
 import {DeviceTypes} from "../../models/deviceType";
 import {SensorService} from "../../service/sensor/sensor.service";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-create-event',
@@ -17,21 +18,26 @@ import {SensorService} from "../../service/sensor/sensor.service";
   styleUrls: ['./create-event.component.css']
 })
 export class CreateEventComponent {
-  @Input() userId!: string;
-  @Input() sensors: any[] = [];
+  userId!: string;
+  sensors: any[] = [];
 
   addTriggerForm: FormGroup;
   deviceTypes = Object.values(DeviceTypes);
 
   constructor(
     private formBuilder: FormBuilder,
-    private sensorService: SensorService
+    private sensorService: SensorService,
+    private dialogRef: MatDialogRef<CreateEventComponent>,
+    @Inject(MAT_DIALOG_DATA) public data: { sensors: any[]; userId: string }
   ) {
+    this.sensors = data.sensors;
+    this.userId = data.userId;
+
     const selectedDeviceType = this.deviceTypes[0];
     this.addTriggerForm = this.formBuilder.group({
       sensor: ['', Validators.required],
       name: ['', Validators.required],
-      description: [''],
+      description: ['', Validators.required],
       value: [0, [Validators.required, Validators.min(0), Validators.max(1023)]],
       condition: ['', Validators.required],
       enabled: ['', Validators.required],
@@ -77,12 +83,11 @@ export class CreateEventComponent {
       formValue.condition = 'lsr';
     }
 
-    console.log(formValue);
-
     if (this.userId) {
       try {
         await this.sensorService.addTriggerToProfile(this.userId, formValue);
-        console.log('Trigger successfully saved to the database');
+        this.dialogRef.close()
+
       } catch (error) {
         console.error('Error saving trigger to the database:', error);
       }

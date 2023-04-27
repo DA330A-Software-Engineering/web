@@ -1,5 +1,7 @@
-import {Component, Input} from '@angular/core';
-import {SensorService} from "../../service/sensor/sensor.service";
+import { Component, Input } from '@angular/core';
+import { SensorService } from "../../service/sensor/sensor.service";
+import { MatDialog } from "@angular/material/dialog";
+import {CreateEventComponent} from "../create-event/create-event.component";
 
 @Component({
   selector: 'app-event-list',
@@ -9,8 +11,20 @@ import {SensorService} from "../../service/sensor/sensor.service";
 export class EventListComponent {
   @Input() userId!: string
   @Input() eventTriggers: any[] = [];
+  @Input() sensors: any[] = [];
 
-  constructor(private sensorService: SensorService,) {
+  constructor(private sensorService: SensorService, private dialog: MatDialog) {
+  }
+
+  openCreateEventDialog(): void {
+    const dialogRef = this.dialog.open(CreateEventComponent, {
+      width: '80%',
+      data: { sensors: this.sensors, userId: this.userId },
+    });
+
+    dialogRef.afterClosed().subscribe((result) => {
+
+    });
   }
 
   async removeTrigger(triggerId: string): Promise<void> {

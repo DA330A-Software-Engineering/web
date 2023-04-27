@@ -8,8 +8,6 @@ import {
   addDoc,
   CollectionReference,
   DocumentData,
-  QuerySnapshot,
-  getDocs,
   deleteDoc,
   collectionData
 } from '@angular/fire/firestore';
@@ -38,7 +36,7 @@ export class SensorService {
     try {
       const triggerCollection: CollectionReference<DocumentData> = collection(doc(this.firestore, 'profiles', profileId), 'triggers');
       await addDoc(triggerCollection, triggerData);
-      console.log('Trigger successfully added to profile');
+
     } catch (error) {
       console.error('Error adding trigger to profile:', error);
     }
@@ -48,7 +46,7 @@ export class SensorService {
     try {
       const triggerDoc = doc(this.firestore, 'profiles', profileId, 'triggers', triggerId);
       await deleteDoc(triggerDoc);
-      console.log('Trigger successfully deleted');
+
     } catch (error) {
       console.error('Error deleting trigger:', error);
     }

@@ -1,5 +1,14 @@
-.create-event-content {
+@import url('https://fonts.googleapis.com/css2?family=Montserrat&family=Nunito:ital,wght@1,300&display=swap');
+
+.light-theme {
   font-family: 'Montserrat', sans-serif;
+  background-color: #ffffff;
+  padding: 10em;
+}
+
+.create-event-content {
+  max-width: 800px;
+  margin: 0 auto;
 }
 
 .create-event-heading {
@@ -11,59 +20,62 @@
 }
 
 .add-trigger-form {
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
-  margin-top: 16px;
+  display: grid;
+  gap: 12px;
 }
 
 .add-trigger-form label {
   display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
+  flex-direction: column;
   font-size: 1rem;
   color: #777777;
 }
 
-.add-trigger-form input,
-.add-trigger-form select {
-  width: 60%;
-  margin-top: 4px;
-  padding: 4px 8px;
-  font-size: 1rem;
-  color: #4a4a4a;
-  border: 1px solid #cccccc;
-  border-radius: 4px;
-}
-
+.add-trigger-form select,
+.add-trigger-form input[type="text"],
 .add-trigger-form input[type="range"] {
-  cursor: pointer;
-}
-
-.add-trigger-form button {
-  background-color: #9ABDDC;
-  font-family: 'Montserrat', sans-serif;
-  color: black !important;
-  padding: 6px 12px;
+  margin-top: 4px;
+  padding: 4px;
+  border: 1px solid #ccc;
   border-radius: 4px;
-  font-weight: 700;
-  margin-top: 12px;
-  cursor: pointer;
-  border: none;
-}
-
-.add-trigger-form button:hover {
-  background-color: #7da2c1;
 }
 
 .error-message {
-  font-size: 0.9rem;
-  color: #d9534f;
+  font-size: 0.8rem;
+  color: #f44336;
   margin-top: 4px;
 }
 
-.add-trigger-form button:disabled {
-  background-color: #cccccc;
+button {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 700;
+  border: none;
+  border-radius: 4px;
+  padding: 6px 12px;
+  cursor: pointer;
+}
+
+[type="submit"] {
+  background-color: #9ABDDC;
+  color: black;
+}
+
+
+[type="submit"]:hover {
+  background-color: #7da2c1;
+}
+
+[type="button"] {
+  background-color: #f0f0f0;
+  color: #4a4a4a;
+}
+
+[type="button"]:hover {
+  background-color: #d9d9d9;
+}
+
+[type="submit"]:disabled {
+  background-color: #ccc;
+  color: #666;
   cursor: not-allowed;
 }

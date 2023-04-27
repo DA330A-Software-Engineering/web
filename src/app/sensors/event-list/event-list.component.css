@@ -69,3 +69,8 @@
 .remove-trigger-btn:hover {
   background-color: #7da2c1;
 }
+
+.add-event-btn {
+  font-family: 'Montserrat', sans-serif;
+  background-color: #7da2c1; /* set the background color */
+}

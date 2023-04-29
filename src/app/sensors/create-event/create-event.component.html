@@ -1,0 +1,181 @@
+<div class="light-theme">
+  <div class="create-event-content">
+    <h2 class="create-event-heading">Create Event</h2>
+
+<!--    INPUT FIELDS-->
+    <form [formGroup]="addTriggerForm" (ngSubmit)="onSubmit()" class="add-trigger-form">
+
+<!--      SENSOR-->
+      <label>
+        Sensor:
+        <select formControlName="sensor">
+          <option *ngFor="let sensor of sensors" [value]="sensor.data.name">{{ sensor.data.name }}</option>
+        </select>
+        <span class="error-message"
+              *ngIf="addTriggerForm.get('sensor')?.invalid && addTriggerForm.get('sensor')?.touched">
+        Sensor is required
+        </span>
+      </label>
+
+<!--      NAME-->
+      <label>
+          Name:
+          <input formControlName="name" type="text"/>
+          <span class="error-message" *ngIf="addTriggerForm.get('name')?.invalid && addTriggerForm.get('name')?.touched">
+          Name is required
+          </span>
+      </label>
+
+<!--      DESCRIPTION-->
+      <label>
+        Description:
+        <input formControlName="description" type="text"/>
+        <span class="error-message"
+              *ngIf="addTriggerForm.get('description')?.invalid && addTriggerForm.get('description')?.touched">
+        Description is required
+        </span>
+      </label>
+
+<!--      VALUE-->
+      <label>
+        Value:
+        <input formControlName="value" type="range" min="0" max="1023"/>
+        <span>{{addTriggerForm.get('value')?.value}}</span>
+      </label>
+
+<!--      RESET VALUE-->
+      <label>
+        Reset Value:
+        <input formControlName="resetValue" type="range" min="0" max="1023"/>
+        <span>{{addTriggerForm.get('resetValue')?.value}}</span>
+      </label>
+
+<!--      CONDITION-->
+      <label>
+        Condition:
+        <select formControlName="condition">
+          <option value="greater">Greater</option>
+          <option value="lesser">Lesser</option>
+        </select>
+        <span class="error-message"
+              *ngIf="addTriggerForm.get('condition')?.invalid && addTriggerForm.get('condition')?.touched">
+        Condition is required
+        </span>
+      </label>
+
+<!--      ENABLED-->
+      <label>
+        Enabled:
+        <select formControlName="enabled">
+          <option value="true">Enabled</option>
+          <option value="false">Disabled</option>
+        </select>
+        <span class="error-message"
+              *ngIf="addTriggerForm.get('enabled')?.invalid && addTriggerForm.get('enabled')?.touched">
+        Enabled is required
+        </span>
+      </label>
+
+
+      <!--  ACTIONS-->
+      <h4>Actions</h4>
+      <div formArrayName="actions" *ngFor="let action of actions.controls; let i = index">
+        <div [formGroupName]="i">
+
+<!--          DEVICE SELECTION-->
+          <label>
+            Device Type:
+            <select formControlName="deviceType">
+              <option *ngFor="let device of deviceTypes" [value]="device">{{ device }}</option>
+            </select>
+          </label>
+
+          <ng-container [ngSwitch]="action.get('deviceType')?.value">
+
+            <!--        TOGGLE-->
+            <ng-container *ngSwitchCase="'toggle'" formGroupName="state">
+              <label>
+                State:
+                <select formControlName="state">
+                  <option [value]="true">On</option>
+                  <option [value]="false">Off</option>
+                </select>
+              </label>
+            </ng-container>
+
+            <!--        OPEN LOCK-->
+            <ng-container *ngSwitchCase="'openLock'" formGroupName="state">
+              <label>
+                Locked:
+                <select formControlName="locked">
+                  <option [value]="true">Locked</option>
+                  <option [value]="false">Unlocked</option>
+                </select>
+              </label>
+              <label>
+                Open:
+                <select formControlName="open">
+                  <option [value]="true">Open</option>
+                  <option [value]="false">Closed</option>
+                </select>
+              </label>
+            </ng-container>
+
+            <!--        FAN-->
+            <ng-container *ngSwitchCase="'fan'" formGroupName="state">
+              <label>
+                State:
+                <select formControlName="on">
+                  <option [value]="true">On</option>
+                  <option [value]="false">Off</option>
+                </select>
+              </label>
+              <label>
+                Reverse:
+                <select formControlName="reverse">
+                  <option [value]="true">Reverse</option>
+                  <option [value]="false">Forward</option>
+                </select>
+              </label>
+            </ng-container>
+
+            <!--        SCREEN-->
+            <ng-container *ngSwitchCase="'screen'" formGroupName="state">
+              <label>
+                State:
+                <select formControlName="on">
+                  <option [value]="true">On</option>
+                  <option [value]="false">Off</option>
+                </select>
+              </label>
+              <label>
+                Text:
+                <input formControlName="text" type="text" maxlength="16"/>
+              </label>
+            </ng-container>
+
+            <!--        BUZZER-->
+            <ng-container *ngSwitchCase="'buzzer'" formGroupName="state">
+              <label>
+                Tune:
+                <select formControlName="tune">
+                  <option value="alarm">Alarm</option>
+                  <option value="pokemon">Pokemon</option>
+                  <option value="pirate">Pirate</option>
+                </select>
+              </label>
+            </ng-container>
+
+          </ng-container>
+
+
+        </div>
+        <button type="button" (click)="removeAction(i)">Remove Action</button>
+      </div>
+
+      <button class="action-button" type="button" (click)="addNewAction()">Add Action</button>
+      <button type="submit" [disabled]="addTriggerForm.invalid">Submit</button>
+
+    </form>
+  </div>
+</div>

@@ -1,0 +1,48 @@
+<form [formGroup]="editGroupForm" class="edit-group-form light-theme">
+  <h1 mat-dialog-title class="edit-group-heading">Edit Group</h1>
+  <div mat-dialog-content class="edit-group-content">
+    <div>
+      <label for="editGroupName">Group Name:</label>
+      <input formControlName="name" type="text" id="editGroupName" name="editGroupName" required>
+      <div *ngIf="editGroupForm.get('name')?.invalid && editGroupForm.get('name')?.touched" class="error">
+        Group name is required
+      </div>
+    </div>
+
+    <div>
+      <label for="editGroupDescription">Group Description:</label>
+      <input formControlName="description" type="text" id="editGroupDescription" name="editGroupDescription" required>
+      <div *ngIf="editGroupForm.get('description')?.invalid && editGroupForm.get('description')?.touched" class="error">
+        Description is required
+      </div>
+    </div>
+
+    <ul>
+      <li *ngFor="let device of data.group.devices" class="no-bullet">
+        <span class="list-text">{{device.data.name}} - {{device.data.type}}</span>
+        <button (click)="removeDevice(device.id)">Remove</button>
+      </li>
+    </ul>
+
+    <div *ngIf="thereAreDevicesNotInTheList(data.group.devices)">
+      <p>Available Devices:</p>
+      <ul>
+        <li *ngFor="let device of sameTypeDevices" class="no-bullet">
+          <div *ngIf="!isDeviceInGroup(device.data.name)" class="available-device-card">
+            <span class="list-text">{{device.data.name}} - {{device.data.type}}</span>
+            <button (click)="addDevice(device.data.name)" class="add-device-btn">ADD</button>
+          </div>
+        </li>
+      </ul>
+    </div>
+
+    <div *ngIf="data.group.devices.length === 0">You must have at least one device in the group!</div>
+
+  </div>
+  <div mat-dialog-actions>
+    <button mat-button [disabled]="editGroupForm.invalid || data.group.devices.length === 0" (click)="save()"
+            [ngClass]="{'enabled-save-btn': !editGroupForm.invalid && data.group.devices.length !== 0}">SAVE
+    </button>
+    <button mat-button (click)="discard()">DISCARD</button>
+  </div>
+</form>

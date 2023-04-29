@@ -27,7 +27,13 @@ import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { NgToastModule } from 'ng-angular-popup'
 import { AuthGuard } from './guards/auth.guard';
 import { TokenInterceptor } from './interceptors/token.interceptor';
-
+import { MatDialogModule } from '@angular/material/dialog';
+import { EditGroupDialogComponent } from './edit-group-dialog/edit-group-dialog.component';
+import { SensorsComponent } from './sensors/sensors.component';
+import { SensorListComponent } from './sensors/sensor-list/sensor-list.component';
+import { CreateEventComponent } from './sensors/create-event/create-event.component';
+import { EventListComponent } from './sensors/event-list/event-list.component';
+import {TransformConditionPipe} from "./sensors/event-list/transformConditionPipe";
 
 const appRoute: Routes = [
   {path:'home', component: HomeComponent, canActivate:[AuthGuard]},
@@ -36,7 +42,8 @@ const appRoute: Routes = [
   {path:'routines', component: RoutinesComponent, canActivate:[AuthGuard]},
   {path:'aboutus', component: AboutusComponent, canActivate:[AuthGuard]},
   {path:'login', component: LoginComponent},
-  {path:'', component: LoginComponent}  
+  {path:'', component: LoginComponent},
+  { path: 'sensors', component: SensorsComponent },
 ]
 
 @NgModule({
@@ -47,8 +54,14 @@ const appRoute: Routes = [
     GroupsComponent,
     RoutinesComponent,
     AboutusComponent,
-    LoginComponent
-  
+    LoginComponent,
+    EditGroupDialogComponent,
+    SensorsComponent,
+    SensorListComponent,
+    CreateEventComponent,
+    EventListComponent,
+    TransformConditionPipe
+
   ],
   imports: [
     BrowserModule,
@@ -68,7 +81,8 @@ const appRoute: Routes = [
     DevicesModule,
     FormsModule,
     ReactiveFormsModule,
-    NgToastModule
+    NgToastModule,
+    MatDialogModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

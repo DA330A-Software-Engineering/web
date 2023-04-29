@@ -73,4 +73,21 @@ export class DeviceService {
     return this.http.delete(url);
   }
 
+
+  updateExistingGroup(name: string, devices: string[], description: string): Observable<any> {
+    const groupData = {
+      name,
+      devices,
+      description
+    };
+    const url = `http://${Constants.ip}:${Constants.port}/groups/${groupData}`;
+    return this.http.put(url, groupData);
+  }
+
+  updateGroup(id: string, groupData: any): Observable<any> {
+  const url = `http://${Constants.ip}:${Constants.port}/groups/${id}`;
+  return this.http.put(url, groupData);
+}
+
+
 }

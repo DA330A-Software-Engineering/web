@@ -1,11 +1,16 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, Input, OnInit } from '@angular/core';
 import { DeviceService } from '../service/deviceService/device.service';
 import { Group } from '../models/group';
 import { Observable, map } from 'rxjs';
 import { groupBy } from 'src/utils';
 import { DeviceTypes } from '../models/deviceType';
 import { Device } from '../models/device';
-import { DeviceState } from '../models/deviceState';
+import { BuzzerState, DeviceState, FanState, OpenLockState, ScreenState, ToggleState } from '../models/deviceState';
+import { NgToastService } from 'ng-angular-popup';
+import { state } from '@angular/animations';
+import { Type } from '@angular/compiler';
+import {MatDialog} from "@angular/material/dialog";
+import {EditGroupDialogComponent} from "../edit-group-dialog/edit-group-dialog.component";
 
 @Component({
   selector: 'app-groups',
@@ -13,6 +18,11 @@ import { DeviceState } from '../models/deviceState';
   styleUrls: ['./groups.component.css']
 })
 export class GroupsComponent implements OnInit{
+  @Input() toggleDevice!: Device<ToggleState>
+  @Input() openLockDevice!: Device<OpenLockState>
+  @Input() fanDevice!: Device<FanState>
+  @Input() screenDevice!: Device<ScreenState>
+  @Input() buzzerDevice!: Device<BuzzerState>
   groupsDevices$!: Group[];
   deviceTypes!: String[];
   typeMappedDevices$!: Observable< Record<string, Device<DeviceState>[]>>
@@ -24,7 +34,7 @@ export class GroupsComponent implements OnInit{
   newGroupDescription!: string;
   groupId!: string;
 
-  constructor(private deviceService: DeviceService) {}  // Lägg till profileId här senare
+  constructor(private deviceService: DeviceService, private toastService: NgToastService, public dialog: MatDialog) {}  // Lägg till profileId här senare
 
   async ngOnInit() {
 
@@ -55,7 +65,7 @@ export class GroupsComponent implements OnInit{
       console.log(devices)
       this.deviceTypes = Object.keys(devices)
     })
-    
+
 
   }
 
@@ -92,5 +102,101 @@ export class GroupsComponent implements OnInit{
     return this.selectedDevices.includes(deviceId)
   }
 
-  
+
+  getDeviceRuleVar(device:any) { // Set rule for false/true
+
+    switch (device.type) {
+      case "toggle":
+        return device.state.on
+      case "openLock":
+        return device.state.open
+
+      default:
+        break;
+    }
+
+  }
+
+  updateDeviceState(device:any, newValue:boolean) {
+    switch (device.type) {
+      case "toggle":
+        device.state.on = newValue
+        break;
+
+      case "openLock":
+        device.state.open = newValue
+        device.state.locked = !newValue
+        break;
+
+      default:
+        break;
+    }
+    return device.state;
+
+  }
+
+
+  determineGroupState(devices: any[]) { // Iterera genom alla states i devices
+    let turnOnDevices = true;
+    devices.forEach(element => {
+      if (this.getDeviceRuleVar(element.data)) {
+        turnOnDevices = false;
+        return;
+
+      }
+
+    });
+    return turnOnDevices;
+
+  }
+
+
+  toggleGroupState(group:Group) {
+
+    const turnOnDevices = this.determineGroupState(group.devices)
+    console.log("Turning on lights", turnOnDevices)
+    group.devices.forEach(device => {
+      const newState = this.updateDeviceState(device.data, turnOnDevices)
+      console.log(device.data.name, newState)
+
+      this.deviceService.sendAction(device.id, device.data.type, newState)
+      .subscribe(() => {
+        console.log('sent');
+      }, (error) => {
+        console.error(error);
+      });
+
+    });
+
+  }
+
+  openEditGroupDialog(group: Group): void {
+    const dialogRef = this.dialog.open(EditGroupDialogComponent, {
+      width: '400px',
+      data: {group: JSON.parse(JSON.stringify(group))} // Create a deep copy of the group object
+    });
+
+    dialogRef.afterClosed().subscribe(async result => {
+      if (result) {
+        const index = this.groupsDevices$.findIndex(g => g.id === result.id);
+        if (index !== -1) {
+          // Update the group locally
+          this.groupsDevices$[index] = result;
+
+          // Update the group in the database
+          try {
+            await this.deviceService.updateGroup(result.id, {
+              name: result.name,
+              description: result.description,
+              devices: result.devices.map((device: { id: string }) => device.id),
+            }).toPromise();
+            console.log('Group updated successfully');
+          } catch (error) {
+            console.error('Failed to update group:', error);
+          }
+        }
+      }
+    });
+  }
+
 }

@@ -1,0 +1,9 @@
+.sensor-container {
+  padding-top: 170px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  min-height: calc(100vh - 170px); /* Subtract the navbar height */
+  box-sizing: border-box; /* To include the padding in the total height calculation */
+}

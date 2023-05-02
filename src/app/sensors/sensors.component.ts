@@ -51,7 +51,7 @@ export class SensorsComponent implements OnInit, OnDestroy {
         this.cdr.detectChanges();
       });
   }
-  
+
   private filterSensors(devices: any[]): any[] {
     return devices.filter(device => device.data.type === 'sensor');
   }

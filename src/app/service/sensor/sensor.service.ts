@@ -22,14 +22,12 @@ export class SensorService {
   listenToTriggersByProfile(profileId: string): Observable<any[]> {
     const triggerCollection: CollectionReference<DocumentData> = collection(doc(this.firestore, 'profiles', profileId), 'triggers');
 
-    return collectionData(triggerCollection, {idField: 'id'}).pipe(
-      map((triggerDocs: DocumentData[]) => {
-        const triggers: any[] = triggerDocs.map((doc) => {
-          return {id: doc['id'], data: doc};
+    return collectionData(triggerCollection, {idField: 'id'})
+      .pipe(map(collection => {
+        return collection.map(triggers => {
+          return {id: triggers['id'], data: triggers}
         });
-        return triggers;
-      })
-    );
+      }));
   }
 
   async addTriggerToProfile(profileId: string, triggerData: any): Promise<void> {

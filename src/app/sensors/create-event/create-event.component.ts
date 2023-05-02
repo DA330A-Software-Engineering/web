@@ -1,13 +1,14 @@
-import { Component, Inject } from '@angular/core';
+import {Component, Inject} from '@angular/core';
 import {
   FormGroup,
   FormBuilder,
   Validators,
   FormArray,
 } from '@angular/forms';
-import { DeviceTypes } from "../../models/deviceType";
-import { SensorService } from "../../service/sensor/sensor.service";
-import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
+import {DeviceTypes} from "../../models/deviceType";
+import {SensorService} from "../../service/sensor/sensor.service";
+import {DeviceService} from "../../service/deviceService/device.service";
+import {MAT_DIALOG_DATA, MatDialogRef} from "@angular/material/dialog";
 
 @Component({
   selector: 'app-create-event',
@@ -16,20 +17,24 @@ import { MAT_DIALOG_DATA, MatDialogRef } from "@angular/material/dialog";
 })
 export class CreateEventComponent {
   userId!: string;
+
   sensors: any[] = [];
+  devices: any[] = [];
+  deviceTypes = Object.values(DeviceTypes);
 
   addTriggerForm: FormGroup;
-  deviceTypes = Object.values(DeviceTypes);
 
   constructor(
     private formBuilder: FormBuilder,
     private sensorService: SensorService,
+    private deviceService: DeviceService,
     private dialogRef: MatDialogRef<CreateEventComponent>,
     @Inject(MAT_DIALOG_DATA) public data: { sensors: any[]; userId: string }
   ) {
     this.sensors = data.sensors;
     this.userId = data.userId;
 
+    this.initDevices().then(r => {})
     this.addTriggerForm = this.createTriggerForm(this.deviceTypes[0]);
     this.registerDeviceTypeChange(0);
   }
@@ -62,7 +67,7 @@ export class CreateEventComponent {
 
   addNewAction(): void {
     this.actions.push(this.createActionFormGroup(this.deviceTypes[0]));
-    this.registerDeviceTypeChange(this.actions.length);
+    this.registerDeviceTypeChange(this.actions.length - 1);
   }
 
   removeAction(index: number): void {
@@ -104,7 +109,7 @@ export class CreateEventComponent {
         on: [false, Validators.required],
         text: ['', [Validators.required, Validators.maxLength(16)]],
       }),
-      
+
       buzzer: this.formBuilder.group({tune: ['alarm', Validators.required]}),
     };
 
@@ -116,5 +121,13 @@ export class CreateEventComponent {
       const stateFormGroup = this.getStateFormGroup(deviceType);
       (this.actions.at(index) as FormGroup).setControl('state', stateFormGroup);
     });
+  }
+
+  async initDevices() {
+    this.devices = await this.deviceService.getAllDevices();
+  }
+
+  filteredDevices(): any[] {
+    return this.devices.filter(device => this.deviceTypes.includes(device.data.type));
   }
 }

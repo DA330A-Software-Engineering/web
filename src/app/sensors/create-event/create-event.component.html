@@ -86,7 +86,7 @@
           <label>
             Device Type:
             <select formControlName="deviceType">
-              <option *ngFor="let device of deviceTypes" [value]="device">{{ device }}</option>
+              <option *ngFor="let device of filteredDevices()" [value]="device.data.type">{{ device.data.name }}</option>
             </select>
           </label>
 

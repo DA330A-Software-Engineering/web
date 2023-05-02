@@ -12,13 +12,13 @@
 	
 }
 
-.login-header{
+.signup-header{
 	font-size: 25px;
 }
 
 #forget{
 	min-width: 100px;
-	font-size: 12px;
+	margin-left: auto;
 	text-decoration: none;
 	cursor: pointer;
 }

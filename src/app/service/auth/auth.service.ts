@@ -1,6 +1,6 @@
-import { Injectable } from '@angular/core';
+import { HostListener, Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import { Observable, tap } from 'rxjs';
 import Constants from 'src/app/constants';
 import { Router } from '@angular/router';
 import { JwtHelperService } from '@auth0/angular-jwt';
@@ -21,8 +21,16 @@ export class AuthService {
     this.userPayload = this.decodedToken();
   }
 
+  
+
   signup(userObj: any){
     return this.http.post<any>(`${this.restUrl}signin`, userObj)
+    .pipe(
+      tap(res => {
+        const token = res.token;
+        this.storeToken(token); 
+      })
+    );
   }
 
   login(loginObj: any){

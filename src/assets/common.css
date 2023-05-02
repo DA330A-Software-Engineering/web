@@ -3,22 +3,16 @@
 .outer {
 	height: 100vh;
 	background: #F5F5F5;
-	font-family: 'Montserrat', sans-serif;
 }
 
 .panel-heading{
 	text-align: center;
 	margin-bottom: 10px;
-	
-}
-
-.login-header{
-	font-size: 25px;
 }
 
 #forget{
 	min-width: 100px;
-	font-size: 12px;
+	margin-left: auto;
 	text-decoration: none;
 	cursor: pointer;
 }

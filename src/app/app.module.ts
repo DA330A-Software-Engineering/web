@@ -44,8 +44,6 @@ const appRoute: Routes = [
   {path:'aboutus', component: AboutusComponent, canActivate:[AuthGuard]},
   {path:'login', component: LoginComponent},
   {path:'signup', component: SignupComponent},
-  {path:'', component: LoginComponent},
-  {path:'', component: LoginComponent},
   { path: 'sensors', component: SensorsComponent },
 ]
 

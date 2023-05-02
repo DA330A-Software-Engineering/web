@@ -4,20 +4,9 @@
         <a mat-button routerLink="home" routerLinkActive="active" class="header-link">Home</a>
         <a mat-button routerLink="devices" routerLinkActive="active" class="header-link">Devices</a>
         <a mat-button routerLink="sensors" routerLinkActive="active" class="header-link">Sensors</a>
-        <div class="dropdown">
-          <a mat-button routerLink="groups" routerLinkActive="active" class="header-link">Groups
-          </a>
-          <div class="dropdown-content">
-            <a routerLink="groupslights">Lights</a>
-            <a routerLink="groupsfan">Fan</a>
-            <a routerLink="groupswindows">Windows</a>
-            <a routerLink="groupsspeakers">Speakers</a>
-            <a routerLink="groupsdoor">Doors</a>
-            <a routerLink="groupsdisplay">Display</a>
-          </div>
-        </div>
+        <a mat-button routerLink="groups" routerLinkActive="active" class="header-link">Groups</a>
         <a mat-button routerLink="routines" routerLinkActive="active" class="header-link">Routines</a>
-        <!--<a mat-button routerLink="aboutus" routerLinkActive="active" class="header-link">About us</a>-->
+        <a mat-button routerLink="aboutus" routerLinkActive="active" class="header-link">About us</a>
         <div class="logout-btn">
           <button (click)="logout()"class="btn" mat-stroked-button>Log out</button>
         </div>

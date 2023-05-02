@@ -46,7 +46,7 @@ const appRoute: Routes = [
   {path:'signup', component: SignupComponent},
   {path:'', component: LoginComponent},
   {path:'', component: LoginComponent},
-  { path: 'sensors', component: SensorsComponent },
+  { path: 'sensors', component: SensorsComponent, canActivate:[AuthGuard] },
 ]
 
 @NgModule({

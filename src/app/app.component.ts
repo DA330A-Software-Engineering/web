@@ -13,22 +13,7 @@ export class AppComponent {
   constructor(public authService: AuthService) {}
 
   ngOnInit(): void {
-    this.listenForTabClose();
+    
   }
 
-  listenForTabClose(): void {
-    window.addEventListener('unload', () => {
-      this.authService.signOut();
-    });
-  }
-
-
-  /*
-  @HostListener('window:beforeunload', ['$event'])
-  onBeforeUnload(event: BeforeUnloadEvent) {
-    event.preventDefault();
-    this.authService.signOut();
-    return '';
-  }*/
-  
 }

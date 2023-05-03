@@ -34,7 +34,8 @@ export class CreateEventComponent {
     this.sensors = data.sensors;
     this.userId = data.userId;
 
-    this.initDevices().then(r => {})
+    this.initDevices().then(r => {
+    })
     this.addTriggerForm = this.createTriggerForm(this.deviceTypes[0]);
     this.registerDeviceTypeChange(0);
   }
@@ -60,8 +61,9 @@ export class CreateEventComponent {
 
   createActionFormGroup(deviceType: string): FormGroup {
     return this.formBuilder.group({
-      deviceType: [deviceType, Validators.required],
-      state: this.getStateFormGroup(deviceType),
+      deviceType: ['', Validators.required],
+      deviceId: ['', Validators.required],
+      state: this.getStateFormGroup("null"),
     });
   }
 
@@ -130,4 +132,14 @@ export class CreateEventComponent {
   filteredDevices(): any[] {
     return this.devices.filter(device => this.deviceTypes.includes(device.data.type));
   }
+
+  onDeviceTypeChange(deviceType: string, index: number): void {
+    const device = this.filteredDevices().find(device => device.data.type === deviceType);
+    if (device) {
+      (this.actions.at(index) as FormGroup).get('deviceId')?.setValue(device.id);
+    } else {
+      console.error('Device not found');
+    }
+  }
+
 }

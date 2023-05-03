@@ -2,10 +2,10 @@
   <div class="create-event-content">
     <h2 class="create-event-heading">Create Event</h2>
 
-<!--    INPUT FIELDS-->
+    <!--    INPUT FIELDS-->
     <form [formGroup]="addTriggerForm" (ngSubmit)="onSubmit()" class="add-trigger-form">
 
-<!--      SENSOR-->
+      <!--      SENSOR-->
       <label>
         Sensor:
         <select formControlName="sensor">
@@ -17,16 +17,16 @@
         </span>
       </label>
 
-<!--      NAME-->
+      <!--      NAME-->
       <label>
-          Name:
-          <input formControlName="name" type="text"/>
-          <span class="error-message" *ngIf="addTriggerForm.get('name')?.invalid && addTriggerForm.get('name')?.touched">
+        Name:
+        <input formControlName="name" type="text"/>
+        <span class="error-message" *ngIf="addTriggerForm.get('name')?.invalid && addTriggerForm.get('name')?.touched">
           Name is required
           </span>
       </label>
 
-<!--      DESCRIPTION-->
+      <!--      DESCRIPTION-->
       <label>
         Description:
         <input formControlName="description" type="text"/>
@@ -36,21 +36,21 @@
         </span>
       </label>
 
-<!--      VALUE-->
+      <!--      VALUE-->
       <label>
         Value:
         <input formControlName="value" type="range" min="0" max="1023"/>
         <span>{{addTriggerForm.get('value')?.value}}</span>
       </label>
 
-<!--      RESET VALUE-->
+      <!--      RESET VALUE-->
       <label>
         Reset Value:
         <input formControlName="resetValue" type="range" min="0" max="1023"/>
         <span>{{addTriggerForm.get('resetValue')?.value}}</span>
       </label>
 
-<!--      CONDITION-->
+      <!--      CONDITION-->
       <label>
         Condition:
         <select formControlName="condition">
@@ -63,7 +63,7 @@
         </span>
       </label>
 
-<!--      ENABLED-->
+      <!--      ENABLED-->
       <label>
         Enabled:
         <select formControlName="enabled">
@@ -82,13 +82,16 @@
       <div formArrayName="actions" *ngFor="let action of actions.controls; let i = index">
         <div [formGroupName]="i">
 
-<!--          DEVICE SELECTION-->
+          <!-- DEVICE SELECTION -->
           <label>
             Device Type:
-            <select formControlName="deviceType">
-              <option *ngFor="let device of filteredDevices()" [value]="device.data.type">{{ device.data.name }}</option>
+            <select formControlName="deviceType" (change)="onDeviceTypeChange($any($event.target).value, i)">
+              <option *ngFor="let device of filteredDevices()" [value]="device.data.type">
+                {{ device.data.name }}
+              </option>
             </select>
           </label>
+
 
           <ng-container [ngSwitch]="action.get('deviceType')?.value">
 

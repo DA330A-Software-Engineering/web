@@ -30,7 +30,7 @@ export class SensorService {
       }));
   }
 
-  async addTriggerToProfile(profileId: string, triggerData: any): Promise<void> {
+  async addEventToProfile(profileId: string, triggerData: any): Promise<void> {
     try {
       const triggerCollection: CollectionReference<DocumentData> = collection(doc(this.firestore, 'profiles', profileId), 'triggers');
       await addDoc(triggerCollection, triggerData);

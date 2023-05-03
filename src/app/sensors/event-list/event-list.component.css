@@ -78,3 +78,18 @@
   outline: none !important;
   border: none;
 }
+
+.action-card {
+  background-color: #f0f0f0;
+  padding: 12px;
+  border: 1px solid #7da2c1;
+  border-radius: 8px;
+  margin-bottom: 8px;
+}
+
+.device-name {
+  font-weight: bold;
+  color: #4a4a4a;
+  margin-bottom: 4px;
+}
+

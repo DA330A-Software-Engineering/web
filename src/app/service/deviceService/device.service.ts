@@ -54,9 +54,9 @@ export class DeviceService {
       }));
   }
 
-  /** Get Groups from ID */
-  async getGroupsByProfile(profileId: string): Promise<any> {
-    const groupCollection: CollectionReference<DocumentData> = collection(doc(this.firestore, 'profiles', profileId), 'groups');
+  /** Get Groups from user email */
+  async getGroupsByProfile(userEmail: string): Promise<any> {
+    const groupCollection: CollectionReference<DocumentData> = collection(doc(this.firestore, 'profiles', userEmail), 'groups');
     const groupQuery: QuerySnapshot<DocumentData> = await getDocs(groupCollection);
     const groups: any[] = groupQuery.docs.map((doc) => {
       const data = doc.data();

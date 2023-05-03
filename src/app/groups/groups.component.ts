@@ -11,6 +11,7 @@ import { state } from '@angular/animations';
 import { Type } from '@angular/compiler';
 import {MatDialog} from "@angular/material/dialog";
 import {EditGroupDialogComponent} from "../edit-group-dialog/edit-group-dialog.component";
+import { AuthService } from '../service/auth/auth.service';
 
 @Component({
   selector: 'app-groups',
@@ -26,7 +27,7 @@ export class GroupsComponent implements OnInit{
   groupsDevices$!: Group[];
   deviceTypes!: String[];
   typeMappedDevices$!: Observable< Record<string, Device<DeviceState>[]>>
-  profileId = 'linnea@hotmail.com'; // Profile ID
+  userEmail!: string;
 
   selectedDevices: string[] = [];
   selectedType!: string;
@@ -34,13 +35,17 @@ export class GroupsComponent implements OnInit{
   newGroupDescription!: string;
   groupId!: string;
 
-  constructor(private deviceService: DeviceService, private toastService: NgToastService, public dialog: MatDialog) {}  // Lägg till profileId här senare
+  constructor(private deviceService: DeviceService, private toastService: NgToastService, public dialog: MatDialog, private authService: AuthService) {}
 
   async ngOnInit() {
 
+    // Get user email
+    this.userEmail = this.authService.getEmailFromToken(); // Store email in variable
+
     // Get all devices and groups
     const devices = await this.deviceService.getAllDevices();
-    const groups: Group[] = await this.deviceService.getGroupsByProfile(this.profileId);
+    const groups: Group[] = await this.deviceService.getGroupsByProfile(this.userEmail);
+
     // Update devices for each group
     await Promise.all(groups.map(async (g: Group) => {
       const foundDevices = await Promise.all(g.devices.map(async (id: string) => {
@@ -68,6 +73,7 @@ export class GroupsComponent implements OnInit{
 
 
   }
+
 
   addDevice(deviceId:string) {
     this.selectedDevices.push(deviceId);

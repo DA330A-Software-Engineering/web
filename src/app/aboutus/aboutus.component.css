@@ -1,0 +1,11 @@
+.container{
+    padding-top: 10%;
+    font-family: 'Montserrat', sans-serif;
+    font-size: larger;
+}
+
+img {
+    width: 70%;
+    height: 70%;
+    padding-right: 200px;
+}

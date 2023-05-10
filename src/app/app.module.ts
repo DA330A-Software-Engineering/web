@@ -35,6 +35,7 @@ import { SensorListComponent } from './sensors/sensor-list/sensor-list.component
 import { CreateEventComponent } from './sensors/create-event/create-event.component';
 import { EventListComponent } from './sensors/event-list/event-list.component';
 import {TransformConditionPipe} from "./sensors/event-list/transformConditionPipe";
+import { DefaultComponent } from './default/default.component';
 
 const appRoute: Routes = [
   {path:'home', component: HomeComponent, canActivate:[AuthGuard]},
@@ -42,11 +43,13 @@ const appRoute: Routes = [
   {path:'groups', component: GroupsComponent, canActivate:[AuthGuard]},
   {path:'routines', component: RoutinesComponent, canActivate:[AuthGuard]},
   {path:'aboutus', component: AboutusComponent, canActivate:[AuthGuard]},
+  {path:'navbar', component: NavbarComponent, canActivate:[AuthGuard]},
   {path:'login', component: LoginComponent},
   {path:'signup', component: SignupComponent},
-  {path:'', component: LoginComponent},
-  {path:'', component: LoginComponent},
   { path: 'sensors', component: SensorsComponent, canActivate:[AuthGuard] },
+  {path:'default', component: DefaultComponent},
+  { path: '', component: DefaultComponent }
+
 ]
 
 @NgModule({
@@ -64,7 +67,8 @@ const appRoute: Routes = [
     SensorListComponent,
     CreateEventComponent,
     EventListComponent,
-    TransformConditionPipe
+    TransformConditionPipe,
+    DefaultComponent
 
   ],
   imports: [

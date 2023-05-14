@@ -1,0 +1,100 @@
+<div class="routines-page">
+  <div class="routines-list">
+    <h1 class="bold">Routines</h1>
+    <ul *ngFor="let routine of routines$" class="no-bullet">
+      <li class="routine-item">
+        <h2>{{routine.name}}</h2>
+        <p>{{routine.description}}</p>
+        <span>Executed {{routine.schedule}}<br>Repeatable: {{routine.repeatable}}<br>Enabled: {{routine.enabled}}<br>Actions to be executed:</span>
+        <ul>
+          <li *ngFor="let action of routine.actions">
+            {{deviceNames[action.id]}}
+            <div *ngIf="action.state">
+              <div *ngFor="let key of getActionState(action)">
+                {{key}}: {{action.state[key]}}
+              </div>
+            </div>
+          </li>
+        </ul>
+        <button (click)="removeRoutine(routine.id)" class="remove-routine-button">Remove Routine</button>
+      </li>
+    </ul>
+  </div>
+  <hr class="divider">
+
+  <div class="create-routine">
+    <h2 class="bold">Create New Routine</h2>
+    <div>
+      <label for="routineName">Routine Name:</label>
+      <input [(ngModel)]="newRoutineName" type="text" id="routineName" name="routineName">
+    </div>
+    <div>
+      <label for="routineDescription">Routine Description:</label>
+      <input [(ngModel)]="newRoutineDescription" type="text" id="routineDescription" name="routineDescription">
+    </div>
+    <div>
+      <label for="routineRepeatable">Repeatable:</label>
+      <input [(ngModel)]="newRoutineRepeatable" type="checkbox" id="routineRepeatable" name="routineRepeatable">
+    </div>
+    <div>
+      <label for="routineEnabled">Enabled:</label>
+      <input [(ngModel)]="newRoutineEnabled" type="checkbox" id="routineEnabled" name="routineEnabled">
+    </div>
+    <div class="routineSchedule">
+      <timepicker [(ngModel)]="newRoutineTime" id="routineTime"></timepicker>
+      <select [(ngModel)]="newRoutineDay" class="routineDay">
+        <option value="0">Sunday</option>
+        <option value="1">Monday</option>
+        <option value="2">Tuesday</option>
+        <option value="3">Wednesday</option>
+        <option value="4">Thursday</option>
+        <option value="5">Friday</option>
+        <option value="6">Saturday</option>
+      </select>
+    </div>
+    <div class="availableActions">
+      <ul *ngFor="let device of devices$" class="no-bullet">
+        <li>
+          <span class="bold">{{ device.name }}</span>
+          <ul>
+            <li *ngFor="let state of device.state | keyvalue">
+              <ng-container [ngSwitch]="state.key">
+                <ng-container *ngSwitchCase="'tune'">
+                  <label for="inputTune" class="new-action-label">{{ state.key }}</label>
+                  <input type="text" id="inputTune" #inputTune>
+                  <button (click)="addRoutineAction(device.id, device.type, state.key, inputTune.value)" class="new-action-button">Add Action</button>
+                </ng-container>
+                <ng-container *ngSwitchCase="'text'">
+                  <label for="inputText" class="new-action-label">{{ state.key }}</label>
+                  <input type="text" id="inputText" #inputText>
+                  <button (click)="addRoutineAction(device.id, device.type, state.key, inputText.value)" class="new-action-button">Add Action</button>
+                </ng-container>
+                <ng-container *ngSwitchDefault>
+                  <label for="inputCheckBox" class="new-action-label">{{ state.key }}</label>
+                  <input type="checkbox" id="inputCheckBox" #inputCheckBox>
+                  <button (click)="addRoutineAction(device.id, device.type, state.key, inputCheckBox.checked)" class="new-action-button">Add Action</button>
+                </ng-container>
+              </ng-container>
+            </li>
+          </ul>
+        </li>
+      </ul>
+    </div>
+    <div>
+      <br>
+      <h3>Selected Actions</h3>
+      <ul class="no-bullet">
+        <li *ngFor="let action of routineActions" class="action-item">
+          <span>{{deviceNames[action.id]}}</span>
+          <div *ngIf="action.state">
+            <div *ngFor="let key of getActionState(action)">
+              {{key}}: {{action.state[key]}}
+            </div>
+          </div>
+          <button (click)="removeRoutineAction(action)" class="remove-action-button">Remove Action</button>
+        </li>
+      </ul>
+    </div>
+    <button (click)="submitRoutine()" type="submit" class="create-routine-button">Create new routine</button>
+  </div>
+</div>

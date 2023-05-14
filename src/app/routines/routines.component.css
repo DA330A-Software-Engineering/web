@@ -1,0 +1,102 @@
+/*
+light blue: #AECCE4
+light grey: #C5C5C5
+red: #F84434
+*/
+
+
+.routines-page {
+  padding-top: 200px;
+  width: 400px;
+  margin: auto;
+}
+
+.no-bullet {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.routine-item {
+  background-color: #AECCE4;
+  padding-left: 30px;
+  padding-bottom: 10px;
+  border-radius: 30px;
+}
+
+label {
+  padding-bottom: 10px;
+  display: inline-block;
+  width: 150px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.new-action-label {
+  width: 50px;
+}
+
+.new-action-button {
+  background-color: #AECCE4;
+  height: 30px;
+  margin-left: 10px;
+}
+
+.remove-action-button {
+  background-color: #F84434;
+  height: 30px;
+}
+
+.action-item {
+  background-color: #AECCE4;
+  border-radius: 20px;
+  padding-left: 20px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  margin-bottom: 10px;
+}
+
+.create-routine-button {
+  background-color: #AECCE4;
+  height: 30px;
+}
+
+.remove-routine-button {
+  background-color: #F84434;
+  height: 30px;
+}
+
+button {
+  box-shadow: 0 2px 5px 0 rgba(0, 0, 0, 0.26);
+  font-weight: 500;
+  color: white;
+  padding: 0 6px 0 6px;
+  margin: 6px 8px 6px 8px;
+  min-width: 88px;
+  border-radius: 4px;
+  font-size: 14px;
+  text-align: center;
+  text-transform: uppercase;
+  text-decoration:none;
+  border: none;
+  outline: none;
+}
+
+button:hover {
+  filter: brightness(0.9);
+  cursor: pointer;
+}
+
+button:active {
+  transform: scale(0.95)
+}
+
+.availableActions {
+  padding-top: 20px;
+}
+
+.routineSchedule {
+  display: flex;
+  align-items: center;
+}

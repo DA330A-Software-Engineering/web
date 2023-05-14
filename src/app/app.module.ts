@@ -36,6 +36,7 @@ import { CreateEventComponent } from './sensors/create-event/create-event.compon
 import { EventListComponent } from './sensors/event-list/event-list.component';
 import {TransformConditionPipe} from "./sensors/event-list/transformConditionPipe";
 import { DefaultComponent } from './default/default.component';
+import { TimepickerModule } from 'ngx-bootstrap/timepicker';
 
 const appRoute: Routes = [
   {path:'home', component: HomeComponent, canActivate:[AuthGuard]},
@@ -91,6 +92,7 @@ const appRoute: Routes = [
     ReactiveFormsModule,
     NgToastModule,
     MatDialogModule,
+    TimepickerModule,
   ],
   providers: [{
     provide: HTTP_INTERCEPTORS,

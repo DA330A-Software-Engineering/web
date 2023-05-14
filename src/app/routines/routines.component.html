@@ -1,21 +1,25 @@
-<div class="routines">
-  <h2>Routines</h2>
-  <ul *ngFor="let routine of routines$">
-    <li class="routine-item">
-      <span>{{routine.name}} - {{routine.description}} - {{routine.schedule}}</span>
-      <ul>
-        <li *ngFor="let action of routine.actions">
-          {{deviceNames[action.id]}}
-          <div *ngIf="action.state">
-            <div *ngFor="let key of getActionState(action)">
-              {{key}}: {{action.state[key]}}
+<div class="routines-page">
+  <div class="routines-list">
+    <h1>Routines</h1>
+    <ul *ngFor="let routine of routines$" class="no-bullet">
+      <li class="routine-item">
+        <h2>{{routine.name}}</h2>
+        <span>{{routine.schedule}}<br>{{routine.description}}<br>Actions to be executed:</span>
+        <ul>
+          <li *ngFor="let action of routine.actions">
+            {{deviceNames[action.id]}}
+            <div *ngIf="action.state">
+              <div *ngFor="let key of getActionState(action)">
+                {{key}}: {{action.state[key]}}
+              </div>
             </div>
-          </div>
-        </li>
-      </ul>
-      <button (click)="removeRoutine(routine.id)">Remove Routine</button>
-    </li>
-  </ul>
+          </li>
+        </ul>
+        <button mat-raised-button color="warn" (click)="removeRoutine(routine.id)">Remove Routine</button>
+      </li>
+    </ul>
+  </div>
+  <hr class="divider">
 
   <div class="create-routine">
     <h2>Create Routine</h2>
@@ -39,51 +43,40 @@
       <label for="routineEnabled">Routine Enabled:</label>
       <input [(ngModel)]="newRoutineEnabled" type="checkbox" id="routineEnabled" name="routineEnabled">
     </div>
-    <!-- <label for="deviceSelector">Add a device to routine</label>
-    <select *ngIf="(devices$ | async) as devices" [(ngModel)]="selectedDevice" name="deviceSelector" id="deviceSelector"
-        (change)="addDeviceToRoutine(selectedDevice)" #deviceSelector>
-      <option *ngFor="let device of devices" [ngValue]="device">{{device.name}}</option>
-    </select> -->
     <div>
-      <ul *ngIf="(devices$ | async) as devices">
+      <ul *ngIf="(devices$ | async) as devices" class="no-bullet">
         <li *ngFor="let device of devices">
-          <span>{{ device.name }}</span>
+          <span class="bold">{{ device.name }}</span>
           <ul>
             <li *ngFor="let state of device.state | keyvalue">
               <ng-container [ngSwitch]="state.key">
                 <ng-container *ngSwitchCase="'tune'">
-                  <label>
-                    {{ state.key }}
-                    <input type="text" #inputTune>
-                  </label>
-                  <button (click)="addRoutineAction(device.id, device.type, state.key, inputTune.value)">Add Action</button>
+                  <label for="inputTune" class="new-action-label">{{ state.key }}</label>
+                  <input type="text" id="inputTune" #inputTune>
+                  <button mat-raised-button (click)="addRoutineAction(device.id, device.type, state.key, inputTune.value)" class="new-action-button">Add Action</button>
                 </ng-container>
                 <ng-container *ngSwitchCase="'text'">
-                  <label>
-                    {{ state.key }}:
-                    <input type="text" #inputText>
-                  </label>
-                  <button (click)="addRoutineAction(device.id, device.type, state.key, inputText.value)">Add Action</button>
+                  <label for="inputText" class="new-action-label">{{ state.key }}</label>
+                  <input type="text" id="inputText" #inputText>
+                  <button mat-raised-button (click)="addRoutineAction(device.id, device.type, state.key, inputText.value)" class="new-action-button">Add Action</button>
                 </ng-container>
                 <ng-container *ngSwitchDefault>
-                  <label>
-                    {{ state.key }}:
-                    <input type="checkbox" #inputCheckBox>
-                  </label>
-                  <button (click)="addRoutineAction(device.id, device.type, state.key, inputCheckBox.checked)">Add Action</button>
+                  <label for="inputCheckBox" class="new-action-label">{{ state.key }}</label>
+                  <input type="checkbox" id="inputCheckBox" #inputCheckBox>
+                  <button mat-raised-button (click)="addRoutineAction(device.id, device.type, state.key, inputCheckBox.checked)" class="new-action-button">Add Action</button>
                 </ng-container>
               </ng-container>
             </li>
           </ul>
         </li>
       </ul>
-      <button (click)="submitRoutine(newRoutineName, newRoutineDescription, newRoutineSchedule, newRoutineRepeatable, newRoutineEnabled)" type="submit">Create</button>
     </div>
     <div>
+      <br>
       <h3>Selected Actions</h3>
-      <ul>
-        <li *ngFor="let action of routineActions">
-          <p>{{deviceNames[action.id]}}</p>
+      <ul class="no-bullet">
+        <li *ngFor="let action of routineActions" class="action-item">
+          <span>{{deviceNames[action.id]}}</span>
           <div *ngIf="action.state">
             <div *ngFor="let key of getActionState(action)">
               {{key}}: {{action.state[key]}}
@@ -93,5 +86,6 @@
         </li>
       </ul>
     </div>
+    <button mat-raised-button (click)="submitRoutine(newRoutineName, newRoutineDescription, newRoutineSchedule, newRoutineRepeatable, newRoutineEnabled)" type="submit" class="create-routine-button">Create new routine</button>
   </div>
 </div>

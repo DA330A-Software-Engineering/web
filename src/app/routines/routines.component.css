@@ -1,4 +1,56 @@
-.routines {
+/*
+light blue: #AECCE4
+light grey: #C5C5C5
+*/
+
+
+.routines-page {
   padding-top: 200px;
-  padding-left: 700px;
+  width: 400px;
+  margin: auto;
+}
+
+.no-bullet {
+  list-style-type: none;
+  padding-left: 0;
+}
+
+.routine-item {
+  background-color: #AECCE4;
+  padding-left: 30px;
+  padding-bottom: 10px;
+  border-radius: 30px;
+}
+
+label {
+  padding-bottom: 10px;
+  display: inline-block;
+  width: 150px;
+}
+
+.bold {
+  font-weight: bold;
+}
+
+.new-action-label {
+  width: 50px;
+}
+
+.new-action-button {
+  background-color: #AECCE4;
+  height: 30px;
+  margin-left: 10px;
+}
+
+.action-item {
+  background-color: #AECCE4;
+  border-radius: 20px;
+  padding-left: 20px;
+  padding-bottom: 10px;
+  padding-top: 10px;
+  margin-bottom: 10px;
+}
+
+.create-routine-button {
+  background-color: #AECCE4;
 }

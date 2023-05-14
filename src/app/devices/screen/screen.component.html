@@ -6,7 +6,7 @@
     <div class="button-container">
         <button mat-raised-button [ngClass]="getButtonColor(device.state.on)" (click)="screenToggleOn()" class="btn">{{getOnButtonText()}}</button>
         <div class="input-container">
-            <input type="text" [(ngModel)]="inputValue" (ngModelChange)="storeInputValue()" name="usertext" class="input">
+            <input type="text" [(ngModel)]="inputValue" (ngModelChange)="storeInputValue()" name="usertext" class="input" maxlength="16">
             <br>
             <button mat-raised-button (click)="screenToggleText()" class="sub-btn">Submit</button>
         </div>

@@ -1,5 +1,7 @@
 
-
+.show-windows{
+  padding-right: 80px;
+}
 .window-image {
     width: 70px; 
     height: auto; 

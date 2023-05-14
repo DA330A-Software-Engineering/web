@@ -1,9 +1,9 @@
-import { Injectable } from '@angular/core';
-import { HttpClient } from '@angular/common/http';
-import { Observable } from 'rxjs';
+import {HostListener, Injectable} from '@angular/core';
+import {HttpClient} from '@angular/common/http';
+import {Observable, tap} from 'rxjs';
 import Constants from 'src/app/constants';
-import { Router } from '@angular/router';
-import { JwtHelperService } from '@auth0/angular-jwt';
+import {Router} from '@angular/router';
+import {JwtHelperService} from '@auth0/angular-jwt';
 
 @Injectable({
   providedIn: 'root'
@@ -12,50 +12,56 @@ import { JwtHelperService } from '@auth0/angular-jwt';
 
 export class AuthService {
 
-  //private baseUrl = `http://${Constants.ip}:${Constants.port}/`; 
-  private restUrl = `http://localhost:3000/users/`; 
+  //private baseUrl = `http://${Constants.ip}:${Constants.port}/`;
+  private restUrl = `http://localhost:3000/users/`;
 
-  private userPayload:any;
+  private userPayload: any;
 
-  constructor(private http: HttpClient, private router: Router ) {
-    this.userPayload = this.decodedToken();
+  constructor(private http: HttpClient, private router: Router) {
   }
 
-  signup(userObj: any){
+  signup(userObj: any) {
     return this.http.post<any>(`${this.restUrl}signin`, userObj)
+      .pipe(
+        tap(res => {
+          const token = res.token;
+          this.storeToken(token);
+        })
+      );
   }
 
-  login(loginObj: any){
+  login(loginObj: any) {
     return this.http.post<any>(`${this.restUrl}login`, loginObj)
   }
 
-  storeToken(tokenValue: string){
+  storeToken(tokenValue: string) {
     localStorage.setItem('token', tokenValue)
   }
 
-  getToken(){
+  getToken() {
     return localStorage.getItem('token')
   }
 
-  isLoggedIn():boolean{
+  isLoggedIn(): boolean {
     return !!localStorage.getItem('token')
   }
-  
-  signOut(){
+
+  signOut() {
     localStorage.clear();
     //localStorage.removeItem('token');
     this.router.navigate(['login']);
   }
 
-  decodedToken(){
+  decodedToken() {
     const jwtHelper = new JwtHelperService();
     const token = this.getToken()!;
     return jwtHelper.decodeToken(token);
   }
 
-  getEmailFromToken(){
-    if(this.userPayload){
-      return this.userPayload.email;
+  getEmailFromToken() {
+    const userPayload = this.decodedToken();
+    if (userPayload) {
+      return userPayload.email;
     }
-}
+  }
 }

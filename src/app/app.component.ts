@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { AuthService } from './service/auth/auth.service';
 
 
@@ -9,6 +9,11 @@ import { AuthService } from './service/auth/auth.service';
 })
 export class AppComponent {
   title = 'angular-web';
+
   constructor(public authService: AuthService) {}
-  
+
+  ngOnInit(): void {
+    
+  }
+
 }

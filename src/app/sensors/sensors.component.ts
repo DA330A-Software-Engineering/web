@@ -1,15 +1,19 @@
-import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
-import { FormBuilder } from '@angular/forms';
-import { DeviceService } from '../service/deviceService/device.service';
-import { SensorService } from "../service/sensor/sensor.service";
-import { AuthService } from "../service/auth/auth.service";
+import {ChangeDetectorRef, Component, OnDestroy, OnInit} from '@angular/core';
+import {FormBuilder} from '@angular/forms';
+import {DeviceService} from '../service/deviceService/device.service';
+import {SensorService} from "../service/sensor/sensor.service";
+import {AuthService} from "../service/auth/auth.service";
+import {Subject} from 'rxjs';
+import {takeUntil} from 'rxjs/operators';
 
 @Component({
   selector: 'app-sensors',
   templateUrl: './sensors.component.html',
   styleUrls: ['./sensors.component.css']
 })
-export class SensorsComponent implements OnInit {
+export class SensorsComponent implements OnInit, OnDestroy {
+  private onDestroy$ = new Subject<void>();
+
   userId: string;
   eventTriggers: any[] = [];
   sensors: any[] = [];
@@ -24,19 +28,28 @@ export class SensorsComponent implements OnInit {
     this.userId = this.getUserIdFromAuthService();
   }
 
-  async ngOnInit(): Promise<void> {
-    await this.fetchSensors();
+  ngOnInit(): void {
+    this.fetchSensors();
     this.listenToTriggers();
   }
+
+  ngOnDestroy(): void {
+    this.onDestroy$.next();
+    this.onDestroy$.complete();
+  }
+
 
   private getUserIdFromAuthService(): string {
     return this.authService.getEmailFromToken();
   }
 
-  private async fetchSensors(): Promise<void> {
-    const allDevices = await this.deviceService.getAllDevices();
-    this.sensors = this.filterSensors(allDevices);
-    this.cdr.detectChanges();
+  private fetchSensors(): void {
+    this.deviceService.sensors$
+      .pipe(takeUntil(this.onDestroy$))
+      .subscribe((sensors) => {
+        this.sensors = this.filterSensors(sensors);
+        this.cdr.detectChanges();
+      });
   }
 
   private filterSensors(devices: any[]): any[] {

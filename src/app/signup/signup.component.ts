@@ -1,28 +1,27 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { AuthService } from '../service/auth/auth.service';
 import { Router } from '@angular/router';
 import { NgToastService } from 'ng-angular-popup';
+import { AuthService } from '../service/auth/auth.service';
 
 @Component({
-  selector: 'app-login',
-  templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  selector: 'app-signup',
+  templateUrl: './signup.component.html',
+  styleUrls: ['./signup.component.css']
 })
-export class LoginComponent implements OnInit {
+export class SignupComponent implements OnInit{
   type: string = "password";
   isText: boolean = false;
   eyeIcon: string = "fa-eye-slash";
-  loginForm!: FormGroup;
+  signupForm!: FormGroup;
 
   constructor(private fb: FormBuilder, private auth: AuthService, private router: Router, private toast: NgToastService){}
-
   ngOnInit(): void{
-    this.loginForm = this.fb.group({
+    this.signupForm = this.fb.group({
+      name: ['', Validators.required],
       email: ['', Validators.required],
       password: ['', Validators.required]
     })
-    
   }
 
   hideShowPassword(){
@@ -31,25 +30,23 @@ export class LoginComponent implements OnInit {
     this.isText ? this.type = "text" : this.type = "password"
   }
 
-  onLogin(){
-    if(this.loginForm.valid){
-      this.auth.login(this.loginForm.value)
+  onSignup(){
+    if(this.signupForm.valid){
+      this.auth.signup(this.signupForm.value)
       .subscribe((res) => {
-        this.loginForm.reset();
-        this.auth.storeToken(res.token);
+        console.log('sent');
+        this.signupForm.reset();
         this.toast.success({detail: "SUCCESS", summary:res.message, duration:5000})
         this.router.navigate(['devices'])
       }, (error) => {
         console.error(error);
-        this.toast.error({detail: "ERROR", summary:"Login failed.", duration:5000})
+        this.toast.error({detail: "ERROR", summary:"Sign up failed", duration:5000})
       });
     } else {
-      this.validateAllFields(this.loginForm)
+      this.validateAllFields(this.signupForm)
       this.toast.error({detail: "ERROR", summary:"Form is not valid.", duration:5000})
-      
     }
   }
-
 
   private validateAllFields(formGroup: FormGroup){
     Object.keys(formGroup.controls).forEach(field =>{
@@ -61,5 +58,5 @@ export class LoginComponent implements OnInit {
       }
     })
   }
-  
+
 }

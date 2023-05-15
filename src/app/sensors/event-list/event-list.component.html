@@ -15,7 +15,7 @@
       <div class="actions">
         <h4 class="actions-heading">Actions</h4>
         <div *ngFor="let action of eventTrigger.data.actions" class="action-card">
-          <p class="device-name">{{ getDeviceNameById(action.deviceId) }}</p>
+          <p class="device-name">{{ getDeviceNameById(action.id) }}</p>
           <ng-container *ngFor="let prop of action.state | keyvalue">
             <p *ngIf="prop.key === 'state'">
               {{ prop.value ? 'on' : 'off' }}

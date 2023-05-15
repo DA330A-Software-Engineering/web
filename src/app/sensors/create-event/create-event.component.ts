@@ -1,11 +1,11 @@
-import { Component, Inject } from '@angular/core';
-import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
-import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
+import {Component, Inject} from '@angular/core';
+import {FormBuilder, FormGroup, FormArray, Validators} from '@angular/forms';
+import {MatDialogRef, MAT_DIALOG_DATA} from "@angular/material/dialog";
 
-import { DeviceTypes } from "../../models/deviceType";
-import { SensorService } from "../../service/sensor/sensor.service";
-import { DeviceService } from "../../service/deviceService/device.service";
-import { EventFormFactory } from "./event-form-factory";
+import {DeviceTypes} from "../../models/deviceType";
+import {SensorService} from "../../service/sensor/sensor.service";
+import {DeviceService} from "../../service/deviceService/device.service";
+import {EventFormFactory} from "./event-form-factory";
 
 @Component({
   selector: 'app-create-event',
@@ -56,7 +56,11 @@ export class CreateEventComponent {
   }
 
   async onSubmit(): Promise<void> {
-    const formValue = {...this.addTriggerForm.value};
+    if (this.addTriggerForm.invalid) {
+      return;
+    }
+
+    const formValue = this.addTriggerForm.value;
     formValue.condition = formValue.condition === 'greater' ? 'grt' : 'lsr';
 
     if (!this.userId) {
@@ -65,7 +69,25 @@ export class CreateEventComponent {
     }
 
     try {
-      await this.sensorService.addEventToProfile(this.userId, formValue);
+      // Map actions to required format
+      const mappedActions = formValue.actions.map((action: any) => {
+        return {
+          id: action.deviceId,
+          type: action.deviceType,
+          state: {
+            ...action.state,
+          },
+        };
+      });
+
+      const dataToSubmit = {
+        ...formValue,
+        actions: mappedActions,
+        deviceId: formValue.sensor,
+      };
+      delete dataToSubmit.sensor;  // remove sensor field
+
+      await this.sensorService.addEventToProfile(this.userId, dataToSubmit);
       this.dialogRef.close();
     } catch (error) {
       console.error('Error saving trigger to the database:', error);

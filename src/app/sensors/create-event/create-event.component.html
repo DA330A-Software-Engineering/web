@@ -9,7 +9,7 @@
       <label>
         Sensor:
         <select formControlName="sensor">
-          <option *ngFor="let sensor of sensors" [value]="sensor.data.name">{{ sensor.data.name }}</option>
+          <option *ngFor="let sensor of sensors" [value]="sensor.data.id">{{ sensor.data.name }}</option>
         </select>
         <span class="error-message"
               *ngIf="addTriggerForm.get('sensor')?.invalid && addTriggerForm.get('sensor')?.touched">

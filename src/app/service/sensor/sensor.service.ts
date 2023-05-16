@@ -1,22 +1,21 @@
 import {Injectable} from '@angular/core';
-import {Observable} from 'rxjs';
-import {map} from 'rxjs/operators';
+import {map, Observable} from 'rxjs';
 import {
   Firestore,
   collection,
   doc,
-  addDoc,
   CollectionReference,
   DocumentData,
-  deleteDoc,
   collectionData
 } from '@angular/fire/firestore';
+import {HttpClient} from "@angular/common/http";
+import Constants from "../../constants";
 
 @Injectable({
   providedIn: 'root'
 })
 export class SensorService {
-  constructor(private firestore: Firestore) {
+  constructor(private http: HttpClient, private firestore: Firestore) {
   }
 
   listenToTriggersByProfile(profileId: string): Observable<any[]> {
@@ -30,23 +29,13 @@ export class SensorService {
       }));
   }
 
-  async addEventToProfile(profileId: string, triggerData: any): Promise<void> {
-    try {
-      const triggerCollection: CollectionReference<DocumentData> = collection(doc(this.firestore, 'profiles', profileId), 'triggers');
-      await addDoc(triggerCollection, triggerData);
-
-    } catch (error) {
-      console.error('Error adding trigger to profile:', error);
-    }
+  createEvent(profileId: string, triggerData: any): Observable<any> {
+    const url = `http://${Constants.ip}:${Constants.port}/triggers`;
+    return this.http.post(url, triggerData);
   }
 
-  async deleteTrigger(profileId: string, triggerId: string): Promise<void> {
-    try {
-      const triggerDoc = doc(this.firestore, 'profiles', profileId, 'triggers', triggerId);
-      await deleteDoc(triggerDoc);
-
-    } catch (error) {
-      console.error('Error deleting trigger:', error);
-    }
+  deleteEvent(triggerId: string): Observable<any> {
+    const url = `http://${Constants.ip}:${Constants.port}/triggers/${triggerId}`;
+    return this.http.delete(url)
   }
 }

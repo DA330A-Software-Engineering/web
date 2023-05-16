@@ -85,10 +85,12 @@ export class CreateEventComponent {
         actions: mappedActions,
         deviceId: formValue.sensor,
       };
-      delete dataToSubmit.sensor;  // remove sensor field
+      delete dataToSubmit.sensor;
 
-      await this.sensorService.addEventToProfile(this.userId, dataToSubmit);
-      this.dialogRef.close();
+      this.sensorService.createEvent(this.userId, dataToSubmit)
+        .subscribe(
+          _ => { this.dialogRef.close(); }
+        );
     } catch (error) {
       console.error('Error saving trigger to the database:', error);
     }

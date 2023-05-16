@@ -43,16 +43,13 @@ export class EventListComponent {
     return device ? device.data.name : 'Unknown Device';
   }
 
-  async removeTrigger(triggerId: string): Promise<void> {
+  removeEvent(eventId: string) {
     if (!this.userId) {
       console.error('Profile ID not found in token');
       return;
     }
-
-    try {
-      await this.sensorService.deleteTrigger(this.userId, triggerId);
-    } catch (error) {
-      console.error('Error removing trigger:', error);
-    }
+    this.sensorService.deleteEvent(eventId).subscribe(_ => {
+    })
   }
+
 }

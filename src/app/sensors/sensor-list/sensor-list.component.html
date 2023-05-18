@@ -4,7 +4,7 @@
   <div class="sensor-list">
     <div class="sensor-box" *ngFor="let sensor of sensors">
       <div class="sensor-name">{{ sensor.data.name }}</div>
-      <div class="sensor-value">{{ sensor.data['sensorValue']?.value }}</div>
+      <div class="sensor-value">{{ sensor.data['sensorValue'] }}</div>
     </div>
   </div>
 

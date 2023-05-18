@@ -1,11 +1,11 @@
-import {Component, Inject} from '@angular/core';
-import {FormBuilder, FormGroup, FormArray, Validators} from '@angular/forms';
-import {MatDialogRef, MAT_DIALOG_DATA} from "@angular/material/dialog";
+import { Component, Inject } from '@angular/core';
+import { FormBuilder, FormGroup, FormArray, Validators } from '@angular/forms';
+import { MatDialogRef, MAT_DIALOG_DATA } from "@angular/material/dialog";
 
-import {DeviceTypes} from "../../models/deviceType";
-import {SensorService} from "../../service/sensor/sensor.service";
-import {DeviceService} from "../../service/deviceService/device.service";
-import {EventFormFactory} from "./event-form-factory";
+import { DeviceTypes } from "../../models/deviceType";
+import { SensorService } from "../../service/sensor/sensor.service";
+import { DeviceService } from "../../service/deviceService/device.service";
+import { EventFormFactory } from "./event-form-factory";
 
 @Component({
   selector: 'app-create-event',
@@ -84,6 +84,7 @@ export class CreateEventComponent {
         ...formValue,
         actions: mappedActions,
         deviceId: formValue.sensor,
+
       };
       delete dataToSubmit.sensor;
 

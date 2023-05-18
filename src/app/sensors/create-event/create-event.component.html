@@ -12,41 +12,41 @@
           <option *ngFor="let sensor of sensors" [value]="sensor.data.id">{{ sensor.data.name }}</option>
         </select>
         <span class="error-message"
-              *ngIf="addTriggerForm.get('sensor')?.invalid && addTriggerForm.get('sensor')?.touched">
-        Sensor is required
+          *ngIf="addTriggerForm.get('sensor')?.invalid && addTriggerForm.get('sensor')?.touched">
+          Sensor is required
         </span>
       </label>
 
       <!--      NAME-->
       <label>
         Name:
-        <input formControlName="name" type="text"/>
+        <input formControlName="name" type="text" />
         <span class="error-message" *ngIf="addTriggerForm.get('name')?.invalid && addTriggerForm.get('name')?.touched">
           Name is required
-          </span>
+        </span>
       </label>
 
       <!--      DESCRIPTION-->
       <label>
         Description:
-        <input formControlName="description" type="text"/>
+        <input formControlName="description" type="text" />
         <span class="error-message"
-              *ngIf="addTriggerForm.get('description')?.invalid && addTriggerForm.get('description')?.touched">
-        Description is required
+          *ngIf="addTriggerForm.get('description')?.invalid && addTriggerForm.get('description')?.touched">
+          Description is required
         </span>
       </label>
 
       <!--      VALUE-->
       <label>
         Value:
-        <input formControlName="value" type="range" min="0" max="1023"/>
+        <input formControlName="value" type="range" min="0" max="1023" />
         <span>{{addTriggerForm.get('value')?.value}}</span>
       </label>
 
       <!--      RESET VALUE-->
       <label>
         Reset Value:
-        <input formControlName="resetValue" type="range" min="0" max="1023"/>
+        <input formControlName="resetValue" type="range" min="0" max="1023" />
         <span>{{addTriggerForm.get('resetValue')?.value}}</span>
       </label>
 
@@ -58,8 +58,8 @@
           <option value="lesser">Lesser</option>
         </select>
         <span class="error-message"
-              *ngIf="addTriggerForm.get('condition')?.invalid && addTriggerForm.get('condition')?.touched">
-        Condition is required
+          *ngIf="addTriggerForm.get('condition')?.invalid && addTriggerForm.get('condition')?.touched">
+          Condition is required
         </span>
       </label>
 
@@ -67,12 +67,12 @@
       <label>
         Enabled:
         <select formControlName="enabled">
-          <option value="true">Enabled</option>
-          <option value="false">Disabled</option>
+          <option [ngValue]="true">Enabled</option>
+          <option [ngValue]="false">Disabled</option>
         </select>
         <span class="error-message"
-              *ngIf="addTriggerForm.get('enabled')?.invalid && addTriggerForm.get('enabled')?.touched">
-        Enabled is required
+          *ngIf="addTriggerForm.get('enabled')?.invalid && addTriggerForm.get('enabled')?.touched">
+          Enabled is required
         </span>
       </label>
 
@@ -99,9 +99,9 @@
             <ng-container *ngSwitchCase="'toggle'" formGroupName="state">
               <label>
                 State:
-                <select formControlName="state">
-                  <option [value]="true">On</option>
-                  <option [value]="false">Off</option>
+                <select formControlName="on">
+                  <option [ngValue]="true">On</option>
+                  <option [ngValue]="false">Off</option>
                 </select>
               </label>
             </ng-container>
@@ -111,15 +111,15 @@
               <label>
                 Locked:
                 <select formControlName="locked">
-                  <option [value]="true">Locked</option>
-                  <option [value]="false">Unlocked</option>
+                  <option [ngValue]="true">Locked</option>
+                  <option [ngValue]="false">Unlocked</option>
                 </select>
               </label>
               <label>
                 Open:
                 <select formControlName="open">
-                  <option [value]="true">Open</option>
-                  <option [value]="false">Closed</option>
+                  <option [ngValue]="true">Open</option>
+                  <option [ngValue]="false">Closed</option>
                 </select>
               </label>
             </ng-container>
@@ -129,15 +129,15 @@
               <label>
                 State:
                 <select formControlName="on">
-                  <option [value]="true">On</option>
-                  <option [value]="false">Off</option>
+                  <option [ngValue]="true">On</option>
+                  <option [ngValue]="false">Off</option>
                 </select>
               </label>
               <label>
                 Reverse:
                 <select formControlName="reverse">
-                  <option [value]="true">Reverse</option>
-                  <option [value]="false">Forward</option>
+                  <option [ngValue]="true">Reverse</option>
+                  <option [ngValue]="false">Forward</option>
                 </select>
               </label>
             </ng-container>
@@ -147,13 +147,13 @@
               <label>
                 State:
                 <select formControlName="on">
-                  <option [value]="true">On</option>
-                  <option [value]="false">Off</option>
+                  <option [ngValue]="true">On</option>
+                  <option [ngValue]="false">Off</option>
                 </select>
               </label>
               <label>
                 Text:
-                <input formControlName="text" type="text" maxlength="16"/>
+                <input formControlName="text" type="text" maxlength="16" />
               </label>
             </ng-container>
 

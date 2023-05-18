@@ -32,7 +32,7 @@ export class EventFormFactory {
 
   getStateFormGroup(deviceType: string): FormGroup {
     const stateFormGroups: { [key: string]: FormGroup } = {
-      toggle: this.formBuilder.group({state: [false, Validators.required]}),
+      toggle: this.formBuilder.group({ on: [false, Validators.required] }),
 
       openLock: this.formBuilder.group({
         locked: [false, Validators.required],
@@ -49,7 +49,7 @@ export class EventFormFactory {
         text: ['', [Validators.required, Validators.maxLength(16)]],
       }),
 
-      buzzer: this.formBuilder.group({tune: ['alarm', Validators.required]}),
+      buzzer: this.formBuilder.group({ tune: ['alarm', Validators.required] }),
     };
 
     return stateFormGroups[deviceType] || this.formBuilder.group({});

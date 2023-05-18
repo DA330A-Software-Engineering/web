@@ -1,5 +1,5 @@
-import {Injectable} from '@angular/core';
-import {map, Observable} from 'rxjs';
+import { Injectable } from '@angular/core';
+import { map, Observable } from 'rxjs';
 import {
   Firestore,
   collection,
@@ -8,7 +8,7 @@ import {
   DocumentData,
   collectionData
 } from '@angular/fire/firestore';
-import {HttpClient} from "@angular/common/http";
+import { HttpClient } from "@angular/common/http";
 import Constants from "../../constants";
 
 @Injectable({
@@ -21,10 +21,10 @@ export class SensorService {
   listenToTriggersByProfile(profileId: string): Observable<any[]> {
     const triggerCollection: CollectionReference<DocumentData> = collection(doc(this.firestore, 'profiles', profileId), 'triggers');
 
-    return collectionData(triggerCollection, {idField: 'id'})
+    return collectionData(triggerCollection, { idField: 'id' })
       .pipe(map(collection => {
         return collection.map(triggers => {
-          return {id: triggers['id'], data: triggers}
+          return { id: triggers['id'], data: triggers }
         });
       }));
   }

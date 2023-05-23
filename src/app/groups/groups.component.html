@@ -1,34 +1,27 @@
 <div class="container">
-<div class="groups"></div>
-<!--<button mat-icon-button class="add-button">
-  <mat-icon>add</mat-icon>
-  <span class="add-text">Create group</span>
-</button>
-<button mat-icon-button class="remove-button">
-  <mat-icon>remove</mat-icon>
-  <span class="remove-text">Delete group</span>
-</button> -->
-<h2>Groups</h2>
+<div class="groups" style="margin-bottom: 60px;">
+<h2 style="margin-bottom: 50px;">Groups</h2>
 <ul *ngFor="let group of groupsDevices$">
-  <li class="group-item">
-    <span>{{group.name}} - {{group.description}}</span>
+  <li class="group-item" style="margin-bottom: 60px;">
+    <span class="group-info">{{group.name}} - {{group.description}}</span>
     <ul>
-      <li *ngFor="let device of group.devices" class="no-bullet">{{device.data.name}} - {{device.data.type}} - {{device.data.state.on}} - {{device.data.state.locked}} - {{device.data.state.open}} - {{device.data.state.reverse}} - {{device.data.state.tune}} - {{device.data.state.text}}</li>
+      <li *ngFor="let device of group.devices" class="no-bullet" style="margin-bottom: 10px; margin-top: 10px;">{{device.data.name}} - {{device.data.type}} - {{device.data.state.on}} - {{device.data.state.locked}} - {{device.data.state.open}} - {{device.data.state.reverse}} - {{device.data.state.tune}} - {{device.data.state.text}}</li>
       <button class="delete-group-btn" (click)="deleteGroup(group.id)">Delete Group</button>
-      <button class="toggle-state-btn" (click)="toggleGroupState(group)">Toggle On/Off</button>
+      <button class="toggle-state-btn" (click)="toggleGroupState(group)">On/Off</button>
       <button class="edit-group-btn" (click)="openEditGroupDialog(group)">Edit Group</button>
     </ul>
   </li>
 </ul>
+</div>
 
-<div class="create-group">
-  <h3>Create Group</h3>
+<div class="create-group" style="position: relative; bottom: 70px; margin-top: 40px;">
+  <h2 style="margin-bottom: 50px;">Create new group</h2>
   <div>
     <label for="groupName">Group Name:</label>
     <input [(ngModel)]="newGroupName" type="text" id="groupName" name="groupName">
   </div>
   <div>
-    <label for="groupDescription">Group Description:</label>
+    <label for="groupDescription">Description:</label>
     <input [(ngModel)]="newGroupDescription" type="text" id="groupDescription" name="groupDescription">
   </div>
   <label for="typeSelector">Choose type:</label>
@@ -41,5 +34,5 @@
       <p *ngIf="isSelected(device.id)" >Selected</p>
     </div>
   </div>
-  <button (click)="submitGroup(newGroupName, newGroupDescription)" type="submit">Send</button>
+  <button class="submit-group-btn" (click)="submitGroup(newGroupName, newGroupDescription)" type="submit">Submit group</button>
 </div>

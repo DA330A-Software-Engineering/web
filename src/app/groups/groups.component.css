@@ -8,12 +8,28 @@
   align-items: center;
 }
 
+ul {
+  list-style-type: none;
+}
+
+h2 {
+  font-size: 19px;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: bold;
+}
+
+
 .create-group {
   margin-top: 50px;
   margin-left: 120px;
   display: flex;
+  justify-content: center;
   flex-direction: column;
   align-items: flex-start;
+}
+
+.create-group div:not(:last-child) {
+  margin-bottom: 20px;
 }
 
 .create-group div {
@@ -22,18 +38,16 @@
 
 .create-group button {
   margin-top: 10px;
+  border-radius: 15px;
 }
 
-
-.create-group h3 {
-  font-weight: bold;
-}
 
 .create-group label {
   display: inline-block;
-  width: 120px;
+  width: 110px;
   margin-right: 10px;
   text-align: right;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .create-group input {
@@ -45,19 +59,113 @@
 }
 
 
+input[type="text"],
+select {
+  width: 100%;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  font-size: 13px;
+  outline: none;
+  font-family: 'Montserrat', sans-serif;
+}
+
+
 .group-item {
   margin-bottom: 20px;
   padding-bottom: 10px;
   border-bottom: 1px solid #ccc;
+  font-family: 'Montserrat', sans-serif;
 }
 
 .delete-group-btn {
   margin-top: 10px;
+  border-radius: 10px;
+  background-color:#9ABDDC;
+  margin-right: 20px;
+  outline: none;
+  font-size: 14px;
+  padding: 5px 5px;
+  font-family: 'Montserrat', sans-serif;
+  border: none;
+  outline: none;
+  color: white;
+  font-weight: 600;
+  transition: background-color 0.5s ease;
+}
+
+.toggle-state-btn {
+  margin-top: 10px;
+  border-radius: 10px;
+  background-color:#9ABDDC;
+  margin-right: 20px;
+  font-size: 14px;
+  padding: 5px 5px;
+  font-family: 'Montserrat', sans-serif;
+  border: none;
+  outline: none;
+  color: white;
+  font-weight: 600;
+  transition: background-color 0.5s ease;
+}
+
+.edit-group-btn {
+  margin-top: 10px;
+  border-radius: 10px;
+  background-color:#9ABDDC;
+  font-family: 'Montserrat', sans-serif;
+  font-size: 14px;
+  padding: 5px 5px;
+  border: none;
+  outline: none;
+  color: white;
+  font-weight: 600;
+  transition: background-color 0.5s ease;
+}
+
+.submit-group-btn {
+  margin-top: 10px;
+  border-radius: 10px;
+  font-family: 'Montserrat', sans-serif;
+  background-color:#9ABDDC;
+  font-size: 14px;
+  font-weight: 600;
+  padding: 5px 5px;
+  border: none;
+  outline: none;
+  color: white;
+  transition: background-color 0.5s ease;
+
+  
+}
+
+.delete-group-btn:hover {
+  background-color:#547b9c;
+  
+}
+
+.toggle-state-btn:hover {
+  background-color:#547b9c;
+}
+
+.edit-group-btn:hover {
+  background-color:#547b9c;
+}
+
+
+.submit-group-btn:hover {
+
+  background-color:#547b9c;
 }
 
 
 .groups{
   padding-top: 20%;
+}
+
+.group-info {
+  font-size: 14px;
+  font-weight: bold;
 }
 
 h1 {
@@ -99,67 +207,9 @@ ul.list-group {
   color: #fff;
 }
 
-.add-button {
-  position: fixed;
-  bottom: 60px;
-  right: 40px;
-  border-radius: 50%;
-  color: white;
-  background-color:#9ABDDC;
-}
-
-.add-button:hover {
-  background-color: #bfd9f1;
-}
-
-.remove-button {
-  position: fixed;
-  top: 130px;
-  right: 40px;
-  border-radius: 50%;
-  color: white;
-  background-color: black;
-}
-
-.remove-button:hover {
-  background-color: rgb(210, 19, 19);
-}
-
-.remove-text {
-  margin-top: 15px;
-  font-size: 14px;
-  font-weight: lighter;
-  color: #333;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  white-space: nowrap;
-  text-decoration: underline;
-  text-decoration-thickness: -1px;
-}
-
-.add-text {
-  margin-top: 15px;
-  font-size: 14px;
-  font-weight: lighter;
-  color: #333;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  white-space: nowrap;
-  text-decoration: underline;
-  text-decoration-thickness: -1px;
-
-
-}
-
 .group-container {
   display: flex;
   align-items: center;
-}
-
-.group-image-container {
-  margin-right: 10px;
 }
 
 .group-image-container img {
@@ -168,11 +218,6 @@ ul.list-group {
 
 .group-info-container {
   flex-grow: 1;
-}
-
-.group-image {
-  max-width: 200px;
-  height: auto;
 }
 
 

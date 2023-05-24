@@ -142,7 +142,7 @@ export class GroupsComponent implements OnInit{
   }
 
 
-  determineGroupState(devices: any[]) { // Iterera genom alla states i devices
+  determineGroupState(devices: any[]) { // Itererate through all states in devices
     let turnOnDevices = true;
     devices.forEach(element => {
       if (this.getDeviceRuleVar(element.data)) {
